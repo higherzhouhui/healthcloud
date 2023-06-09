@@ -1,0 +1,248 @@
+{
+	"pages": [{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"navigationBarBackgroundColor": "#D4E8FC",
+				"enablePullDownRefresh": true,
+				  "app-plus": {
+				    "webview": {
+				      "render": {
+				        "hardwareAccelerated": false
+				      }
+				    }
+				  }
+			}
+		}, {
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": {
+						"autoBackButton": false
+					}
+				}
+			}
+		}, {   
+			"path": "pages/register/register",
+			"style": {
+				"navigationBarTitleText": "注册",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/forget/forget",
+			"style": {
+				"navigationBarTitleText": "忘记密码",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/wode/child/authentication",
+			"style": {
+				"navigationBarTitleText": "实名认证",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#fff"
+			}
+		},
+		{
+			"path": "pages/xiangmu/buy",
+			"style": {
+				"navigationBarTitleText": "立即支付",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#fff"
+			}
+		},
+		{
+			"path": "pages/wode/child/withdrawal",
+			"style": {
+				"navigationBarTitleText": "分红提现",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#fff"
+			}
+		},
+		{
+			"path": "pages/wode/child/bankcardbind",
+			"style": {
+				"navigationBarTitleText": "银行卡绑定",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#fff"
+			}
+		},
+		{
+			"path": "pages/wode/child/transaction",
+			"style": {
+				"navigationBarTitleText": "交易明细",
+				"enablePullDownRefresh": true,
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/wode/wode",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"enablePullDownRefresh": true,
+				"navigationBarBackgroundColor": "#D4E8FC"
+			}
+		}, {
+			"path": "pages/wode/child/myteam",
+			"style": {
+				"navigationBarTitleText": "我的团队",
+				"enablePullDownRefresh": true,
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/wode/child/xiangmu",
+			"style": {
+				"navigationBarTitleText": "我的项目",
+				"enablePullDownRefresh": true,
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/wode/child/userInfo",
+			"style": {
+				"navigationBarTitleText": "个人资料",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/wode/child/repassword",
+			"style": {
+				"navigationBarTitleText": "修改密码",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/xiangmu/xiangmu",
+			"style": {
+				"navigationBarTitleText": "项目",
+				"enablePullDownRefresh": true,
+				"navigationBarBackgroundColor": "#D4E8FC"
+			}
+
+		}, {
+			"path": "pages/xiangmu/webview",
+			"style": {
+				"navigationBarTitleText": "支付",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#fff"
+			}
+
+		}, {
+			"path": "pages/kefu/kefu",
+			"style": {
+				"navigationBarTitleText": "客服",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#D4E8FC"
+			}
+
+		}, {
+			"path": "pages/tuiguang/tuiguang",
+			"style": {
+				"navigationBarTitleText": "推广",
+				"navigationBarBackgroundColor": "#D4E8FC",
+				"enablePullDownRefresh": true
+			}
+		}, {
+			"path": "pages/index/newsDetail/newsDetail",
+			"style": {
+				"navigationBarTitleText": "新闻动态",
+				"enablePullDownRefresh": true,
+				"navigationBarBackgroundColor": "#FFF"
+			}
+		}, {
+			"path": "pages/login/personal/personal",
+			"style": {
+				"navigationBarTitleText": "用户协议",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/login/privacy/privacy",
+			"style": {
+				"navigationBarTitleText": "隐私协议",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/index/chat/chat",
+			"style": {
+				"navigationBarTitleText": "官方群聊",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#2E96FF",
+				"backgroundColor": "#2E96FF",
+				"navigationBarTextStyle": "white"
+			}
+
+		}, {
+			"path": "pages/index/invite/invite",
+			"style": {
+				"navigationBarTitleText": "邀请好友",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#fff"
+			}
+
+		}, {
+			"path": "pages/index/course/course",
+			"style": {
+				"navigationBarTitleText": "操作教程",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/download/download",
+			"style": {
+				"navigationBarTitleText": "正泰新能源———APP下载",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#36B6FE",
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": {
+						"autoBackButton": false
+					}
+				}
+			}
+
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "正泰新能源",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"background": "#efeff4"
+		}
+	},
+	"tabBar": {
+		"backgroundColor": "#fff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tabbar/home.png",
+				"selectedIconPath": "static/tabbar/shome.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/tuiguang/tuiguang",
+				"iconPath": "static/tabbar/tuiguang.png",
+				"selectedIconPath": "static/tabbar/stuiguang.png",
+				"text": "推广"
+			},
+			{
+				"pagePath": "pages/xiangmu/xiangmu",
+				"iconPath": "static/tabbar/xiangmu.png",
+				"selectedIconPath": "static/tabbar/sxiangmu.png",
+				"text": "项目"
+			},
+			{
+				"pagePath": "pages/kefu/kefu",
+				"iconPath": "static/tabbar/kefu.png",
+				"selectedIconPath": "static/tabbar/skefu.png",
+				"text": "客服"
+			},
+			{
+				"pagePath": "pages/wode/wode",
+				"iconPath": "static/tabbar/wode.png",
+				"selectedIconPath": "static/tabbar/swode.png",
+				"text": "我的"
+			}
+		]
+	}
+}

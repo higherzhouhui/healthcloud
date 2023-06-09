@@ -1,0 +1,20 @@
+{
+  "name": "energyapp",
+  "version": "1.0.2",
+  "description": "正泰新能源，响应国家节能减排号召，大力发展绿色能源",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/higherzhouhui/energyApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/higherzhouhui/energyApp/issues"
+  },
+  "homepage": "https://github.com/higherzhouhui/energyApp#readme"
+}
