@@ -3,21 +3,21 @@
     <view class="top">
         <image src="../../../static/yaoqing/bg.png" class="inviteImg"></image>
     </view>
-    <view class="content">
+   <view class="content">
         <view class="inviteWrapper">
 			<view class="rulesWrapper">
-				<view class="ruleTitle">活动规则</view>
-				<view class="ruleList" v-for="item in rules" :key="item.id">
+				<view class="ruleTitle">我的邀请码</view>
+				<!-- <view class="ruleList" v-for="item in rules" :key="item.id">
 					<text class="normal">推荐</text><text class="res">{{item.inviteNum}}</text>
 					<text class="normal">人，</text><text class="normal">赠送推广金</text><text class="red">{{item.amount}}</text>
 					<text class="normal">元</text>
-				</view>
+				</view> -->
 			</view>
             <view class="title"></view>
             <view class="ecode-box">
-                <canvas ref="ecode" id="qrcode" class="ecode" style="width: 120px;" canvas-id="qrcode"></canvas>
+                <canvas ref="ecode" id="qrcode" class="ecode" style="width: 185px; height: 185px;" canvas-id="qrcode"></canvas>
             </view>
-			<view class="inviteCode">您的邀请码: {{inviteCode}}</view>
+			<!-- <view class="inviteCode">您的邀请码: {{inviteCode}}</view> -->
             <view class="btnGroup">
                 <view class="btn" @tap="dataURLtoBlob">下载二维码</view>
                 <view class="btn" @tap="copyInviteLink()">复制推广链接</view>
@@ -72,7 +72,7 @@ export default {
                 canvasId: 'qrcode', //切记canvasId 里边的内容需要跟canvas里边canvas-id="qrcode"的名字一样
                 componentInstance: this,
                 text: text, //需要转成二维码的内容是后端传过来的，我这里是onLoad传过来的，根                              据自己的需要
-                size: 120,
+                size: 185,
                 margin: 0,
                 backgroundColor: '#ffffff',
                 foregroundColor: '#000000',
@@ -142,15 +142,17 @@ export default {
 <style lang="scss" scoped>
 .container {
     min-height: 100vh;
-    background: #FEC695;
+    background: #F85B4CFF;
 
     .top {
         position: relative;
         width: 100%;
         height: 0;
-        padding-bottom: 71%;
+        padding-bottom: 116%;
     }
-
+	.ecode-box{
+		margin-bottom: 32px;
+	}
     .inviteImg {
         width: 100%;
         height: 100%;
@@ -171,7 +173,7 @@ export default {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 24px 0;
+            padding: 32px 0;
 
             .title {
                 font-size: 18px;
@@ -197,7 +199,7 @@ export default {
 
                 .btn {
                     height: 40px;
-                    background: linear-gradient(90deg, #FF6C5E 0%, #FF4F6D 100%);
+                    background: #FE1E27FF;
                     border-radius: 22px 22px 22px 22px;
                     padding: 0 24px;
                     font-size: 15px;

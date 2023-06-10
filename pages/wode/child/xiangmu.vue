@@ -7,24 +7,24 @@
                     <img class="avatar" :onerror="`this.src='${avatar}'`" :src="item.image" alt="">
                     <view class="avatar-info">
                         <view class="name">{{ item.title }}</view>
-                        <view class="num">
+                        <!-- <view class="num">
                             <view class="fh">￥</view>{{ item.price }}
-                        </view>
+                        </view> -->
                     </view>
                 </view>
             </view>
             <view class="botton-info">
                 <view class="in-item">
                     <view class="value">{{ item.chntSubsidy }}</view>
-                    <view class="txt">正泰补贴(元)</view>
+                    <view class="txt">奖励数字人民币</view>
                 </view>
                 <view class="in-item">
-                    <view class="value2 value">{{ item.dayEarnings }}</view>
-                    <view class="txt">每日收益(元)</view>
+                    <view class="value">{{ item.dayEarnings }}</view>
+                    <view class="txt">每日社保补贴</view>
                 </view>
                 <view class="in-item">
-                    <view class="value">{{ item.period }}</view>
-                    <view class="txt">周期(天)</view>
+                    <view class="value value2">{{ item.period }}</view>
+                    <view class="txt">购买价格</view>
                 </view>
             </view>
         </view>
@@ -102,19 +102,21 @@ export default {
 
             .avatar-box {
                 display: flex;
-                align-items: top;
+                align-items: center;
 
                 .avatar {
                     margin-right: 8px;
-                    width: 53px;
-                    height: 53px;
+                    width: 40px;
+                    height: 40px;
                     border-radius: 8px;
                 }
 
                 .avatar-info {
                     .name {
-                        color: #17191A;
                         font-size: 15px;
+                        font-family: PingFang SC-Semibold, PingFang SC;
+                        font-weight: 600;
+                        color: #17191A;
                     }
 
                     .num {
@@ -151,7 +153,7 @@ export default {
             justify-content: space-between;
             margin-top: 12px;
             padding: 9px 19px 5px 19px;
-            background-color: #F6FAFF;
+            // background-color: #F6FAFF;
             border-radius: 4px;
 
             .in-item {
@@ -164,7 +166,7 @@ export default {
                     color: #17191A;
 
                     &.value2 {
-                        color: #2EC18F;
+                        color: #FE1E27FF;
                     }
                 }
 
