@@ -3,7 +3,7 @@
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "首页",
-				"navigationBarBackgroundColor": "#D4E8FC",
+				"navigationBarBackgroundColor": "#fff",
 				"enablePullDownRefresh": true,
 				  "app-plus": {
 				    "webview": {
@@ -18,6 +18,8 @@
 			"style": {
 				"navigationBarTitleText": "登录",
 				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#fff",
+				"backgroundColor": "#fff",
 				"app-plus": {
 					"titleNView": {
 						"autoBackButton": false
@@ -28,6 +30,8 @@
 			"path": "pages/register/register",
 			"style": {
 				"navigationBarTitleText": "注册",
+				"navigationBarBackgroundColor": "#fff",
+				"backgroundColor": "#fff",
 				"enablePullDownRefresh": false
 			}
 		}, {
@@ -57,7 +61,8 @@
 			"style": {
 				"navigationBarTitleText": "分红提现",
 				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor": "#fff"
+				"navigationBarBackgroundColor": "#F31E27",
+				"navigationBarTextStyle": "white"
 			}
 		},
 		{
@@ -80,7 +85,7 @@
 			"style": {
 				"navigationBarTitleText": "我的",
 				"enablePullDownRefresh": true,
-				"navigationBarBackgroundColor": "#D4E8FC"
+				"navigationBarBackgroundColor": "#fff"
 			}
 		}, {
 			"path": "pages/wode/child/myteam",
@@ -115,7 +120,7 @@
 			"style": {
 				"navigationBarTitleText": "项目",
 				"enablePullDownRefresh": true,
-				"navigationBarBackgroundColor": "#D4E8FC"
+				"navigationBarBackgroundColor": "#fff"
 			}
 
 		}, {
@@ -131,14 +136,14 @@
 			"style": {
 				"navigationBarTitleText": "客服",
 				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor": "#D4E8FC"
+				"navigationBarBackgroundColor": "#fff"
 			}
 
 		}, {
 			"path": "pages/tuiguang/tuiguang",
 			"style": {
 				"navigationBarTitleText": "推广",
-				"navigationBarBackgroundColor": "#D4E8FC",
+				"navigationBarBackgroundColor": "#fff",
 				"enablePullDownRefresh": true
 			}
 		}, {
@@ -165,10 +170,10 @@
 			"path": "pages/index/chat/chat",
 			"style": {
 				"navigationBarTitleText": "官方群聊",
-				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor": "#2E96FF",
-				"backgroundColor": "#2E96FF",
-				"navigationBarTextStyle": "white"
+				"enablePullDownRefresh": false
+				// "navigationBarBackgroundColor": "#2E96FF",
+				// "backgroundColor": "#2E96FF",
+				// "navigationBarTextStyle": "white"
 			}
 
 		}, {

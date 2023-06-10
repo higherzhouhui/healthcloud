@@ -178,9 +178,7 @@ import appUpdate from 'common/util/appUpdate.js'
 	padding-bottom: 24px;
 }
 .topContent {
-	background-image: url('../../static/my/bg.png');
-	background-size: 100% 250px;
-	background-repeat: no-repeat;
+	background: linear-gradient(180deg, #FFE7E6 0%, #F5F6F7 100%);
 	padding: 24px 12px 0 12px;
 	.userInfo {
 		display: flex;
@@ -209,11 +207,11 @@ import appUpdate from 'common/util/appUpdate.js'
 				}
 				.ziliao {
 					height: 20px;
-					background: #F3F8FE;
+					background: #FFE7E6FF;
 					border-radius: 10px 10px 10px 10px;
 					font-family: PingFang SC-Regular, PingFang SC;
 					font-weight: 400;
-					color: #2E96FF;
+					color: #FE1E27FF;
 					line-height: 20px;
 					text-align: center;
 					padding: 0 10px;
@@ -269,7 +267,7 @@ import appUpdate from 'common/util/appUpdate.js'
 				}
 				.tixian {
 					height: 28px;
-					background: #2E96FF;
+					background: #FE1E27FF;
 					border-radius: 17px 17px 17px 17px;
 					padding: 0 8px;
 					font-size: 13px;
@@ -289,7 +287,7 @@ import appUpdate from 'common/util/appUpdate.js'
 		width: 100%;
 		position: relative;
 		height: 0;
-		padding-bottom: 28.5%;
+		padding-bottom: 18.5%;
 		.yaoqingImg {
 			position: absolute;
 			width: 100%;

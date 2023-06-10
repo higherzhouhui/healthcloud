@@ -1,8 +1,8 @@
 <template>
-	<view>
-		<image src="../../static/login/loginBg.png" class="loginBg"></image>
+	<view class="container">
+		<!-- <image src="../../static/login/loginBg.png" class="loginBg"></image> -->
 		<view class="main">
-			<view class="title">Hi，欢迎来到正泰！</view>
+			<view class="title">Hi，欢迎来到健享云保！</view>
 			<form class="formStyle" @submit="formSubmit">
 				<view class="label"><image src="../../static/login/phone.png" class="phoneImg"></image>手机号</view>
 				<view class="inputForm">
@@ -155,13 +155,18 @@ import { getQueryString } from "@/utils/common.js"
 </script>
 
 <style scoped lang="scss">
+.container{
+	background-color: #fff;
+	height: 100vh;
+	box-sizing: border-box;
+}
 .loginBg {
 	width: 100%;
 	object-fit: cover;
 }
 .main {
-	margin-top: -150px;
-	padding: 0 28px;
+	// margin-top: 59px;
+	padding: 59px 28px 0;
 	position: relative;
 	z-index: 9;
 }
@@ -246,7 +251,7 @@ import { getQueryString } from "@/utils/common.js"
 .submit {
 	width: 300px;
 	height: 40px;
-	background: #2E96FF;
+	background: #FF4B4B;
 	border-radius: 22px;
 	margin: 32px auto 0 auto;
 	font-size: 15px;
@@ -285,7 +290,7 @@ import { getQueryString } from "@/utils/common.js"
 		font-size: 13px;
 		font-family: PingFang SC-Regular, PingFang SC;
 		font-weight: 400;
-		color: #2E96FF;
+		color: #FF4B4B;
 		line-height: 17px;
 	}
 }

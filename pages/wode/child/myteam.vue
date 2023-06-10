@@ -150,7 +150,7 @@
 				display: inline-block;
 			}
 			&.active{	
-				color: #2E96FF;			
+				color: #FE1E27FF;			
 				font-weight: 500;
 				
 				.txt{
@@ -166,7 +166,7 @@
 			padding-bottom: 22.8%;
 			height: 0;
 			width: 100%;
-			background: linear-gradient(180deg, #2EBCFF 0%, #2E96FF 100%);
+			background: #FE1E27FF;
 			border-radius: 8px;
 			.txt-box{
 				position: absolute;

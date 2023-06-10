@@ -2,10 +2,8 @@
 	<view class="container">
 		<view class="mask" v-if="ruleVisible">
 			<view class="rule-box">
-				<view class="box-title">
-					<view class="txt">
-						奖励规则
-					</view>
+				<view class="txt">
+					奖励规则
 				</view>
 				<!-- <view v-for="(item, index) in rules" :key="index">
 					<view class="title">{{ item.title }}</view>
@@ -132,7 +130,7 @@ export default {
 	}
 
 	.rule-box {
-		padding: 44px 16px 16px;
+		padding: 21px 16px 16px;
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -140,32 +138,19 @@ export default {
 		transform: translate(-50%, -50%);
 		background-color: #fff;
 		border-radius: 14px;
-		border: 5px solid rgba(46, 150, 255, 1);
+		border: 5px solid #EBECEDFF;
 
-		.box-title {
-			position: absolute;
-			left: 50%;
-			transform: translateX(-50%);
-			top: -10px;
-			width: 56.55%;
-			height: 0;
-			padding-bottom: 12.2%;
-			background: url('../../static/tuiguang/title.png');
-			background-size: 100% 100%;
+		.txt {
+			// position: absolute;
+			// width: 100%;
+			// top: 50%;
+			// transform: translateY(-50%);
+			margin-bottom: 12px;
 			text-align: center;
-
-			.txt {
-				position: absolute;
-				width: 100%;
-				top: 50%;
-				transform: translateY(-50%);
-				text-align: center;
-				font-size: 16px;
-				font-family: PingFang SC-Semibold, PingFang SC;
-				font-weight: 600;
-				color: #FFFFFF;
-			}
-
+			font-size: 16px;
+			font-family: PingFang SC-Semibold, PingFang SC;
+			font-weight: 600;
+			color: #FE1E27FF;
 		}
 
 		.box-content {

@@ -8,16 +8,11 @@ export default function appUpdate(check) {
 	getVersionRequest({deviceType: 1}).then(res => {
 		if (res.code === 200) {
 			const {data} = res
-			const currentVersion = Number(String(version).replace(/\./g, ''))
-			const onlineVersioin = Number(String(data.version ).replace(/\./g, ''))
-			if (isNaN(currentVersion) || isNaN(onlineVersioin)) {
-				return
-			}
-			if (currentVersion < onlineVersioin) {
+			if (data.version !== version) {
 				uni.showModal({ 
 					title: `当前版本:${version}`,
 					content: `更新提示：${data.describe},最新版本:${data.version}`,
-					confirmText: '更新',
+					confirmText: '下载',
 					success: (showResult) => {
 						if (showResult.confirm) {
 							plus.nativeUI.toast("正在准备环境，请稍后!");
@@ -39,7 +34,7 @@ export default function appUpdate(check) {
 			} else {
 				if (check) {
 					uni.showToast({
-						title: '当前已是最新版本' + version,
+						title: '当前已经是最新版本' + version,
 						icon: 'none'
 					})
 				}

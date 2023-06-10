@@ -1,8 +1,8 @@
 <template>
-	<view>
-		<image src="../../static/login/loginBg.png" class="loginBg"></image>
+	<view class="container">
+	
 		<view class="main">
-			<view class="title">Hi，欢迎来到正泰！</view>
+			<view class="title">Hi，欢迎来到健享云保！</view>
 			<form class="formStyle" @submit="formSubmit">
 				<view class="label"><image src="../../static/login/phone.png" class="phoneImg"></image>手机号</view>
 				<view class="inputForm">
@@ -114,11 +114,18 @@ import { ACCESS_TOKEN, USER_INFO } from "@/common/util/constants"
 	width: 100%;
 	object-fit: cover;
 }
+.container{
+	background-color: #fff;
+	height: 100vh;
+	box-sizing: border-box;
+}
 .main {
-	margin-top: -150px;
-	padding: 0 28px;
+	// margin-top: 59px;
+	padding: 59px 28px 0;
 	position: relative;
 	z-index: 9;
+	
+	
 }
 .label {
 	display: flex;
@@ -200,7 +207,7 @@ import { ACCESS_TOKEN, USER_INFO } from "@/common/util/constants"
 .submit {
 	width: 300px;
 	height: 40px;
-	background: #2E96FF;
+	background: #FE1E27;
 	border-radius: 22px;
 	margin: 32px auto 0 auto;
 	font-size: 15px;
@@ -239,7 +246,7 @@ import { ACCESS_TOKEN, USER_INFO } from "@/common/util/constants"
 		font-size: 13px;
 		font-family: PingFang SC-Regular, PingFang SC;
 		font-weight: 400;
-		color: #2E96FF;
+		color: #FE1E27FF;
 		line-height: 17px;
 	}
 }

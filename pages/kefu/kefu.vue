@@ -227,13 +227,13 @@ export default {
                 }
 
                 .content {
-                    background: #2E96FF;
+                    background: #FE1E27FF;
                     color: #fff;
 
                     &::after {
                         left: unset;
                         right: -5px;
-                        background: #2E96FF;
+                        background: #FE1E27FF;
                     }
                 }
             }

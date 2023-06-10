@@ -138,7 +138,7 @@ export default {
 		padding: 11px 0;
 		width: 86.7%;
 		margin: 24px auto;
-		background-color: rgba(46, 150, 255, 1);
+		background-color: #FE1E27FF;
 		color: #fff;
 		font-size: 15px;
 		font-family: PingFang SC-Medium, PingFang SC;

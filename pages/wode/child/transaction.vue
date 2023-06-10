@@ -119,7 +119,7 @@ export default {
             font-size: 15px;
             font-family: PingFang SC-Semibold, PingFang SC;
             font-weight: 600;
-            color: #2E96FF;
+            color: #FE1E27FF;
         }
 
         .time {

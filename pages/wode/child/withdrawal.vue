@@ -80,7 +80,7 @@ import {walletWithdraw} from '@/api/user'
 			position: relative;
 			width: 100%;
 			padding-bottom: 46.4%;
-			background: linear-gradient(180deg, #2EBCFF 0%, #2E96FF 100%);
+			background: linear-gradient(180deg, #F31E27 0%, #F59178 100%);;
 			.top-box{
 				position: absolute;
 				padding: 24px 16px;
@@ -123,7 +123,7 @@ import {walletWithdraw} from '@/api/user'
 				font-size: 15px;
 				font-family: PingFang SC-Regular, PingFang SC;
 				font-weight: 400;
-				color: #17191A;
+				color: #17191AFF;
 				.input-form{
 					margin-top: 24px;
 					display: flex;
@@ -139,12 +139,12 @@ import {walletWithdraw} from '@/api/user'
 						align-items: center;
 						input{
 							font-size: 24px;
-							color: #2E96FF;
+							color: #FE1E27FF;
 						}
 					}
 					.all{
 						font-size: 15px;
-						color: #2E96FF;
+						color: #FE1E27FF;
 						white-space: nowrap;
 					}
 				}
@@ -156,7 +156,7 @@ import {walletWithdraw} from '@/api/user'
 			padding: 11px 0;
 			width: 100%;
 			margin: 24px auto;
-			background-color: rgba(46, 150, 255, 1);
+			background-color: #FE1E27FF;
 			color: #fff;
 			font-size: 15px;
 			font-family: PingFang SC-Medium, PingFang SC;
