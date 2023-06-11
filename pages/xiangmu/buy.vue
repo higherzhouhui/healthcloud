@@ -1,6 +1,6 @@
 <template>
     <view class="container">
-        <view class="item">
+        <view class="item" v-if="type == 1">
             <view class="top-info">
                 <view class="avatar-box">
                     <img class="avatar" :onerror="`this.src='${avatar}'`" :src="item.image" alt="">
@@ -28,6 +28,14 @@
                 </view>
             </view>
         </view>
+		<view class="gq-box" v-else>
+			<view class="price">
+				￥{{item.price || 0}}
+			</view>
+			<view class="txt">
+				健享云保健康医疗原始股权
+			</view>
+		</view>
         <view class="item">
             <view class="title">支付方式</view>
             <view>
@@ -72,10 +80,12 @@ export default {
             item: {},
             payType: 2,
             loading: false,
+			type: 2
         }
     },
     onLoad(option) {
         this.item = JSON.parse(decodeURIComponent(option.item));
+		this.type = option.type
     },
     onShow() {
 
@@ -105,7 +115,26 @@ export default {
 <style lang="scss" scoped>
 .container {
     padding: 12px;
-
+	.gq-box{
+		margin-bottom: 12px;
+		padding: 34px;
+		background-color: #Fff;
+		border-radius: 8px;
+		text-align: center;
+		.price{
+			font-size: 20px;
+			font-family: PingFang SC-Semibold, PingFang SC;
+			font-weight: 600;
+			color: #FE1E27;
+		}
+		.txt{
+			margin-top: 8px;
+			font-size: 13px;
+			font-family: PingFang SC-Regular, PingFang SC;
+			font-weight: 400;
+			color: #17191A;
+		}
+	}
     .item {
         margin-bottom: 12px;
         padding: 12px;

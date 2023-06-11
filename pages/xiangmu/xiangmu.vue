@@ -17,7 +17,7 @@
 							</view> -->
 						</view>
 					</view>
-					<view class="button" @tap="toBuy(item)">
+					<view class="button" @tap="toBuy(item, 1)">
 						立即购买
 					</view>
 				</view>
@@ -37,7 +37,58 @@
 				</view>
 			</view>
 		</view>
-		<view class="qq" v-else></view>
+		<view class="gq" v-else>
+			<image class="img" src='../../static/xiangmu/guquan.png'></image>
+			<view class="gq-box">
+				<view class="gq-box-title">
+					<view class="price">￥{{gqData.price}}</view> 元/份
+				</view>
+				<view class="gq-box-content">
+					<view class="gq-box-content-title">
+						健享云保健康医疗原始股权
+					</view>
+					<view class="gq-box-content-p">
+						云之健在老大的带领下，响应国家号召，全面实现健康所需。
+					</view>
+					<view class="gq-box-content-p">
+						早投资早收益，凡是购买股权的家人，均可获得800积分，终身享受股权收益。
+					</view>
+					<view class="gq-box-content-p">
+						股权每日分红2.8%，分红可立即提现，同时额外事有社保补贴金每日分红3.5%，社保补贴金每月可提现。
+					</view>
+				</view>
+				<view class="gq-box-content">
+					<view class="item flex j-s-b">
+						<view>
+							起购数量
+						</view>
+						<view>
+							{{gqData.base}}
+						</view>
+					</view>
+					<view class="item flex j-s-b">
+						<view>
+							购买数量
+						</view>
+						<view class="flex choice">
+							<image class="imgs js" src="../../static/xiangmu/js.png" @tap="choice(-1)"></image>
+							<view class="input">{{gqData.count * gqData.base}}</view>
+							<image class="imgs add" src="../../static/xiangmu/zj.png" @tap="choice(1)"></image>
+						</view>
+					</view>
+				</view>
+				<view class="gq-box-content flex j-s-b">
+					<view class="flex">
+						<view>合计金额：</view>
+						<view class="price">￥{{price}}</view>
+					</view>
+					<view class="btn" @tap="toBuy({price}, 2)">
+						提交订单
+					</view>
+				</view>
+			</view>
+			
+		</view>
 	</view>
 
 </template>
@@ -53,7 +104,18 @@ export default {
 				{label: '信托计划', type: 1},
 				{label: '股权', type: 2}
 			],
-			type: 1
+			type: 2,
+		
+			gqData: {
+				price: 8,
+				count: 1,
+				base: 100
+			}
+		}
+	},
+	computed: {
+		price() {
+			return this.gqData.price * this.gqData.count * this.gqData.base
 		}
 	},
 	onLoad(option) {
@@ -72,8 +134,15 @@ export default {
 		})
 	},
 	methods: {
-		toBuy(item) {
-			uni.navigateTo({ url: "/pages/xiangmu/buy?item=" + encodeURIComponent(JSON.stringify(item)) });
+			
+		choice(num){
+			let {count} = this.gqData
+			let val = count + num
+			if(val <= 0) return 
+			this.gqData.count = val
+		},
+		toBuy(item, type) {
+			uni.navigateTo({ url: "/pages/xiangmu/buy?item=" + encodeURIComponent(JSON.stringify(item)) + '&type=' + type });
 		}
 	}
 }
@@ -86,6 +155,7 @@ export default {
 		width: 100%;
 		display: flex;
 		background-color: #fff;
+		z-index: 2;
 			.tabs-item{
 				padding: 10px 0 0;
 				flex: 1;
@@ -107,6 +177,110 @@ export default {
 					.txt{
 						border-bottom: 3px solid;
 					}
+				}
+			}
+		}
+		.gq{
+			.img{
+				margin-top: 45px;
+				width: 100%;
+				font-size: 0;
+			}
+			.gq-box{
+				margin-top: -6px;
+				.gq-box-title {
+					padding-left: 12px;
+					box-sizing: border-box;
+					display: flex;
+					background-color: #FE1E27FF;
+					height: 38px;
+					line-height: 38px;
+					font-size: 13px;
+					font-family: PingFang SC-Semibold, PingFang SC;
+					font-weight: 600;
+					color: #FFFFFF;
+					.price{
+						font-size: 20px;
+					}
+				}
+				.flex{
+					display: flex;
+					align-items: center;
+					font-size: 13px;
+					font-family: PingFang SC-Regular, PingFang SC;
+					font-weight: 400;
+					color: #17191A;
+					&.choice{
+						border-radius: 4px;
+						border: 1px solid #C5C6C7;
+					}
+					.btn{
+						padding: 0 16px;
+						font-weight: 400;
+						color: #FFFFFF;
+						height: 32px;
+						line-height: 32px;
+						background: #FE1E27;
+						border-radius: 16px;
+					}
+					.imgs{
+						padding: 4px;
+						width: 15px;
+						height: 15px;
+						
+						&.js{
+							border-right: 1px solid #C5C6C7;
+						}
+						&.add{
+							border-left: 1px solid #C5C6C7;
+						}
+					}
+					.input{
+						width: 50px;
+						font-size: 15px;
+						font-family: PingFang SC-Medium, PingFang SC;
+						font-weight: 500;
+						color: #17191A;
+						height: 23px;
+						line-height: 23px;
+						text-align: center;
+					}
+				}
+				.j-s-b{
+					justify-content: space-between;
+				}
+				.gq-box-content {
+					margin-bottom: 12px;
+					padding: 16px 12px;
+					background-color: #fff;
+					.price{
+						font-size: 20px;
+						font-family: PingFang SC-Semibold, PingFang SC;
+						font-weight: 600;
+						color: #FE1E27;
+					}
+					.item{
+						font-size: 15px;
+						font-family: PingFang SC-Medium, PingFang SC;
+						font-weight: 500;
+						color: #17191A;
+						&:first-child{
+							margin-bottom: 16px;
+						}
+					}
+				}
+				.gq-box-content-title{
+					font-size: 15px;
+					font-family: PingFang SC-Medium, PingFang SC;
+					font-weight: 500;
+					color: #17191A;
+				}
+				.gq-box-content-p{
+					margin-top: 12px;
+					font-size: 13px;
+					font-family: PingFang SC-Regular, PingFang SC;
+					font-weight: 400;
+					color: #4F5459;
 				}
 			}
 		}

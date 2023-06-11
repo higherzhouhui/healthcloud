@@ -66,6 +66,40 @@
 			}
 		},
 		{
+			"path": "pages/wode/child/szrmb",
+			"style": {
+				"navigationBarTitleText": "数字人民币",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#F31E27",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/wode/child/szwithdrawal",
+			"style": {
+				"navigationBarTitleText": "转账",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#fff"
+			}
+		},
+		{
+			"path": "pages/wode/child/recharge",
+			"style": {
+				"navigationBarTitleText": "充值",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#fff"
+			}
+		},
+		{
+			"path": "pages/wode/child/collection",
+			"style": {
+				"navigationBarTitleText": "收款",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#fff"
+			}
+		},
+		
+		{
 			"path": "pages/wode/child/bankcardbind",
 			"style": {
 				"navigationBarTitleText": "银行卡绑定",
@@ -218,6 +252,7 @@
 	},
 	"tabBar": {
 		"backgroundColor": "#fff",
+		"selectedColor": "#FE1E27FF", 
 		"list": [{
 				"pagePath": "pages/index/index",
 				"iconPath": "static/tabbar/home.png",

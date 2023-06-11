@@ -127,6 +127,36 @@ const routes = [
 			}
 	},
 	{
+		path: "/pages/wode/child/recharge",
+		name: 'recharge',
+			meta: {
+				title: '重置',
+			}
+	},
+	{
+		path: "/pages/wode/child/collection",
+		name: 'collection',
+			meta: {
+				title: '收款',
+			}
+	},
+	
+	{
+		path: "/pages/wode/child/szrmb",
+		name: 'userInfo',
+			meta: {
+				title: '数字人民币',
+			}
+	},
+	{
+		path: "/pages/wode/child/szwithdrawal",
+		name: 'szwithdrawal',
+			meta: {
+				title: '转账',
+			}
+	},
+	
+	{
 		path: "/pages/wode/child/xiangmu",
 		name: 'myxiangmu',
 			meta: {

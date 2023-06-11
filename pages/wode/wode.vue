@@ -29,8 +29,8 @@
 						<view class="tixian" @tap="handleWithDraw('tuiguang')">提现</view>
 					</view>
 				</view>
-				<view class="list" @tap="withdrawal('earnings', wallet.earnings)">
-					<view class="title">收益钱包（元）</view>
+				<view class="list" @tap="handleRouteTo('szrmb')">
+					<view class="title">数字人民币（元）</view>
 					<view class="bot">
 						<view class="jine">{{ wallet.earnings }}</view>
 						<view class="tixian" @tap="handleWithDraw('shouyi')">提现</view>
