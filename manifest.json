@@ -1,10 +1,11 @@
 {
-    "name" : "正泰新能源",
-    "appid" : "__UNI__B1DAD90",
-    "description" : "传统能源之外的各种能源形式。指刚开始开发利用或正在积极研究、有待推广的能源，如太阳能、地热能、风能、海洋能、生物质能和核聚变能等",
-    "versionName" : "1.0.5",
+    "name" : "健享云保",
+    "appid" : "__UNI__12DBE35",
+    "description" : "稳妥可靠保障；后延伸成一种保障机制，是用来规划人生财务的一种工具，是市场经济条件下风险管理的基本手段，是金融体系和社会保障体系的重要的支柱",
+    "versionName" : "1.0.0",
     "versionCode" : "100",
     "transformPx" : false,
+
     "app-plus" : {
         /* 5+App特有相关 */
         "usingComponents" : true,
