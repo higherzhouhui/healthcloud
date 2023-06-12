@@ -226,8 +226,7 @@
 			"style": {
 				"navigationBarTitleText": "正泰新能源———APP下载",
 				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor": "#36B6FE",
-				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#fff",
 				"app-plus": {
 					"titleNView": {
 						"autoBackButton": false
