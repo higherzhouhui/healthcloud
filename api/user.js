@@ -5,6 +5,9 @@ export function loginRequest(params) {
 export function getUserWallet(params) {
 	return request('/user-wallet/getUserWallet', 'GET', params)	
 }
+export function walletTransfer(params) {
+	return request('/user-wallet/walletTransfer', 'GET', params)	
+}
 export function walletWithdraw(params) {
 	return request('/user-wallet/walletWithdraw', 'GET', params)	
 }
