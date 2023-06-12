@@ -161,7 +161,7 @@ export default {
 <style scoped lang="scss">
 	.tabs{
 		position: fixed;
-		top:40px;
+		top:0;
 		width: 100%;
 		display: flex;
 		background-color: #fff;
