@@ -409,7 +409,7 @@ export default {
         line-height: 21px;
 
         .notice-time {
-            color: #2E96FF;
+            color: #FE1E27;
         }
     }
 

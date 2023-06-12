@@ -138,7 +138,7 @@ export default {
 
             .button {
                 padding: 5px 16px;
-                background-color: #2E96FF;
+                background-color: #FE1E27;
                 font-size: 13px;
                 font-family: PingFang SC-Regular, PingFang SC;
                 font-weight: 400;

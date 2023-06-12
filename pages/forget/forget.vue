@@ -212,7 +212,7 @@ import { resetPasswordRequest } from "@/api/user.js"
 .submit {
 	width: 300px;
 	height: 40px;
-	background: #2E96FF;
+	background: #FE1E27;
 	border-radius: 22px;
 	margin: 32px auto 0 auto;
 	font-size: 15px;
@@ -225,7 +225,7 @@ import { resetPasswordRequest } from "@/api/user.js"
 .reback {
 	width: 300px;
 	height: 40px;
-	border: 1px solid #2E96FF;
+	border: 1px solid #FE1E27;
 	border-radius: 22px;
 	margin: 32px auto 0 auto;
 	font-size: 15px;

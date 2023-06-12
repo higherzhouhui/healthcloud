@@ -166,7 +166,7 @@ export default {
             font-family: PingFang SC-Regular, PingFang SC;
             font-weight: 400;
             color: #FFFFFF;
-            background: #2E96FF;
+            background: #FE1E27;
             border-radius: 17px;
             white-space: nowrap;
         }

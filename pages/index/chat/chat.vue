@@ -38,7 +38,7 @@
 .container {
 	min-height: 100vh;
 	padding: 24px 12px;
-	// background: #2E96FF;
+	// background: #FE1E27;
 	.content {
 		border-radius: 12px 12px 12px 12px;
 		background: #fff;
