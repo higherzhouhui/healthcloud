@@ -15,12 +15,12 @@
             </view>
             <view v-else class="own box">
                 <view class="content">{{ item.content }}</view>
-                <img v-if="$store.state.userInfo.avatar" :src="$store.state.userInfo.avatar || '../../static/wode/avatar.png'" class="avatar" alt="" />
+                <img v-if="$store.state.userInfo.avatar && isOk" @error="isOk = false" :src="$store.state.userInfo.avatar || '../../static/wode/avatar.png'" class="avatar" alt="" />
                 <image v-else class="avatar" src="../../static/wode/logo.png" alt=""></image>
             </view>
         </view>
     </scroll-view>
-    <view class="bottom-input">
+    <view class="bottom-input" :class="css">
         <input v-model="message" type="text">
         <view class="txt" @tap="send" :class="loading && 'loading'">发送</view>
     </view>
@@ -46,9 +46,11 @@ export default {
             serviceData: {
                 remark: ''
             },
+            css: window ? 'h5css' : 'appcss',
             top: 0,
             times: 0,
-            kTime: (1000 * 60 * 5)
+            kTime: (1000 * 60 * 5),
+            isOk: true
         }
     },
     mounted() {
@@ -143,7 +145,9 @@ export default {
         align-items: center;
         background-color: #F0F1F2;
         box-sizing: border-box;
-
+        &.h5css {
+            bottom: 50px;
+        }
         input {
             padding: 0 12px;
             background-color: #fff;
@@ -197,7 +201,7 @@ export default {
                     font-family: PingFang SC-Regular, PingFang SC;
                     font-weight: 400;
                     color: #17191A;
-
+                    word-break: break-all;
                     &::after {
                         content: '';
                         width: 10px;

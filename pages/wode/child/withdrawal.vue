@@ -51,6 +51,9 @@ import {walletWithdraw} from '@/api/user'
 		},
 		methods: {
 			withdrawal() {
+				if(this.type == 'currency') {
+					return uni.showToast({title: '暂未开放，敬请期待', icon: 'none'})
+				}
 				if(!this.txPrice) {
 					return uni.showToast({ title: '请填写提现金额', icon: 'none' })
 				}else if(this.txPrice > this.amount) {
