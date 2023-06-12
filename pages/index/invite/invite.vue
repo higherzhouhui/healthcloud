@@ -33,7 +33,7 @@ import {
     USER_INFO
 } from '@/common/util/constants.js'
 import {
-	URL
+	LINK
 } from '@/config/index.js'
 import { getExpandList } from '@/api/promotion'
 
@@ -51,7 +51,7 @@ export default {
             inviteCode
         } = uni.getStorageSync(USER_INFO)
 		this.inviteCode = inviteCode
-        const url = `${URL}?inviteCode=${inviteCode}/#/pages/register/register`
+        const url = `${LINK}?inviteCode=${inviteCode}/#/pages/register/register`
         this.linkUrl = url
         this.qrFun(url)
 		this.getRules()
