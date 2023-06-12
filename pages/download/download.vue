@@ -5,7 +5,7 @@
 				<image src="../../static/download/logo.png" class="img"></image> 
 			</view>
 			
-			<a download="正泰新能源.apk " :href="versionInfo.downUrl" class="download">立即下载</a>
+			<a download="健享云保.apk " :href="versionInfo.downUrl" class="download">立即下载</a>
 				<!-- <view class="version">版本号:{{versionInfo.version}}</view> -->
 		</view>
 	</view>

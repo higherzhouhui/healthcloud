@@ -224,7 +224,7 @@
 		}, {
 			"path": "pages/download/download",
 			"style": {
-				"navigationBarTitleText": "正泰新能源———APP下载",
+				"navigationBarTitleText": "健享云保———APP下载",
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor": "#fff",
 				"app-plus": {
@@ -238,7 +238,7 @@
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "正泰新能源",
+		"navigationBarTitleText": "健享云保",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8",
 		"app-plus": {
