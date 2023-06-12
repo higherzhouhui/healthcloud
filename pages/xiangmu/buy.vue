@@ -22,7 +22,7 @@
                     <view class="txt">每日社保补贴</view>
                 </view>
                 <view class="in-item">
-                    <view class="value value2">{{ item.period }}</view>
+                    <view class="value value2">{{ item.price }}</view>
                     <view class="txt">购买价格</view>
 
                 </view>
@@ -80,12 +80,14 @@ export default {
             item: {},
             payType: 2,
             loading: false,
-			type: 2
+			type: 2,
+            num: 0
         }
     },
     onLoad(option) {
         this.item = JSON.parse(decodeURIComponent(option.item));
 		this.type = option.type
+        this.num = option.num
     },
     onShow() {
 
@@ -94,7 +96,8 @@ export default {
         onPay() {
             if(this.loading) return
             this.loading = true
-            buyProject({ payType: this.payType, id: this.item.id, returnUrl: '/pages/xiangmu/xiangmu?status=1' }).then(rt => {
+            let {num, id, type} = this.item
+            buyProject({ num, projectType: type, payType: this.payType, id, returnUrl: '/pages/xiangmu/xiangmu?status=1' }).then(rt => {
                 this.loading = false
                 if (rt.data) {
                     uni.redirectTo({

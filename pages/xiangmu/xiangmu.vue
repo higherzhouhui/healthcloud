@@ -31,7 +31,7 @@
 						<view class="txt">每日社保补贴</view>
 					</view>
 					<view class="in-item">
-						<view class="value value2">{{ item.period }}</view>
+						<view class="value value2">{{ item.price }}</view>
 						<view class="txt">购买价格</view>
 					</view>
 				</view>
@@ -82,7 +82,7 @@
 						<view>合计金额：</view>
 						<view class="price">￥{{price}}</view>
 					</view>
-					<view class="btn" @tap="toBuy({price}, 2)">
+					<view class="btn" @tap="toBuy({price}, 2, gqData.count)">
 						提交订单
 					</view>
 				</view>
@@ -104,7 +104,7 @@ export default {
 				{label: '信托计划', type: 1},
 				{label: '股权', type: 2}
 			],
-			type: 2,
+			type: 1,
 		
 			gqData: {
 				price: 8,
@@ -118,31 +118,41 @@ export default {
 			return this.gqData.price * this.gqData.count * this.gqData.base
 		}
 	},
-	onLoad(option) {
-		getProjectList().then(rt => {
-			this.list = rt.data
-		})
-		if (option && option.status == 1) {
-			uni.showToast({ title: '购买成功' })
+	watch: {
+		type() {
+			this.getList()
 		}
+	},
+	onLoad() {
+		this.getList()
 	},
 	onPullDownRefresh() {
 		// 执行刷新操作
-		getProjectList().then(rt => {
-			uni.stopPullDownRefresh()
-			this.list = rt.data
-		})
+		this.getList()
 	},
 	methods: {
-			
+		getList() {
+			getProjectList({projectType: this.type}).then(rt => {
+			uni.stopPullDownRefresh()
+			this.list = rt.data
+			if(this.type == 2 && this.list[0]) {
+				this.gqData.price =  this.list[0].price
+			}
+		})
+		},
 		choice(num){
 			let {count} = this.gqData
 			let val = count + num
 			if(val <= 0) return 
 			this.gqData.count = val
 		},
-		toBuy(item, type) {
-			uni.navigateTo({ url: "/pages/xiangmu/buy?item=" + encodeURIComponent(JSON.stringify(item)) + '&type=' + type });
+		toBuy(item, type, num) {
+			if(type == 2 && this.list[0]) {
+				item.id = this.list[0].id
+			}
+			item.type = type
+			item.num = num
+			uni.navigateTo({ url: "/pages/xiangmu/buy?item=" + encodeURIComponent(JSON.stringify(item))});
 		}
 	}
 }

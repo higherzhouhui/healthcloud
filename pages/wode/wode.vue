@@ -15,31 +15,31 @@
 				</view> -->
 			</view>
 			<view class="moneyContainer">
-				<view class="list" @tap="withdrawal('bonus', wallet.bonus)">
-					<view class="title">分红钱包（元）</view>
+				<view class="list" @tap="withdrawal('cash', wallet.cash || 0)">
+					<view class="title">现金钱包（元）</view>
 					<view class="bot">
-						<view class="jine">{{ wallet.bonus }}</view>
+						<view class="jine">{{ wallet.cash || 0 }}</view>
 						<view class="tixian" @tap="handleWithDraw('fenhong')">提现</view>
 					</view>
 				</view>
-				<view class="list" @tap="withdrawal('extend', wallet.extend)">
-					<view class="title">推广钱包（元）</view>
+				<view class="list" @tap="withdrawal('group', wallet.group || 0)">
+					<view class="title">团队绩效钱包（元）</view>
 					<view class="bot">
-						<view class="jine">{{ wallet.extend }}</view>
+						<view class="jine">{{ wallet.group  || 0}}</view>
 						<view class="tixian" @tap="handleWithDraw('tuiguang')">提现</view>
 					</view>
 				</view>
 				<view class="list" @tap="handleRouteTo('szrmb')">
 					<view class="title">数字人民币（元）</view>
 					<view class="bot">
-						<view class="jine">{{ wallet.earnings }}</view>
+						<view class="jine">{{ wallet.rmb || 0 }}</view>
 						<view class="tixian" @tap="handleWithDraw('shouyi')">提现</view>
 					</view>
 				</view>
-				<view class="list" @tap="withdrawal('chnt', wallet.chnt)">
-					<view class="title">正泰补贴金（元）</view>
+				<view class="list" @tap="withdrawal('currency', wallet.currency || 0)">
+					<view class="title">货币兑换（元）</view>
 					<view class="bot">
-						<view class="jine">{{ wallet.chnt }}</view>
+						<view class="jine">{{ wallet.currency  || 0}}</view>
 						<view class="tixian" @tap="handleWithDraw('zhengtai')">提现</view>
 					</view>
 				</view>
@@ -84,10 +84,10 @@ import appUpdate from 'common/util/appUpdate.js'
 					{title: '下载APP', logo: 'download', link: 'download', hidden: document ? false : true},
 				],
 				wallet: {
-					bonus: 0, // 分红钱包
-					extend: 0, // 推广钱包
-					earnings: 0, // 收益钱包
-					chnt: 0 //正泰补贴金
+					cash: 0, // 现金钱包
+					group: 0, // 团队绩效浅薄啊
+					rmb: 0, // 数字人民币
+					currency: 0 //货币兑换
 				},
 				avatarUrlError: false,
 			}

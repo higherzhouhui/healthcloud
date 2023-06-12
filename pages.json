@@ -205,11 +205,7 @@
 			"style": {
 				"navigationBarTitleText": "官方群聊",
 				"enablePullDownRefresh": false
-				// "navigationBarBackgroundColor": "#2E96FF",
-				// "backgroundColor": "#2E96FF",
-				// "navigationBarTextStyle": "white"
 			}
-
 		}, {
 			"path": "pages/index/invite/invite",
 			"style": {
@@ -252,7 +248,7 @@
 	},
 	"tabBar": {
 		"backgroundColor": "#fff",
-		"selectedColor": "#FE1E27FF", 
+		"selectedColor": "#fe1e27ff", 
 		"list": [{
 				"pagePath": "pages/index/index",
 				"iconPath": "static/tabbar/home.png",
