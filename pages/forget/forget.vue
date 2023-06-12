@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<image src="../../static/login/loginBg.png" class="loginBg"></image>
+		<!-- <image src="../../static/login/loginBg.png" class="loginBg"></image> -->
 		<view class="main">
 			<view class="title">找回密码</view>
 			<form class="formStyle" @submit="formSubmit">
@@ -127,8 +127,7 @@ import { resetPasswordRequest } from "@/api/user.js"
 	object-fit: cover;
 }
 .main {
-	margin-top: -150px;
-	padding: 0 28px 50px 28px;
+	padding: 59px 28px 50px 28px;
 	position: relative;
 	z-index: 9;
 }

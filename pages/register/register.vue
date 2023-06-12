@@ -143,6 +143,10 @@ import { getQueryString } from "@/utils/common.js"
 					this.$Router.replaceAll({ name: page })
 					return
 				}
+				if (page === 'personal' || page === 'privacy') {
+					uni.navigateTo({url: `/pages/login/${page}/${page}`});
+					return
+				}
 			   uni.navigateTo({url: `/pages/${page}/${page}`});
 			},
 		},
