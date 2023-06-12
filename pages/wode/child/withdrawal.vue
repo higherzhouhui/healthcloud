@@ -48,6 +48,9 @@ import {walletWithdraw} from '@/api/user'
 		onLoad(option) {
 			this.type = option.type;
 			this.amount = option.amount;
+			uni.setNavigationBarTitle({
+			  title: `${option.title}提现`
+			});
 		},
 		methods: {
 			withdrawal() {

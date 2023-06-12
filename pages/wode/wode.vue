@@ -15,32 +15,32 @@
 				</view> -->
 			</view>
 			<view class="moneyContainer">
-				<view class="list" @tap="withdrawal('cash', wallet.cash || 0)">
+				<view class="list" @tap="withdrawal('cash', wallet.cash || 0, '现金')">
 					<view class="title">现金钱包（元）</view>
 					<view class="bot">
 						<view class="jine">{{ wallet.cash || 0 }}</view>
-						<view class="tixian" @tap="handleWithDraw('fenhong')">提现</view>
+						<view class="tixian">提现</view>
 					</view>
 				</view>
-				<view class="list" @tap="withdrawal('group', wallet.group || 0)">
+				<view class="list" @tap="withdrawal('group', wallet.group || 0, '团队绩效')">
 					<view class="title">团队绩效钱包（元）</view>
 					<view class="bot">
 						<view class="jine">{{ wallet.group  || 0}}</view>
-						<view class="tixian" @tap="handleWithDraw('tuiguang')">提现</view>
+						<view class="tixian">提现</view>
 					</view>
 				</view>
-				<view class="list" @tap="handleRouteTo('szrmb')">
+				<view class="list" @tap="handleRouteTo('szrmb', wallet.rmb || 0, '数字人民币')">
 					<view class="title">数字人民币（元）</view>
 					<view class="bot">
 						<view class="jine">{{ wallet.rmb || 0 }}</view>
-						<view class="tixian" @tap="handleWithDraw('shouyi')">提现</view>
+						<view class="tixian">提现</view>
 					</view>
 				</view>
-				<view class="list" @tap="withdrawal('currency', wallet.currency || 0)">
+				<view class="list" @tap="withdrawal('currency', wallet.currency || 0, '货币兑换')">
 					<view class="title">货币兑换（元）</view>
 					<view class="bot">
 						<view class="jine">{{ wallet.currency  || 0}}</view>
-						<view class="tixian" @tap="handleWithDraw('zhengtai')">提现</view>
+						<view class="tixian">提现</view>
 					</view>
 				</view>
 			</view>
@@ -164,9 +164,9 @@ import appUpdate from 'common/util/appUpdate.js'
 					}
 				})
 			},
-			withdrawal(type, amount) {
+			withdrawal(type, amount, title) {
 				uni.navigateTo({
-					url:`/pages/wode/child/withdrawal?type=${type}&amount=${amount}`
+					url:`/pages/wode/child/withdrawal?type=${type}&amount=${amount}&title=${title}`
 				})
 			}
 		}
