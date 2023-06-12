@@ -4,11 +4,11 @@
 		<form>
 			<view class="form-box">
 				<view class="uni-form-item uni-column">
-					<view class="title">姓名</view>
+					<view class="title">转账额</view>
 					<view class="input-box">
-						<input class="uni-input" v-model="form.name" placeholder="请输入姓名" />
-						<image v-if="form.name" src="../../../static/login/close.png" class="clear"
-							@tap="() => form.name = ''"></image>
+						<input class="uni-input" v-model="form.amount" placeholder="请输入转账额" />
+						<image v-if="form.amount" src="../../../static/login/close.png" class="clear"
+							@tap="() => form.amount = ''"></image>
 					</view>
 				</view>
 			</view>
@@ -28,14 +28,13 @@
 </template>
 
 <script>
-import { getUserCard, saveOrUpdateCard } from '@/api/bank'
+import { walletTransfer } from '@/api/user'
 export default {
 	data() {
 		return {
 			form: {
-				bankCode: '',
 				phone: '',
-				name: ''
+				amount: 0
 			}
 		}
 	},
@@ -44,15 +43,15 @@ export default {
 	},
 	methods: {
 		volid() {
-			let { bankCode, phone, name } = this.form
+			let { amount, phone } = this.form
 			let bol = true;
 			let msg = ''
-			if (!name || !name.trim()) {
+			if (!amount || !amount.trim() || isNaN(amount)) {
 				bol = false
-				msg = '请输入姓名'
-			} else if (!phone || !phone.trim()) {
+				msg = '请输入正确的转账额'
+			} else if (!phone || !phone.trim() || isNaN(phone)) {
 				bol = false
-				msg = '请输入收款人手机号'
+				msg = '请输入正确的收款人手机号'
 			}
 			if (msg) {
 				uni.showToast({ title: msg, icon: 'none' })
@@ -69,8 +68,7 @@ export default {
 		formSubmit() {
 			
 			if (this.volid()) {
-				return
-				saveOrUpdateCard(this.form).then(rt => {
+				walletTransfer(this.form).then(rt => {
 					if (rt.code === 200) {
 						uni.showToast({ title: '绑定成功' })
 						setTimeout(() => {
