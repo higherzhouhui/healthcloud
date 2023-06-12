@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="tabs">
+		<view class="tabs" :class="css">
 			<view class="tabs-item" @tap="type = item.type" :class="item.type == type && 'active'" v-for="item in tabs" :index="item.type" >
 				<view class="txt">{{item.label}}</view>
 			</view>
@@ -105,7 +105,7 @@ export default {
 				{label: '股权', type: 2}
 			],
 			type: 1,
-		
+			css: window ? 'h5css' : 'appcss',
 			gqData: {
 				price: 8,
 				count: 1,
@@ -166,6 +166,9 @@ export default {
 		display: flex;
 		background-color: #fff;
 		z-index: 2;
+		&.h5css{
+			top: 40px;
+		}
 			.tabs-item{
 				padding: 10px 0 0;
 				flex: 1;
