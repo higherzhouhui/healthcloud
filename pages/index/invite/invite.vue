@@ -32,6 +32,9 @@ import UQrcode from '@/common/util/ecode'
 import {
     USER_INFO
 } from '@/common/util/constants.js'
+import {
+	URL
+} from '@/config/index.js'
 import { getExpandList } from '@/api/promotion'
 
 export default {
@@ -48,7 +51,7 @@ export default {
             inviteCode
         } = uni.getStorageSync(USER_INFO)
 		this.inviteCode = inviteCode
-        const url = `http://web.zhengtaixinnengyuan.com?inviteCode=${inviteCode}/#/pages/register/register`
+        const url = `${URL}?inviteCode=${inviteCode}/#/pages/register/register`
         this.linkUrl = url
         this.qrFun(url)
 		this.getRules()
