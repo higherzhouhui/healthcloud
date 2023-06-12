@@ -16,7 +16,7 @@
             <view v-else class="own box">
                 <view class="content">{{ item.content }}</view>
                 <img v-if="$store.state.userInfo.avatar && isOk" @error="isOk = false" :src="$store.state.userInfo.avatar || '../../static/wode/avatar.png'" class="avatar" alt="" />
-                <image v-else class="avatar" src="../../static/wode/logo.png" alt=""></image>
+                <image v-else class="avatar" src="../../static/wode/avatar.png" alt=""></image>
             </view>
         </view>
     </scroll-view>
