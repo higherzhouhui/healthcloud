@@ -156,7 +156,7 @@ uni.addInterceptor('request', {
 				break;
 		}
 		//处理状态码
-		if (args.statusCode !== 200) {
+		if (args.statusCode !== 200 && args.statusCode !== 404) {
 			uni.showToast({
 				title: args.message,
 				icon: 'none'
