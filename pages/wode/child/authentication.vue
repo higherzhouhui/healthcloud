@@ -24,6 +24,7 @@
 			</view>
 		</form>
 		<view class="sure-btn" @tap="formSubmit" v-if="!disabled">立即认证</view>
+		<view class="sure-btn" style="opacity: 0.6;" v-else>请联系客服更改</view>
 	</view>
 </template>
 
