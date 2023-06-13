@@ -11,7 +11,7 @@
 				姓名
 			</view>
 			<view class="value">
-				{{ info.authenticated  ? info.name : '未实名' }}
+				{{ info.name || '未实名' }}
 			</view>
 		</view>
 		<view class="item">
