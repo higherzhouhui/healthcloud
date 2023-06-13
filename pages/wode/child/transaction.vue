@@ -6,7 +6,7 @@
                 <view class="left-info">
                     <view class="name">
                         {{item.type | title}}
-                        <view v-if="item.describe">-{{ item.describe }}</view>
+                        <view v-if="item.describe">{{ item.describe }}</view>
                     </view>
                     <view class="time">
                         {{item.createTime}}
