@@ -7,7 +7,7 @@
 					<view class="input-box">
 						<view class="title">真实姓名</view>
 						<input class="uni-input" :disabled="disabled" v-model="name" placeholder="请输入您的真实姓名" />
-						<image v-if="name" src="../../../static/login/close.png" class="clear"
+						<image v-if="name && !disabled" src="../../../static/login/close.png" class="clear"
 							@tap="() => name = ''"></image>
 					</view>
 				</view>
@@ -17,7 +17,7 @@
 					<view class="input-box">
 						<view class="title">身份证号</view>
 						<input class="uni-input" :disabled="disabled" v-model="idCard" placeholder="请输入您的身份证号" />
-						<image v-if="idCard" src="../../../static/login/close.png" class="clear"
+						<image v-if="idCard && !disabled" src="../../../static/login/close.png" class="clear"
 							@tap="() => idCard = ''"></image>
 					</view>
 				</view>
@@ -97,7 +97,7 @@ export default {
 		height: 20px;
 		position: absolute;
 		right: 0;
-		top: 0;
+		bottom: 0;
 	}
 	.top-title {
 		padding: 13px;
