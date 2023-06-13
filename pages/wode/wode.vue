@@ -11,10 +11,10 @@
 						<view class="ziliao" @tap="handleRouteTo('userInfo')">个人资料</view>
 					</view>
 				</view>
-				<!-- <view class="right">
+				<view class="right">
 					<image src="../../static/my/jinbi.png" class="jinbiImg"></image>
 					<text class="signText" @tap="signToday()">签到</text>
-				</view> -->
+				</view>
 			</view>
 			<view class="moneyContainer">
 				<view class="list" @tap="withdrawal('cash', wallet.cash || 0, '现金')">
