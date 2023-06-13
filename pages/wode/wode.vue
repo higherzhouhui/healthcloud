@@ -187,6 +187,7 @@ export default {
 			insert().then(rt => {
 				if (rt.code == 200) {
 					uni.showToast({ title: '签到成功！' })
+					this.getWallet()
 				} else {
 					uni.showToast({ title: rt.message || '签到失败！', icon: 'none' })
 				}
