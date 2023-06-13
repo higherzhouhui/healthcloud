@@ -5,8 +5,8 @@
             <view v-for="(item, index) in list" :key="index" class="scroll-view-item item">
                 <view class="left-info">
                     <view class="name">
-                        {{item.type | title}}
-                        <view v-if="item.describe">{{ item.describe }}</view>
+                        {{item.typeStr}}
+                        <view v-if="item.describe">-{{ item.describe }}</view>
                     </view>
                     <view class="time">
                         {{item.createTime}}

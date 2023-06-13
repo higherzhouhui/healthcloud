@@ -11,10 +11,10 @@
 						<view class="ziliao" @tap="handleRouteTo('userInfo')">个人资料</view>
 					</view>
 				</view>
-				<!-- <view class="right">
+				<view class="right">
 					<image src="../../static/my/jinbi.png" class="jinbiImg"></image>
 					<text class="signText" @tap="signToday()">签到</text>
-				</view> -->
+				</view>
 			</view>
 			<view class="moneyContainer">
 				<view class="list" @tap="withdrawal('cash', wallet.cash || 0, '现金')">
@@ -110,13 +110,14 @@ export default {
 		}
 	},
 	onLoad() {
-		this.getWallet()
+		
 	},
 	onPullDownRefresh() {
 		// 执行刷新操作
 		this.freshCurrentPage()
 	},
 	onShow() {
+		this.getWallet()
 	},
 	computed: {
 		leavel() {
@@ -186,6 +187,7 @@ export default {
 			insert().then(rt => {
 				if (rt.code == 200) {
 					uni.showToast({ title: '签到成功！' })
+					this.getWallet()
 				} else {
 					uni.showToast({ title: rt.message || '签到失败！', icon: 'none' })
 				}
