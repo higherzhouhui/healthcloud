@@ -38,13 +38,14 @@
 			</view>
 		</view>
 		<view class="gq" v-else>
-			<image class="img" src='../../static/xiangmu/guquan.png'></image>
+			<img :src="gqData.image" class="img" v-if="gqData.image" alt="">
+			<image v-else class="img" src='../../static/xiangmu/guquan.png'></image>
 			<view class="gq-box">
 				<view class="gq-box-title">
 					<view class="price">￥{{gqData.price}}</view> 元/份
 				</view>
-				<view class="gq-box-content">
-					<view class="gq-box-content-title">
+				<view class="gq-box-content" v-html="gqData.details">
+					<!-- <view class="gq-box-content-title">
 						健享云保健康医疗原始股权
 					</view>
 					<view class="gq-box-content-p">
@@ -55,7 +56,7 @@
 					</view>
 					<view class="gq-box-content-p">
 						股权每日分红2.8%，分红可立即提现，同时额外事有社保补贴金每日分红3.5%，社保补贴金每月可提现。
-					</view>
+					</view> -->
 				</view>
 				<view class="gq-box-content">
 					<view class="item flex j-s-b">
@@ -109,7 +110,8 @@ export default {
 			gqData: {
 				price: 8,
 				count: 1,
-				base: 100
+				base: 100,
+				details: ''
 			}
 		}
 	},
@@ -136,7 +138,7 @@ export default {
 			uni.stopPullDownRefresh()
 			this.list = rt.data
 			if(this.type == 2 && this.list[0]) {
-				this.gqData.price =  this.list[0].price
+				this.gqData = Object.assign({}, this.gqData, this.list[0])
 			}
 		})
 		},

@@ -97,7 +97,7 @@ export default {
             if(this.loading) return
             this.loading = true
             let {num, id, type} = this.item
-            buyProject({ num, projectType: type, payType: this.payType, id, returnUrl: '/pages/xiangmu/xiangmu?status=1' }).then(rt => {
+            buyProject({ num: num * 100, projectType: type, payType: this.payType, id, returnUrl: '/pages/xiangmu/xiangmu?status=1' }).then(rt => {
                 this.loading = false
                 if (rt.data) {
                     uni.redirectTo({
