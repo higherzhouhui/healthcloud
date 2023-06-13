@@ -110,13 +110,14 @@ export default {
 		}
 	},
 	onLoad() {
-		this.getWallet()
+		
 	},
 	onPullDownRefresh() {
 		// 执行刷新操作
 		this.freshCurrentPage()
 	},
 	onShow() {
+		this.getWallet()
 	},
 	computed: {
 		leavel() {
