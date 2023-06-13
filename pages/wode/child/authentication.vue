@@ -6,7 +6,7 @@
 				<view class="uni-form-item uni-column">
 					<view class="input-box">
 						<view class="title">真实姓名</view>
-						<input class="uni-input" v-model="name" placeholder="请输入您的真实姓名" />
+						<input class="uni-input" :disabled="disabled" v-model="name" placeholder="请输入您的真实姓名" />
 						<image v-if="name" src="../../../static/login/close.png" class="clear"
 							@tap="() => name = ''"></image>
 					</view>
@@ -16,14 +16,14 @@
 				<view class="uni-form-item uni-column">
 					<view class="input-box">
 						<view class="title">身份证号</view>
-						<input class="uni-input" v-model="idCard" placeholder="请输入您的身份证号" />
+						<input class="uni-input" :disabled="disabled" v-model="idCard" placeholder="请输入您的身份证号" />
 						<image v-if="idCard" src="../../../static/login/close.png" class="clear"
 							@tap="() => idCard = ''"></image>
 					</view>
 				</view>
 			</view>
 		</form>
-		<view class="sure-btn" @tap="formSubmit">立即认证</view>
+		<view class="sure-btn" @tap="formSubmit" v-if="!disabled">立即认证</view>
 	</view>
 </template>
 
@@ -34,6 +34,7 @@ export default {
 		return {
 			idCard: '',
 			name: '',
+			disabled: false
 		}
 	},
 	onShow() {
@@ -42,9 +43,10 @@ export default {
 	methods: {
 		getUserInfo() {
 			personalInfo().then(rt=>{
-				let {idCard, name} = rt.data
+				let {idCard, name, authenticated} = rt.data
 				this.idCard = idCard
 				this.name = name
+				this.disabled = authenticated
 			})
 		},
 		volid() {
