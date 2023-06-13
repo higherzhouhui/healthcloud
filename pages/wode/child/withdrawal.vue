@@ -22,7 +22,7 @@
 				<view class='input-form'>
 					<view class="input-box">
 						<view class="fh">￥</view>
-						<input type="numeric" v-model="txPrice">
+						<input type="number" v-model="txPrice">
 					</view>
 					<view class="all" @tap="txPrice = amount">
 						全部提现
