@@ -163,9 +163,6 @@ uni.addInterceptor('request', {
 			})
 			return Promise.reject(args.message);
 		}
-		if (!args.data || !args.data.code || !args.data.message) {
-			return Promise.reject("错误的数据内容。");
-		}
 		//处理消息码
 		if (args.data && args.data.code !== 200) {
 			if (args.data.code === 401) {
