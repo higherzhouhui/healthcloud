@@ -114,7 +114,7 @@ export default {
 			  success(res) {
 				const tempFilePaths = res.tempFilePaths[0];
 				uni.uploadFile({
-				  url: 'http://www.zhengtaixinnengyuan.com/admin/upload/uploadImage',
+				  url: 'http://api.zhengtaixinnengyuan.com/admin/upload/uploadImage',
 				  filePath: tempFilePaths,
 				  name: 'file',
 				  formData: {
