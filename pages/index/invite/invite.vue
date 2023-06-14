@@ -6,13 +6,14 @@
         <view class="content">
             <view class="inviteWrapper">
                 <view class="rulesWrapper">
-                    <view class="ruleTitle">我的邀请码</view>
+                    <view class="ruleTitle"><view class="txts">我的邀请码</view></view>
                     <!-- <view class="ruleList" v-for="item in rules" :key="item.id">
 					<text class="normal">推荐</text><text class="res">{{item.inviteNum}}</text>
 					<text class="normal">人，</text><text class="normal">赠送推广金</text><text class="red">{{item.amount}}</text>
 					<text class="normal">元</text>
 				</view> -->
                 </view>
+                <view class="nums">{{ inviteCode }}</view>
                 <view class="title">每天签到送<view class="num">1w</view>数字人民币</view>
                 <view class="ecode-box">
                     <canvas ref="ecode" id="qrcode" class="ecode" style="width: 175px; height: 175px;"
@@ -188,10 +189,19 @@ export default {
                 margin-bottom: 22px;
                 font-weight: 600;
                 color: #17191A;
-                .num{
+
+                .num {
                     display: inline-block;
                     color: #FF4B4B;
                 }
+            }
+
+            .nums {
+                margin: 16px 0;
+                font-size: 16px;
+                font-family: PingFang SC-Semibold, PingFang SC;
+                font-weight: 600;
+                color: #FE1E27;
             }
 
             .qrdImg {
@@ -231,13 +241,19 @@ export default {
 
         .rulesWrapper {
             .ruleTitle {
+                padding: 0 5px;
                 font-size: 18px;
                 font-family: PingFang SC-Semibold, PingFang SC;
                 font-weight: 600;
                 color: #17191A;
                 line-height: 30px;
                 text-align: center;
-                margin-bottom: 20px;
+                // margin-bottom: 5px;
+                background-color: #FFF4F4;
+                height: 11px;
+                .txts{
+                    transform: translateY(-20px);
+                }
             }
 
             .ruleList {
