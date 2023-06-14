@@ -147,7 +147,7 @@ export default {
 				case 'fenhong': break;
 			}
 		},
-		handleRouteTo(link) {
+		handleRouteTo(link, value) {
 			if (link === 'update') {
 				appUpdate(true)
 				return
@@ -159,7 +159,7 @@ export default {
 				return
 			}
 			uni.navigateTo({
-				url: `/pages/wode/child/${link}`
+				url: `/pages/wode/child/${link}?value=${value}`
 			})
 		},
 		handleToInvitePage(link) {

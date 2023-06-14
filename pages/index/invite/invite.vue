@@ -14,7 +14,7 @@
 				</view> -->
                 </view>
                 <view class="nums">{{ inviteCode }}</view>
-                <view class="title">每天签到送<view class="num">1w</view>数字人民币</view>
+                <!-- <view class="title">每天签到送<view class="num">1w</view>数字人民币</view> -->
                 <view class="ecode-box">
                     <canvas ref="ecode" id="qrcode" class="ecode" style="width: 175px; height: 175px;"
                         canvas-id="qrcode"></canvas>
@@ -173,7 +173,6 @@ export default {
         bottom: 12px;
         width: calc(100% - 24px);
         left: 12px;
-
         .inviteWrapper {
             background: #FFFFFF;
             border-radius: 12px 12px 12px 12px;
@@ -186,7 +185,7 @@ export default {
                 font-size: 15px;
                 font-family: PingFang SC-Semibold, PingFang SC;
                 line-height: 30px;
-                margin-bottom: 22px;
+                // margin-bottom: 22px;
                 font-weight: 600;
                 color: #17191A;
 
@@ -241,6 +240,7 @@ export default {
 
         .rulesWrapper {
             .ruleTitle {
+                margin-top: 20px;
                 padding: 0 5px;
                 font-size: 18px;
                 font-family: PingFang SC-Semibold, PingFang SC;

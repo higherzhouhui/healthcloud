@@ -25,7 +25,7 @@
 				<view class='input-form'>
 					<view class="input-box">
 						<view class="fh">￥</view>
-						<view class="price">0</view>
+						<view class="price">{{ price }}</view>
 					</view>
 				</view>
 				<view class="flex j-s-b">
@@ -46,11 +46,12 @@ import {walletWithdraw} from '@/api/user'
 			return {
 				amount: 10000,
 				txPrice: null,
-				type: ''
+				type: '',
+				price: 0
 			}
 		},
 		onLoad(option) {
-			
+			this.price = option.value || 0
 		},
 		methods: {
 			to(link) {
