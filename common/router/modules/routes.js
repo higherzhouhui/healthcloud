@@ -106,6 +106,13 @@ const routes = [
 			},
 	},
 	{
+		path: "/pages/xiangmu/buybank",
+		name: 'webview',
+			meta: {
+				title: '银行卡支付',
+			},
+	},
+	{
 		path: "/pages/kefu/kefu",
 		name: 'kefu',
 			meta: {

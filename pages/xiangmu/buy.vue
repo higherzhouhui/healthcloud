@@ -45,8 +45,8 @@
                         支付宝
                     </view>
                     <view>
-                        <image class="choice" v-if="payType == 1" src="../../static/xiangmu/choice.png"></image>
-                        <image class="choice" v-else src="../../static/xiangmu/choice-active.png"></image>
+                        <image class="choice" v-if="payType == 2" src="../../static/xiangmu/choice-active.png"></image>
+                        <image class="choice" v-else src="../../static/xiangmu/choice.png"></image>
                     </view>
 
                 </view>
@@ -57,6 +57,17 @@
                     </view>
                     <view>
                         <image class="choice" v-if="payType == 1" src="../../static/xiangmu/choice-active.png"></image>
+                        <image class="choice" v-else src="../../static/xiangmu/choice.png"></image>
+                    </view>
+
+                </view>
+                <view class="pay-item" @tap="bankbuy">
+                    <view>
+                        <image class="icon" src="../../static/xiangmu/yinhangka.png" alt=""></image>
+                        银行卡支付
+                    </view>
+                    <view>
+                        <image class="choice" v-if="payType == 3" src="../../static/xiangmu/choice-active.png"></image>
                         <image class="choice" v-else src="../../static/xiangmu/choice.png"></image>
                     </view>
 
@@ -80,19 +91,22 @@ export default {
             item: {},
             payType: 2,
             loading: false,
-			type: 2,
+			type: 1,
             num: 0
         }
     },
     onLoad(option) {
         this.item = JSON.parse(decodeURIComponent(option.item));
-		this.type = option.type
-        this.num = option.num
+		this.type = this.item.type
+        this.num = this.item.num
     },
     onShow() {
 
     },
     methods: {
+        bankbuy() {
+            uni.navigateTo({ url: "/pages/xiangmu/buybank"});
+        },
         onPay() {
             if(this.loading) return
             this.loading = true
@@ -161,9 +175,9 @@ export default {
             font-family: PingFang SC-Regular, PingFang SC;
             font-weight: 400;
             color: #17191A;
-
-            &:first-child {
-                border-bottom: 1px solid #EBECED;
+            border-bottom: 1px solid #EBECED;
+            &:last-child {
+                border-bottom: unset;
             }
 
             .icon {

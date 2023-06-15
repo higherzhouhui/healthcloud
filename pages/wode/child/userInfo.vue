@@ -49,7 +49,9 @@
 import { updateAvatarRequest } from '@/api/user'
 import { hideMiddlePhone } from "@/utils/common"
 import { mapActions } from "vuex"
-
+import {
+    URL
+} from '@/config/index.js'
 export default {
 	data() {
 		return {
@@ -114,7 +116,7 @@ export default {
 			  success(res) {
 				const tempFilePaths = res.tempFilePaths[0];
 				uni.uploadFile({
-				  url: 'http://api.jianxiangyunbao.com/admin/upload/uploadImage',
+				  url: `${URL}/admin/upload/uploadImage`,
 				  filePath: tempFilePaths,
 				  name: 'file',
 				  formData: {
