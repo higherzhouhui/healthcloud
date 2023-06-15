@@ -73,7 +73,7 @@
 						</view>
 						<view class="flex choice">
 							<image class="imgs js" src="../../static/xiangmu/js.png" @tap="choice(-1)"></image>
-							<view class="input">{{gqData.count * gqData.base}}</view>
+							<view class="input">{{gqData.count + gqData.base}}</view>
 							<image class="imgs add" src="../../static/xiangmu/zj.png" @tap="choice(1)"></image>
 						</view>
 					</view>
@@ -109,7 +109,7 @@ export default {
 			css: window ? 'h5css' : 'appcss',
 			gqData: {
 				price: 8,
-				count: 1,
+				count: 0,
 				base: 100,
 				details: ''
 			}
@@ -117,7 +117,7 @@ export default {
 	},
 	computed: {
 		price() {
-			return this.gqData.price * this.gqData.count * this.gqData.base
+			return this.gqData.price * (this.gqData.count + this.gqData.base)
 		}
 	},
 	watch: {
@@ -145,7 +145,7 @@ export default {
 		choice(num){
 			let {count} = this.gqData
 			let val = count + num
-			if(val <= 0) return 
+			if(val < 0) return 
 			this.gqData.count = val
 		},
 		toBuy(item, type, num) {
