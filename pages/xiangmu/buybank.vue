@@ -3,7 +3,7 @@
         <view class="gq-box">
             <view class="gq-box-item red">
                 <view class="key">转账卡号</view>
-                <view class="value">{{ data.cardId }}</view>
+                <view class="value">{{ data.bankCode }}</view>
                 <view class="copy" @tap="copy">复制</view>
             </view>
             <view class="gq-box-item">
@@ -17,7 +17,7 @@
         </view>
         <view class="item">
             <view class="title">上传打款截图</view>
-            <image v-if="data.cardimg" class="up-img" :src="data.cardimg"></image>
+            <image v-if="data.voucher" class="up-img" :src="data.voucher"></image>
             <view v-else class="up-box" @tap="handleUploadAvatar">
                 <image class="img" src="../../static/xiangmu/shangchuan.png"></image>
             </view>
@@ -32,14 +32,17 @@
 import {
     URL
 } from '@/config/index.js'
+import { getPayCard, buyProject } from '@/api/project'
 export default {
     data() {
         return {
+            loading: false,
             data: {
-                cardId: '6226 6846 8989 8876 076',
-                name: '王大锤',
-                bankName: '大锤银行',
-                cardimg: ''
+                bankCode: '',
+                name: '',
+                bankName: '',
+                voucher: '',
+                id: null
             },
         }
     },
@@ -47,13 +50,18 @@ export default {
 
     },
     onShow() {
-
+        this.getPayCardInfo()
     },
     methods: {
+        getPayCardInfo() {
+            getPayCard().then(rt => {
+                    this.data = Object.assign({}, this.data, rt.data || {}) 
+            })
+        },
         copy() {
             uni.showToast({ title: '复制成功' })
             uni.setClipboardData({
-                data: this.data.cardId
+                data: this.data.bankCode
             });
         },
         handleUploadAvatar() {
@@ -72,7 +80,7 @@ export default {
                         },
                         success: function (res) {
                             const response = JSON.parse((res.data))
-                            that.data.cardimg = response.data
+                            that.data.voucher = response.data
                         },
                         fail: function (res) {
                             console.log('上传失败：', res);
@@ -82,7 +90,24 @@ export default {
             });
         },
         onPay() {
-
+            let {id, voucher} = this.data
+            if(!voucher) {
+                return uni.showToast({ title: '请上传打款截图', icon: 'none' })
+            }
+            this.loading = true
+            buyProject({payType:3, id, voucher}).then(rt=>{
+                this.loading = false
+                if(rt.code == 200){
+                    uni.showToast({ title: '上传成功' })
+                    setTimeout(()=>{
+                        uni.switchTab({url: '/pages/xiangmu/xiangmu'})
+                    }, 1000)     
+                }else {
+                    uni.showToast({ title: rt.message, icon: 'none' })
+                }
+            }).catch(_=>{
+                this.loading = false
+            })
         }
     }
 }
@@ -158,11 +183,13 @@ export default {
 
 
 }
-.up-img{
+
+.up-img {
     margin-top: 10px;
     width: 100%;
     border-radius: 12px;
 }
+
 .up-box {
     margin-top: 10px;
     width: 100%;

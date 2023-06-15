@@ -11,3 +11,6 @@ export function getPayOrder(params) {
 export function getMyProjectList(params) {
 	return request('/project/getMyProjectList', 'GET', params)	
 }
+export function getPayCard(params) {
+	return request('/project/getPayCard', 'GET', params)	
+}
