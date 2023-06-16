@@ -2,7 +2,7 @@
 	<view>
 		<view class="tabs" :class="css">
 			<view class="tabs-item" @tap="type = item.type" :class="item.type == type && 'active'" v-for="item in tabs"
-				:index="item.type">
+				:key="item.type">
 				<view class="txt">{{ item.label }}</view>
 			</view>
 		</view>
@@ -46,18 +46,6 @@
 					<view class="price">￥{{ gqData.price }}</view> 元/份
 				</view>
 				<view class="gq-box-content" v-html="gqData.details">
-					<!-- <view class="gq-box-content-title">
-						健享云保健康医疗原始股权
-					</view>
-					<view class="gq-box-content-p">
-						云之健在老大的带领下，响应国家号召，全面实现健康所需。
-					</view>
-					<view class="gq-box-content-p">
-						早投资早收益，凡是购买股权的家人，均可获得800积分，终身享受股权收益。
-					</view>
-					<view class="gq-box-content-p">
-						股权每日分红2.8%，分红可立即提现，同时额外事有社保补贴金每日分红3.5%，社保补贴金每月可提现。
-					</view> -->
 				</view>
 				<view class="gq-box-content">
 					<view class="item flex j-s-b">
@@ -74,7 +62,7 @@
 						</view>
 						<view class="flex choice">
 							<image class="imgs js" src="../../static/xiangmu/js.png" @tap="choice(-1)"></image>
-							<view class="input">{{ gqData.count + gqData.base }}</view>
+							<view class="input">{{ gqData.count * gqData.base }}</view>
 							<image class="imgs add" src="../../static/xiangmu/zj.png" @tap="choice(1)"></image>
 						</view>
 					</view>
@@ -109,7 +97,7 @@ export default {
 			css: window ? 'h5css' : 'appcss',
 			gqData: {
 				price: 8,
-				count: 0,
+				count: 1,
 				base: 100,
 				details: ''
 			}
@@ -117,7 +105,7 @@ export default {
 	},
 	computed: {
 		price() {
-			return this.gqData.price * (this.gqData.count + this.gqData.base)
+			return this.gqData.price * (this.gqData.count * this.gqData.base)
 		}
 	},
 	watch: {
@@ -145,7 +133,7 @@ export default {
 		choice(num) {
 			let { count } = this.gqData
 			let val = count + num
-			if (val < 0) return
+			if (val <= 0) return
 			this.gqData.count = val
 		},
 		toBuy(item, type, num) {
