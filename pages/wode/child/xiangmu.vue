@@ -1,40 +1,44 @@
 <template>
-    <view class="container">
-        <scroll-view v-if="list.length" scroll-y="true" class="scroll-box" @scrolltolower="lower">
-            <view class="item" v-for="item in list" :key="item.id">
-                <view class="top-info">
-                    <view class="avatar-box">
-                        <img class="avatar" :onerror="`this.src='${avatar}'`" :src="item.image" alt="">
-                        <view class="avatar-info">
-                            <view class="name">{{ item.title }}</view>
-                            <!-- <view class="num">
+<view class="container">
+    <scroll-view v-if="list.length" scroll-y="true" class="scroll-box" @scrolltolower="lower">
+        <view class="item" v-for="item in list" :key="item.id">
+            <view class="top-info">
+                <view class="avatar-box">
+                    <img class="avatar" :onerror="`this.src='${avatar}'`" :src="item.image" alt="">
+                    <view class="avatar-info">
+                        <view class="name">{{ item.title }}</view>
+                        <!-- <view class="num">
                             <view class="fh">￥</view>{{ item.price }}
                         </view> -->
-                        </view>
                     </view>
-                </view>
-                <view class="botton-info">
-                    <view class="in-item">
-                        <view class="value">{{ item.chntSubsidy }}</view>
-                        <view class="txt">奖励数字人民币</view>
-                    </view>
-                    <view class="in-item">
-                        <view class="value">{{ item.dayEarnings }}</view>
-                        <view class="txt">每日社保补贴</view>
-                    </view>
-                    <view class="in-item">
-                        <view class="value value2">{{ item.price }}</view>
-                        <view class="txt">购买价格</view>
-                    </view>
-                </view>
-                <view class="time-box" v-if="item.createTime || item.endTime">
-                    <view v-if="item.createTime">购买时间：{{ item.createTime }}</view>
-                    <view v-if="item.endTime" class="b-txt">开始时间：{{ item.endTime }}</view>
                 </view>
             </view>
-        </scroll-view>
-        <view v-if="!list.length" class="no-data">暂无数据</view>
-    </view>
+            <view class="botton-info">
+                <view class="in-item">
+                    <view class="value">{{ item.chntSubsidy }}</view>
+                    <view class="txt">奖励数字人民币</view>
+                </view>
+                <view class="in-item"  v-if="item.projectType == 1">
+                    <view class="value">{{ item.dayEarnings }}</view>
+                    <view class="txt">每日社保补贴</view>
+                </view>
+                <view class="in-item" v-else>
+                    <view class="value">{{ item.num || 0 }}</view>
+                    <view class="txt">购买股权数量</view>
+                </view>
+                <view class="in-item">
+                    <view class="value value2">{{ item.price }}</view>
+                    <view class="txt">{{ item.projectType == 2 ? '购买单价' : '购买价格' }} </view>
+                </view>
+            </view>
+            <view class="time-box" v-if="item.createTime || item.endTime">
+                <view v-if="item.createTime">购买时间：{{ item.createTime }}</view>
+                <view v-if="item.endTime" class="b-txt">开始时间：{{ item.endTime }}</view>
+            </view>
+        </view>
+    </scroll-view>
+    <view v-if="!list.length" class="no-data">暂无数据</view>
+</view>
 </template>
 
 <script>
@@ -68,7 +72,7 @@ export default {
                 pageSize: 20
             }).then(rt => {
                 uni.stopPullDownRefresh();
-                let list = rt.data?.list || []
+                let list = rt.data ?.list || []
                 if (!list.length) return this.hasmore = false
                 if (this.pageNum == 1) {
                     this.list = list
@@ -148,20 +152,22 @@ export default {
                 border-radius: 16px;
             }
         }
-        .time-box {
-                margin-top: 2px;
-                padding: 8px;
-                background-color: #F5F6F7;
-                border-radius: 8px;
-                font-size: 12px;
-                font-family: PingFang SC-Regular, PingFang SC;
-                font-weight: 400;
-                color: #4F5459;
 
-                .bt-txt {
-                    margin-top: 4px;
-                }
+        .time-box {
+            margin-top: 2px;
+            padding: 8px;
+            background-color: #F5F6F7;
+            border-radius: 8px;
+            font-size: 12px;
+            font-family: PingFang SC-Regular, PingFang SC;
+            font-weight: 400;
+            color: #4F5459;
+
+            .bt-txt {
+                margin-top: 4px;
             }
+        }
+
         .botton-info {
             display: flex;
             align-items: center;
@@ -170,8 +176,6 @@ export default {
             padding: 9px 19px 5px 19px;
             // background-color: #F6FAFF;
             border-radius: 4px;
-
-        
 
             .in-item {
                 text-align: center;
