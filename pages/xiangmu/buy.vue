@@ -105,7 +105,7 @@ export default {
     },
     methods: {
         bankbuy() {
-            uni.navigateTo({ url: "/pages/xiangmu/buybank"});
+            uni.navigateTo({ url: "/pages/xiangmu/buybank?id="+this.item.id});
         },
         onPay() {
             if(this.loading) return
