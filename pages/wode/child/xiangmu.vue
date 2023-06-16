@@ -28,7 +28,7 @@
                 </view>
                 <view class="in-item">
                     <view class="value value2">{{ item.price }}</view>
-                    <view class="txt">{{ item.projectType == 2 ? '购买单价' : '购买价格' }} </view>
+                    <view class="txt">购买价格</view>
                 </view>
             </view>
             <view class="time-box" v-if="item.createTime || item.endTime">
