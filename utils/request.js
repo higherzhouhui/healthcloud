@@ -166,17 +166,22 @@ uni.addInterceptor('request', {
 		//处理消息码
 		if (args.data && args.data.code !== 200) {
 			if (args.data.code === 401 || args.data.code === 998) {
-				uni.showToast({
-					title: args.message,
-					icon: 'error'
-				})
-				setTimeout(() => {
-					uni.removeStorageSync(ACCESS_TOKEN)
-					uni.removeStorageSync(USER_INFO)
-					uni.navigateTo({
-						url: '/pages/login/login'
+				if (!modelShow) {
+					modelShow = true
+					uni.showModal({
+						title: "提示",
+						content: args.data.message || args.data.msg,
+						showCancel: false,
+						complete() {
+							modelShow = false
+							uni.removeStorageSync(ACCESS_TOKEN)
+							uni.removeStorageSync(USER_INFO)
+							uni.navigateTo({
+								url: '/pages/login/login'
+							})
+						}
 					})
-				}, 1000)
+				}
 			}
 			return Promise.resolve(args.data);
 		}
@@ -195,7 +200,6 @@ uni.addInterceptor('request', {
 				}
 			})
 		}
-		
 	},
 })
 

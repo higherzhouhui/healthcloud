@@ -1,6 +1,7 @@
 <template>
 	<view class="container">
 		<view v-html="course"></view>
+
 	</view>
 </template>
 
