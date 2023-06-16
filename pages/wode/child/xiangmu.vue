@@ -26,10 +26,10 @@
                         <view class="value value2">{{ item.price }}</view>
                         <view class="txt">购买价格</view>
                     </view>
-                    <view class="time-box" v-if="item.createTime || item.endTime">
-                        <view v-if="item.createTime">购买时间：{{ item.createTime }}</view>
-                        <view v-if="item.endTime" class="b-txt">开始时间：{{ item.endTime }}</view>
-                    </view>
+                </view>
+                <view class="time-box" v-if="item.createTime || item.endTime">
+                    <view v-if="item.createTime">购买时间：{{ item.createTime }}</view>
+                    <view v-if="item.endTime" class="b-txt">开始时间：{{ item.endTime }}</view>
                 </view>
             </view>
         </scroll-view>
@@ -148,17 +148,7 @@ export default {
                 border-radius: 16px;
             }
         }
-
-        .botton-info {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 12px;
-            padding: 9px 19px 5px 19px;
-            // background-color: #F6FAFF;
-            border-radius: 4px;
-
-            .time-box {
+        .time-box {
                 margin-top: 2px;
                 padding: 8px;
                 background-color: #F5F6F7;
@@ -172,6 +162,16 @@ export default {
                     margin-top: 4px;
                 }
             }
+        .botton-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 12px;
+            padding: 9px 19px 5px 19px;
+            // background-color: #F6FAFF;
+            border-radius: 4px;
+
+        
 
             .in-item {
                 text-align: center;
