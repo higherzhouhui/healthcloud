@@ -124,7 +124,7 @@ export default {
             switch (type) {
                 case 'caozuo':
                     uni.navigateTo({
-                        url: `/pages/index/course/course?course=${this.course}`
+                        url: `/pages/index/course/course`
                     })
                     break;
                 case 'yqhy':

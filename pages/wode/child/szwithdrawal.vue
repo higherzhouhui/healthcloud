@@ -6,7 +6,7 @@
 				<view class="uni-form-item uni-column">
 					<view class="title">转账额</view>
 					<view class="input-box">
-						<input class="uni-input" v-model="form.amount" placeholder="请输入转账额" />
+						<input class="uni-input" type="number" v-model="form.amount" placeholder="请输入转账额" />
 						<image v-if="form.amount" src="../../../static/login/close.png" class="clear"
 							@tap="() => form.amount = ''"></image>
 					</view>
@@ -16,7 +16,7 @@
 				<view class="uni-form-item uni-column">
 					<view class="title">手机号</view>
 					<view class="input-box">
-						<input class="uni-input" v-model="form.phone" placeholder="请输入收款人手机号" />
+						<input class="uni-input" type="number" v-model="form.phone" placeholder="请输入收款人手机号" />
 						<image v-if="form.phone" src="../../../static/login/close.png" class="clear"
 							@tap="() => form.phone = ''"></image>
 					</view>

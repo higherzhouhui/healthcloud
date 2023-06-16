@@ -1,29 +1,43 @@
 <template>
 	<view class="container">
-		<image :src="image" mode="widthFix"></image>
+		<view v-html="course"></view>
 	</view>
 </template>
 
 <script>
+	import {
+	    getHomeBaseRequest
+	} from '@/api/home.js'
 	export default {
 		data() {
 			return {
-				image: ''
+				course: ''
 			}
 		},
-		onLoad(options) {
-			this.image = options?.course
+		onLoad() {
+			this.getBaseInfo()
 		},
 		methods: {
-			
+			getBaseInfo() {
+				getHomeBaseRequest().then(res => {
+					if (res.code === 200) {
+						this.course = res.data.course
+					} else {
+						uni.showToast({
+							title: res.message || res.msg,
+							icon: 'none'
+						})
+					}
+				})
+			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
 .container {
-	display: flex;
-	justify-content: center;
 	padding: 12px;
+	word-break: break-all;
+	
 }
 </style>
