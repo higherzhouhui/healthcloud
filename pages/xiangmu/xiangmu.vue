@@ -18,8 +18,8 @@
 							</view> -->
 						</view>
 					</view>
-					<view class="button" :class="item.status != 1 && 'sq'" @tap="toBuy(item, 1)">
-						{{ item.status == 1 ? '立即购买' : '已售罄' }}
+					<view class="button" :class="item.state != 1 && 'sq'" @tap="toBuy(item, 1)">
+						{{ item.state == 1 ? '立即购买' : '已售罄' }}
 					</view>
 				</view>
 				<view class="botton-info">
@@ -149,7 +149,7 @@ export default {
 			this.gqData.count = val
 		},
 		toBuy(item, type, num) {
-			if(item.status == 0) return 
+			if(item.state == 0) return 
 			if (type == 2 && this.list[0]) {
 				item.id = this.list[0].id
 			}
