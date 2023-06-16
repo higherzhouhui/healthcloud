@@ -1,8 +1,9 @@
 <template>
 	<view>
 		<view class="tabs" :class="css">
-			<view class="tabs-item" @tap="type = item.type" :class="item.type == type && 'active'" v-for="item in tabs" :index="item.type" >
-				<view class="txt">{{item.label}}</view>
+			<view class="tabs-item" @tap="type = item.type" :class="item.type == type && 'active'" v-for="item in tabs"
+				:index="item.type">
+				<view class="txt">{{ item.label }}</view>
 			</view>
 		</view>
 		<view class="container" v-if="type == 1">
@@ -42,7 +43,7 @@
 			<image v-else class="img" src='../../static/xiangmu/guquan.png'></image>
 			<view class="gq-box">
 				<view class="gq-box-title">
-					<view class="price">￥{{gqData.price}}</view> 元/份
+					<view class="price">￥{{ gqData.price }}</view> 元/份
 				</view>
 				<view class="gq-box-content" v-html="gqData.details">
 					<!-- <view class="gq-box-content-title">
@@ -64,7 +65,7 @@
 							起购数量
 						</view>
 						<view>
-							{{gqData.base}}
+							{{ gqData.base }}
 						</view>
 					</view>
 					<view class="item flex j-s-b">
@@ -73,7 +74,7 @@
 						</view>
 						<view class="flex choice">
 							<image class="imgs js" src="../../static/xiangmu/js.png" @tap="choice(-1)"></image>
-							<view class="input">{{gqData.count + gqData.base}}</view>
+							<view class="input">{{ gqData.count + gqData.base }}</view>
 							<image class="imgs add" src="../../static/xiangmu/zj.png" @tap="choice(1)"></image>
 						</view>
 					</view>
@@ -81,17 +82,16 @@
 				<view class="gq-box-content flex j-s-b">
 					<view class="flex">
 						<view>合计金额：</view>
-						<view class="price">￥{{price}}</view>
+						<view class="price">￥{{ price }}</view>
 					</view>
-					<view class="btn" @tap="toBuy({price}, 2, gqData.count)">
+					<view class="btn" @tap="toBuy({ price }, 2, gqData.count)">
 						提交订单
 					</view>
 				</view>
 			</view>
-			
+
 		</view>
 	</view>
-
 </template>
 
 <script>
@@ -102,8 +102,8 @@ export default {
 			avatar: 'https://alipic.lanhuapp.com/web475b3b1e-96fa-4a25-be45-7c2868ddce63',
 			list: [],
 			tabs: [
-				{label: '信托计划', type: 1},
-				{label: '股权', type: 2}
+				{ label: '理财计划', type: 1 },
+				{ label: '股权', type: 2 }
 			],
 			type: 1,
 			css: window ? 'h5css' : 'appcss',
@@ -134,174 +134,195 @@ export default {
 	},
 	methods: {
 		getList() {
-			getProjectList({projectType: this.type}).then(rt => {
-			uni.stopPullDownRefresh()
-			this.list = rt.data
-			if(this.type == 2 && this.list[0]) {
-				this.gqData = Object.assign({}, this.gqData, this.list[0])
-			}
-		})
+			getProjectList({ projectType: this.type }).then(rt => {
+				uni.stopPullDownRefresh()
+				this.list = rt.data
+				if (this.type == 2 && this.list[0]) {
+					this.gqData = Object.assign({}, this.gqData, this.list[0])
+				}
+			})
 		},
-		choice(num){
-			let {count} = this.gqData
+		choice(num) {
+			let { count } = this.gqData
 			let val = count + num
-			if(val < 0) return 
+			if (val < 0) return
 			this.gqData.count = val
 		},
 		toBuy(item, type, num) {
-			if(type == 2 && this.list[0]) {
+			if (type == 2 && this.list[0]) {
 				item.id = this.list[0].id
 			}
 			item.type = type
 			item.num = num
-			uni.navigateTo({ url: "/pages/xiangmu/buy?item=" + encodeURIComponent(JSON.stringify(item))});
+			uni.navigateTo({ url: "/pages/xiangmu/buy?item=" + encodeURIComponent(JSON.stringify(item)) });
 		}
 	}
 }
 </script>
 
 <style scoped lang="scss">
-	.tabs{
-		position: fixed;
-		top:0;
-		width: 100%;
-		display: flex;
+.tabs {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	display: flex;
+	background-color: #fff;
+	z-index: 2;
+
+	&.h5css {
+		top: 40px;
+	}
+
+	.tabs-item {
+		padding: 10px 0 0;
+		flex: 1;
+		text-align: center;
+		font-size: 15px;
+		font-family: PingFang SC-Medium, PingFang SC;
+		font-weight: 400;
+		height: 40px;
+		line-height: 40px;
 		background-color: #fff;
-		z-index: 2;
-		&.h5css{
-			top: 40px;
+
+		.txt {
+			// padding: 0 4px 10px;
+			display: inline-block;
 		}
-			.tabs-item{
-				padding: 10px 0 0;
-				flex: 1;
-				text-align: center;
+
+		&.active {
+			color: #FE1E27FF;
+			font-weight: 500;
+
+			.txt {
+				border-bottom: 3px solid;
+			}
+		}
+	}
+}
+
+.gq {
+	.img {
+		margin-top: 45px;
+		width: 100%;
+		font-size: 0;
+	}
+
+	.gq-box {
+		margin-top: -6px;
+
+		.gq-box-title {
+			padding-left: 12px;
+			box-sizing: border-box;
+			display: flex;
+			background-color: #FE1E27FF;
+			height: 38px;
+			line-height: 38px;
+			font-size: 13px;
+			font-family: PingFang SC-Semibold, PingFang SC;
+			font-weight: 600;
+			color: #FFFFFF;
+
+			.price {
+				font-size: 20px;
+			}
+		}
+
+		.flex {
+			display: flex;
+			align-items: center;
+			font-size: 13px;
+			font-family: PingFang SC-Regular, PingFang SC;
+			font-weight: 400;
+			color: #17191A;
+
+			&.choice {
+				border-radius: 4px;
+				border: 1px solid #C5C6C7;
+			}
+
+			.btn {
+				padding: 0 16px;
+				font-weight: 400;
+				color: #FFFFFF;
+				height: 32px;
+				line-height: 32px;
+				background: #FE1E27;
+				border-radius: 16px;
+			}
+
+			.imgs {
+				padding: 4px;
+				width: 15px;
+				height: 15px;
+
+				&.js {
+					border-right: 1px solid #C5C6C7;
+				}
+
+				&.add {
+					border-left: 1px solid #C5C6C7;
+				}
+			}
+
+			.input {
+				width: 50px;
 				font-size: 15px;
 				font-family: PingFang SC-Medium, PingFang SC;
-				font-weight: 400;
-				height: 40px;
-				line-height: 40px;
-				background-color: #fff;
-				.txt{
-					// padding: 0 4px 10px;
-					display: inline-block;
-				}
-				&.active{	
-					color: #FE1E27FF;			
-					font-weight: 500;
-					
-					.txt{
-						border-bottom: 3px solid;
-					}
+				font-weight: 500;
+				color: #17191A;
+				height: 23px;
+				line-height: 23px;
+				text-align: center;
+			}
+		}
+
+		.j-s-b {
+			justify-content: space-between;
+		}
+
+		.gq-box-content {
+			margin-bottom: 12px;
+			padding: 16px 12px;
+			background-color: #fff;
+
+			.price {
+				font-size: 20px;
+				font-family: PingFang SC-Semibold, PingFang SC;
+				font-weight: 600;
+				color: #FE1E27;
+			}
+
+			.item {
+				font-size: 15px;
+				font-family: PingFang SC-Medium, PingFang SC;
+				font-weight: 500;
+				color: #17191A;
+
+				&:first-child {
+					margin-bottom: 16px;
 				}
 			}
 		}
-		.gq{
-			.img{
-				margin-top: 45px;
-				width: 100%;
-				font-size: 0;
-			}
-			.gq-box{
-				margin-top: -6px;
-				.gq-box-title {
-					padding-left: 12px;
-					box-sizing: border-box;
-					display: flex;
-					background-color: #FE1E27FF;
-					height: 38px;
-					line-height: 38px;
-					font-size: 13px;
-					font-family: PingFang SC-Semibold, PingFang SC;
-					font-weight: 600;
-					color: #FFFFFF;
-					.price{
-						font-size: 20px;
-					}
-				}
-				.flex{
-					display: flex;
-					align-items: center;
-					font-size: 13px;
-					font-family: PingFang SC-Regular, PingFang SC;
-					font-weight: 400;
-					color: #17191A;
-					&.choice{
-						border-radius: 4px;
-						border: 1px solid #C5C6C7;
-					}
-					.btn{
-						padding: 0 16px;
-						font-weight: 400;
-						color: #FFFFFF;
-						height: 32px;
-						line-height: 32px;
-						background: #FE1E27;
-						border-radius: 16px;
-					}
-					.imgs{
-						padding: 4px;
-						width: 15px;
-						height: 15px;
-						
-						&.js{
-							border-right: 1px solid #C5C6C7;
-						}
-						&.add{
-							border-left: 1px solid #C5C6C7;
-						}
-					}
-					.input{
-						width: 50px;
-						font-size: 15px;
-						font-family: PingFang SC-Medium, PingFang SC;
-						font-weight: 500;
-						color: #17191A;
-						height: 23px;
-						line-height: 23px;
-						text-align: center;
-					}
-				}
-				.j-s-b{
-					justify-content: space-between;
-				}
-				.gq-box-content {
-					margin-bottom: 12px;
-					padding: 16px 12px;
-					background-color: #fff;
-					.price{
-						font-size: 20px;
-						font-family: PingFang SC-Semibold, PingFang SC;
-						font-weight: 600;
-						color: #FE1E27;
-					}
-					.item{
-						font-size: 15px;
-						font-family: PingFang SC-Medium, PingFang SC;
-						font-weight: 500;
-						color: #17191A;
-						&:first-child{
-							margin-bottom: 16px;
-						}
-					}
-				}
-				.gq-box-content-title{
-					font-size: 15px;
-					font-family: PingFang SC-Medium, PingFang SC;
-					font-weight: 500;
-					color: #17191A;
-				}
-				.gq-box-content-p{
-					margin-top: 12px;
-					font-size: 13px;
-					font-family: PingFang SC-Regular, PingFang SC;
-					font-weight: 400;
-					color: #4F5459;
-				}
-			}
+
+		.gq-box-content-title {
+			font-size: 15px;
+			font-family: PingFang SC-Medium, PingFang SC;
+			font-weight: 500;
+			color: #17191A;
 		}
+
+		.gq-box-content-p {
+			margin-top: 12px;
+			font-size: 13px;
+			font-family: PingFang SC-Regular, PingFang SC;
+			font-weight: 400;
+			color: #4F5459;
+		}
+	}
+}
 .container {
 
-	padding:62px  12px 12px;
+	padding: 62px 12px 12px;
 
 	.item {
 		margin-bottom: 12px;
@@ -395,4 +416,5 @@ export default {
 			}
 		}
 	}
-}</style>
+}
+</style>

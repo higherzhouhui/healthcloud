@@ -117,7 +117,7 @@ export default {
 		this.freshCurrentPage()
 	},
 	onShow() {
-		this.getWallet()
+		this.freshCurrentPage()
 	},
 	computed: {
 		leavel() {
