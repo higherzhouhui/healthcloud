@@ -2,8 +2,8 @@
 	<view class="container">
 		<view class="content">
 			<image class="avatartImg" :src="groupPhoto"></image>
-			<view class="title">{{groupName || '正泰能源群'}}</view>
-			<view class="code">{{groupNum || '32322332'}}</view>
+			<view class="title">{{groupName}}</view>
+			<view class="code">{{groupNum}}</view>
 			<image class="qrdImg" :src="officialGroup"></image>
 			<view class="joinText">扫一扫二维码加入群聊</view>
 		</view>
