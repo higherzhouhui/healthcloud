@@ -42,13 +42,15 @@ export default {
                 name: '',
                 bankName: '',
                 voucher: '',
-                id: null
+                id: null,
+                num: 0
             },
             id: null
         }
     },
     onLoad(option) {
         this.id = option.id
+        this.num = option.num
     },
     onShow() {
         this.getPayCardInfo()
@@ -96,7 +98,7 @@ export default {
                 return uni.showToast({ title: '请上传打款截图', icon: 'none' })
             }
             this.loading = true
-            buyProject({payType:3, id: this.id, voucher}).then(rt=>{
+            buyProject({payType:3, id: this.id, num: this.num * 100, voucher}).then(rt=>{
                 this.loading = false
                 if(rt.code == 200){
                     uni.showToast({ title: '上传成功' })
