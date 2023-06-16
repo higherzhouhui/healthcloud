@@ -64,6 +64,10 @@ export default {
         this.timer = null
         // this.top = 0
     },
+    onHide() {
+        clearInterval(this.timer)
+        this.timer = null
+    },
     methods: {
         scroll: function (e) {
             console.log(e)
