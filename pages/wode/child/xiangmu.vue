@@ -26,9 +26,9 @@
                         <view class="value value2">{{ item.price }}</view>
                         <view class="txt">购买价格</view>
                     </view>
-                    <view class="time-box">
-                        <view>购买时间：2022-8-15 17:05:13</view>
-                        <view class="b-txt">开始时间：2022-8-15 17:05:13</view>
+                    <view class="time-box" v-if="item.createTime || item.endTime">
+                        <view v-if="item.createTime">购买时间：{{ item.createTime }}</view>
+                        <view v-if="item.endTime" class="b-txt">开始时间：{{ item.endTime }}</view>
                     </view>
                 </view>
             </view>
@@ -68,9 +68,7 @@ export default {
                 pageSize: 20
             }).then(rt => {
                 uni.stopPullDownRefresh();
-                let {
-                    list
-                } = rt.data
+                let list = rt.data?.list || []
                 if (!list.length) return this.hasmore = false
                 if (this.pageNum == 1) {
                     this.list = list

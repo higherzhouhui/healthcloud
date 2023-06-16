@@ -18,8 +18,8 @@
 							</view> -->
 						</view>
 					</view>
-					<view class="button" @tap="toBuy(item, 1)">
-						立即购买
+					<view class="button" :class="item.status != 1 && 'sq'" @tap="toBuy(item, 1)">
+						{{ item.status == 1 ? '立即购买' : '已售罄' }}
 					</view>
 				</view>
 				<view class="botton-info">
@@ -84,7 +84,7 @@
 						<view>合计金额：</view>
 						<view class="price">￥{{ price }}</view>
 					</view>
-					<view class="btn" @tap="toBuy({ price }, 2, gqData.count)">
+					<view class="btn" @tap="toBuy({ price, }, 2, gqData.count)">
 						提交订单
 					</view>
 				</view>
@@ -149,6 +149,7 @@ export default {
 			this.gqData.count = val
 		},
 		toBuy(item, type, num) {
+			if(item.status == 0) return 
 			if (type == 2 && this.list[0]) {
 				item.id = this.list[0].id
 			}
@@ -380,6 +381,9 @@ export default {
 				font-weight: 400;
 				color: #FFFFFF;
 				border-radius: 16px;
+				&.sq{
+					opacity: 0.5;
+				}
 			}
 		}
 
