@@ -170,11 +170,13 @@ uni.addInterceptor('request', {
 					title: args.message,
 					icon: 'error'
 				})
-				uni.removeStorageSync(ACCESS_TOKEN)
-				uni.removeStorageSync(USER_INFO)
-				uni.navigateTo({
-					url: '/pages/login/login'
-				})
+				setTimeout(() => {
+					uni.removeStorageSync(ACCESS_TOKEN)
+					uni.removeStorageSync(USER_INFO)
+					uni.navigateTo({
+						url: '/pages/login/login'
+					})
+				}, 1000)
 			}
 			return Promise.resolve(args.data);
 		}
