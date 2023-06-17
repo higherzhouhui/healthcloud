@@ -106,7 +106,7 @@ export default {
     methods: {
         bankbuy() {
             uni.navigateTo({
-                url: "/pages/xiangmu/buybank?id=" + this.item.id + '&num=' + this.item.num
+                url: "/pages/xiangmu/buybank?id=" + this.item.id + '&num=' + this.item.num + '&projectType=' + this.item.type
             });
         },
         onPay() {
