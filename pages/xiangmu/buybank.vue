@@ -17,7 +17,7 @@
         </view>
         <view class="item">
             <view class="title">上传打款截图</view>
-            <image v-if="data.voucher" class="up-img" :src="data.voucher"></image>
+            <image v-if="data.voucher" class="up-img" :src="data.voucher" @tap="handleUploadAvatar"></image>
             <view v-else class="up-box" @tap="handleUploadAvatar">
                 <image class="img" src="../../static/xiangmu/shangchuan.png"></image>
             </view>
@@ -64,9 +64,8 @@ export default {
             })
         },
         copy() {
-            uni.showToast({ title: '复制成功' })
             uni.setClipboardData({
-                data: this.data.bankCode
+                data: this.data.bankCode,
             });
         },
         handleUploadAvatar() {
@@ -75,6 +74,9 @@ export default {
             // 选择图片
             uni.chooseImage({
                 success(res) {
+					uni.showLoading({
+						title: '上传中...'
+					})
                     const tempFilePaths = res.tempFilePaths[0];
                     uni.uploadFile({
                         url: `${URL}/admin/upload/uploadImage`,
@@ -86,12 +88,15 @@ export default {
                         success: function (res) {
                             const response = JSON.parse((res.data))
                             that.data.voucher = response.data
+							uni.hideLoading()
                         },
                         fail: function (res) {
                             console.log('上传失败：', res);
+							uni.hideLoading()
                         }
                     });
-                }
+                },
+				
             });
         },
         onPay() {
@@ -100,14 +105,15 @@ export default {
                 return uni.showToast({ title: '请上传打款截图', icon: 'none' })
             }
             this.loading = true
+
             buyProject({payType:3, id: this.id, num: this.num * 100, voucher, projectType: this.projectType}).then(rt=>{
                 this.loading = false
                 if(rt.code == 200){
-                    uni.showToast({ title: '上传成功' })
+                    uni.showToast({ title: '上传成功,请联系在线客服审核！', icon: 'none' })
                     setTimeout(()=>{
                         uni.switchTab({url: '/pages/xiangmu/xiangmu'})
                     }, 1000)     
-                }else {
+                } else {
                     uni.showToast({ title: rt.message, icon: 'none' })
                 }
             }).catch(_=>{
