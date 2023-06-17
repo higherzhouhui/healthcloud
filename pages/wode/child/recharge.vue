@@ -8,6 +8,22 @@
 </template>
 
 <script>
+	export default {
+		data() {
+			return {
+				
+			}
+		},
+		onLoad(options) {
+			// 请注意，货币兑换与充值共用该页面
+			const { title } = options
+			if (title) {
+				uni.setNavigationBarTitle({
+					title: title
+				})
+			}
+		}
+	}
 </script>
 
 <style lang="scss" scoped>

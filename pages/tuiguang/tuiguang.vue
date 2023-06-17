@@ -29,7 +29,7 @@
 					<view class="avatar-box">
 						<img class="avatar" :src="item.icon" :onerror="`this.src='${icon}'`" alt="" />
 						<view class="avatar-info">
-							<view class="name">社保补贴金：{{ item.amount }}/月</view>
+							<view class="name">推广奖励金：{{ item.amount }}/月</view>
 							<view class="num">
 								已邀请青铜会员：{{ item.thenInviteNum }}人</view>
 							<view class="txt">邀请 <view class="numed">{{ item.inviteNum }}个</view>青铜会员即可达标</view>

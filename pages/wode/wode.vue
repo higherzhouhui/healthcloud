@@ -42,7 +42,7 @@
 					<view class="title">货币兑换（元）</view>
 					<view class="bot">
 						<view class="jine">{{ wallet.currency || 0 }}</view>
-						<view class="tixian">提现</view>
+						<view class="tixian">兑换</view>
 					</view>
 				</view>
 			</view>
@@ -194,6 +194,12 @@ export default {
 			})
 		},
 		withdrawal(type, amount, title) {
+			if (type === 'currency') {
+				uni.navigateTo({
+					url: `/pages/wode/child/recharge?title=${title}`
+				})
+				return
+			}
 			uni.navigateTo({
 				url: `/pages/wode/child/withdrawal?type=${type}&amount=${amount}&title=${title}`
 			})
