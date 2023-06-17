@@ -1,7 +1,7 @@
 <template>
 <view class="container">
     <scroll-view scroll-y="true" v-if="serviceData.remark" :scroll-top="top" ref="scroll" class="scroll-box" id="scroll" @scroll="scroll">
-        <view class="item other-item" >
+        <view class="item other-item">
             <view class="other box">
                 <image class="avatar" src="../../static/kefu/kefu-icon.png" alt=""></image>
                 <view class="content">{{ serviceData.remark }}</view>
@@ -11,10 +11,12 @@
             <view v-if="item.showTime" class="time"> {{ item.createTime }} </view>
             <view v-if="item.form == serviceData.id" class="other box">
                 <image class="avatar" src="../../static/kefu/kefu-icon.png" alt=""></image>
-                <view class="content">{{ item.content }}</view>
+                <view class="content" v-if="item.type == 1">{{ item.content }}</view>
+                <img class="imgs" v-if="item.type == 2" @tap="showPhoto(item.content)" :src="item.content">
             </view>
             <view v-else class="own box">
-                <view class="content">{{ item.content }}</view>
+                <view class="content" v-if="item.type == 1">{{ item.content }}</view>
+                <img class="imgs" v-if="item.type == 2" @tap="showPhoto(item.content)" :src="item.content">
                 <img v-if="$store.state.userInfo.avatar && isOk" @error="isOk = false" :src="$store.state.userInfo.avatar || '../../static/wode/avatar.png'" class="avatar" alt="" />
                 <image v-else class="avatar" src="../../static/wode/avatar.png" alt=""></image>
             </view>
@@ -22,6 +24,7 @@
     </scroll-view>
     <view class="bottom-input" :class="css">
         <input v-model="message" type="text">
+        <image @tap="handleUploadAvatar" class="img" src="../../static/kefu/tupian.png"></image>
         <view class="txt" @tap="send" :class="loading && 'loading'">发送</view>
     </view>
 </view>
@@ -31,6 +34,9 @@
 import {
     USER_INFO
 } from '@/common/util/constants.js'
+import {
+    URL
+} from '@/config/index.js'
 import {
     getChatMessageList,
     getService,
@@ -69,6 +75,38 @@ export default {
         this.timer = null
     },
     methods: {
+        showPhoto(img) {
+            uni.previewImage({
+                current: 0, // 当前显示图片的索引值
+                urls: [img], // 需要预览的图片列表，photoList要求必须是数组
+                loop: false, // 是否可循环预览
+            })
+        },
+        handleUploadAvatar() {
+            // 获取图片
+            let that = this;
+            // 选择图片
+            uni.chooseImage({
+                success(res) {
+                    const tempFilePaths = res.tempFilePaths[0];
+                    uni.uploadFile({
+                        url: `${URL}/admin/upload/uploadImage`,
+                        filePath: tempFilePaths,
+                        name: 'file',
+                        formData: {
+                            'user': 'test'
+                        },
+                        success: function (res) {
+                            const response = JSON.parse((res.data))
+                            that.send(response.data, 2)
+                        },
+                        fail: function (res) {
+                            console.log('上传失败：', res);
+                        }
+                    });
+                }
+            });
+        },
         scroll: function (e) {
             console.log(e)
             this.top = e.detail.scrollTop
@@ -112,25 +150,27 @@ export default {
                 this.serviceData = rt.data || {}
             })
         },
-        send() {
-            if (!this.message || !this.message.trim() || this.loading) return
+        send(message, type) {
+            if ((!this.message || !this.message.trim() || this.loading) && !message) return
             this.loading = true
+            let t = type || 1;
+            let content = message || this.message
             sendMessage({
                 to: this.serviceData.id,
-                type: 1,
-                content: this.message
+                type: t,
+                content
             }).then(rt => {
                 this.loading = false
                 if (rt.code == 200) {
                     this.list.push({
                         form: this.userInfo.id,
-                        content: this.message,
+                        content,
                         // showTime: (Date.now() - this.times) > this.kTime
                     })
                     this.message = ''
                     this.toBottom()
                 }
-            }).catch(_=>{
+            }).catch(_ => {
                 this.loading = false;
             })
         }
@@ -149,16 +189,24 @@ export default {
         align-items: center;
         background-color: #F0F1F2;
         box-sizing: border-box;
+
+        .img {
+            margin-left: 15px;
+            width: 25px;
+            height: 23px;
+        }
+
         &.h5css {
             bottom: 50px;
         }
+
         input {
             padding: 0 12px;
             background-color: #fff;
             height: 32px;
             line-height: 32px;
             border-radius: 4px;
-            width: 100%;
+            width: 66%;
         }
 
         .txt {
@@ -195,6 +243,13 @@ export default {
                 display: flex;
                 align-items: start;
 
+                .imgs {
+                    max-width: 177px;
+                    max-height: 177px;
+                    border-radius: 8px;
+                    object-fit: cover;
+                }
+
                 .content {
                     position: relative;
                     max-width: 60%;
@@ -206,6 +261,7 @@ export default {
                     font-weight: 400;
                     color: #17191A;
                     word-break: break-all;
+
                     &::after {
                         content: '';
                         width: 10px;
