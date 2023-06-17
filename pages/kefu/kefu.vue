@@ -165,6 +165,7 @@ export default {
                     this.list.push({
                         form: this.userInfo.id,
                         content,
+                        type: t
                         // showTime: (Date.now() - this.times) > this.kTime
                     })
                     this.message = ''
