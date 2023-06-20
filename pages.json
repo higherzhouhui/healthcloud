@@ -40,10 +40,19 @@
 				"navigationBarTitleText": "忘记密码",
 				"enablePullDownRefresh": false
 			}
+			
 		}, {
 			"path": "pages/wode/child/authentication",
 			"style": {
 				"navigationBarTitleText": "实名认证",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#fff"
+			}
+		},
+		{
+			"path": "pages/wode/child/szbwithdrawal",
+			"style": {
+				"navigationBarTitleText": "货币兑换",
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor": "#fff"
 			}

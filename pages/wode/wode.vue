@@ -197,6 +197,7 @@ export default {
 			if (type === 'currency') {
 				uni.navigateTo({
 					url: `/pages/wode/child/recharge?title=${title}`
+					// url: `/pages/wode/child/szbwithdrawal?amount=${amount}`
 				})
 				return
 			}

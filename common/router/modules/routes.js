@@ -140,6 +140,14 @@ const routes = [
 				title: '重置',
 			}
 	},
+	
+	{
+		path: "/pages/wode/child/szbwithdrawal",
+		name: 'szbwithdrawal',
+			meta: {
+				title: '货币兑换',
+			}
+	},
 	{
 		path: "/pages/wode/child/collection",
 		name: 'collection',
