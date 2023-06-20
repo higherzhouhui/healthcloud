@@ -37,39 +37,31 @@
 			downloadImage(event) {
 				// #ifdef APP-PLUS
 				// 长按下载
-				uni.showModal({
-					title: '提示',
-					content: '下载该二维码',
-					success: (showResult) => {
-						if (showResult.confirm) {
-							uni.downloadFile({
-								url: event.target.src,
-								success: (res) => {
-									uni.saveImageToPhotosAlbum({
-										filePath: res.tempFilePath,
-										success: () => {
-											uni.showToast({
-												title: '保存成功'
-											});
-										},
-										fail: () => {
-											uni.showToast({
-												icon: 'none',
-												title: '保存失败'
-											});
-										},
-									});
-								},
-								fail: () => {
-									uni.showToast({
-										icon: 'none',
-										title: '下载失败'
-									});
-								},
-							});
-						}
-					}
-				})
+				uni.downloadFile({
+					url: this.officialGroup,
+					success: (res) => {
+						uni.saveImageToPhotosAlbum({
+							filePath: res.tempFilePath,
+							success: () => {
+								uni.showToast({
+									title: '保存成功'
+								});
+							},
+							fail: () => {
+								uni.showToast({
+									icon: 'none',
+									title: '保存失败'
+								});
+							},
+						});
+					},
+					fail: () => {
+						uni.showToast({
+							icon: 'none',
+							title: '下载失败'
+						});
+					},
+				});
 				// #endif
 			},
 		}
