@@ -115,6 +115,9 @@ export default {
 			uni.chooseImage({
 			  success(res) {
 				const tempFilePaths = res.tempFilePaths[0];
+				uni.showLoading({
+					title: '上传中...'
+				})
 				uni.uploadFile({
 				  url: `${URL}/admin/upload/uploadImage`,
 				  filePath: tempFilePaths,
@@ -124,6 +127,7 @@ export default {
 				  },
 				  success: function (res) {
 					  const response = JSON.parse((res.data))
+					  uni.hideLoading()
 				    updateAvatarRequest({
 						avatar: response.data,
 						idCard: that.info.idCard,
@@ -137,6 +141,7 @@ export default {
 				  },
 				  fail: function (res) {
 				    console.log('上传失败：', res);
+					uni.hideLoading()
 				  }
 				});
 			  }
