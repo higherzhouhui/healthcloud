@@ -38,7 +38,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="container" v-if="type == 3">
+		<view class="container" v-else-if="type == 3">
 			<view class="item" v-for="item in list" :key="item.id">
 				<view class="top-info">
 					<view class="avatar-box">
