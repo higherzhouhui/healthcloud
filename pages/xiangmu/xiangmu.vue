@@ -38,6 +38,34 @@
 				</view>
 			</view>
 		</view>
+		<view class="container" v-if="type == 3">
+			<view class="item" v-for="item in list" :key="item.id">
+				<view class="top-info">
+					<view class="avatar-box">
+						<img class="avatar" :onerror="`this.src='${avatar}'`" :src="item.image" alt="">
+						<view class="avatar-info">
+							<view class="name">{{ item.title }}</view>
+							<!-- <view class="num">
+								<view class="fh">￥</view>{{ item.price }}
+							</view> -->
+						</view>
+					</view>
+					<view class="button" :class="item.state != 1 && 'sq'" @tap="toBuy(item, 3)">
+						{{ item.state == 1 ? '立即购买' : '已售罄' }}
+					</view>
+				</view>
+				<view class="botton-info" style="padding: 0 40px;">
+					<view class="in-item">
+						<view class="value">{{ item.chntSubsidy }}</view>
+						<view class="txt">奖励数字人民币</view>
+					</view>
+					<view class="in-item">
+						<view class="value value2">{{ item.price }}</view>
+						<view class="txt">购买价格</view>
+					</view>
+				</view>
+			</view>
+		</view>
 		<view class="gq" v-else>
 			<img :src="gqData.image" class="img" v-if="gqData.image" alt="">
 			<image v-else class="img" src='../../static/xiangmu/guquan.png'></image>
@@ -91,6 +119,7 @@ export default {
 			list: [],
 			tabs: [
 				{ label: '理财计划', type: 1 },
+				{ label: '养老保险', type: 3},
 				{ label: '股权', type: 2 }
 			],
 			type: 1,
