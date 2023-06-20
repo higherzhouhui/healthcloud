@@ -28,6 +28,34 @@
             </view>
         </view>
     </view>
+    <view class="item" v-else-if="type == 3">
+        <view class="top-info">
+            <view class="avatar-box">
+                <img class="avatar" :onerror="`this.src='${avatar}'`" :src="item.image" alt="">
+                <view class="avatar-info">
+                    <view class="name">{{ item.title }}</view>
+                    <!-- <view class="num">
+                            <view class="fh">￥</view>{{ item.price }}
+                        </view> -->
+                </view>
+            </view>
+        </view>
+        <view class="botton-info" style="padding: 0 40px;">
+            <view class="in-item">
+                <view class="value">{{ item.chntSubsidy }}</view>
+                <view class="txt">奖励数字人民币</view>
+            </view>
+            <!-- <view class="in-item">
+                <view class="value">{{ item.dayEarnings }}</view>
+                <view class="txt">每日社保补贴</view>
+            </view> -->
+            <view class="in-item">
+                <view class="value value2">{{ item.price }}</view>
+                <view class="txt">购买价格</view>
+
+            </view>
+        </view>
+    </view>
     <view class="gq-box" v-else>
         <view class="price">
             ￥{{item.price || 0}}
