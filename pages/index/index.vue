@@ -104,7 +104,9 @@ export default {
 
     //离开页面时暂停视频播放
     onHide() {
-        this.videoContext.pause();
+        if (this.videoContext) {
+			this.videoContext.pause();
+		}
     },
 
     onLoad() {
