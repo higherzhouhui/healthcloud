@@ -25,7 +25,7 @@
     <view class="bottom-input" :class="css">
         <input v-model="message" type="text">
         <image @tap="handleUploadAvatar" class="img" src="../../static/kefu/tupian.png"></image>
-        <view class="txt" @tap="send" :class="loading && 'loading'">发送</view>
+        <view class="txt" @tap="send()" :class="loading && 'loading'">发送</view>
     </view>
 </view>
 </template>
