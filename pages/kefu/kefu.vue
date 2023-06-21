@@ -1,33 +1,36 @@
 <template>
-<view class="container">
-    <scroll-view scroll-y="true" v-if="serviceData.remark" :scroll-top="top" ref="scroll" class="scroll-box" id="scroll" @scroll="scroll">
-        <view class="item other-item">
-            <view class="other box">
-                <image class="avatar" src="../../static/kefu/kefu-icon.png" alt=""></image>
-                <view class="content">{{ serviceData.remark }}</view>
+    <view class="container">
+        <scroll-view scroll-y="true" v-if="serviceData.remark" :scroll-top="top" ref="scroll" class="scroll-box" id="scroll"
+            @scroll="scroll">
+            <view class="item other-item">
+                <view class="other box">
+                    <image class="avatar" src="../../static/kefu/kefu-icon.png" alt=""></image>
+                    <view class="content">{{ serviceData.remark }}</view>
+                </view>
             </view>
+            <view v-for="(item, index) in list" :key="index" class="item"
+                :class="[item.form != serviceData.id && 'own-item', item.showTime && 'has-time']">
+                <view v-if="item.showTime" class="time"> {{ item.createTime }} </view>
+                <view v-if="item.form == serviceData.id" class="other box">
+                    <image class="avatar" src="../../static/kefu/kefu-icon.png" alt=""></image>
+                    <view class="content" v-if="item.type == 1">{{ item.content }}</view>
+                    <img class="imgs" v-if="item.type == 2" @tap="showPhoto(item.content)" :src="item.content">
+                </view>
+                <view v-else class="own box">
+                    <view class="content" v-if="item.type == 1">{{ item.content }}</view>
+                    <img class="imgs" v-if="item.type == 2" @tap="showPhoto(item.content)" :src="item.content">
+                    <img v-if="$store.state.userInfo.avatar && isOk" @error="isOk = false"
+                        :src="$store.state.userInfo.avatar || '../../static/wode/avatar.png'" class="avatar" alt="" />
+                    <image v-else class="avatar" src="../../static/wode/avatar.png" alt=""></image>
+                </view>
+            </view>
+        </scroll-view>
+        <view class="bottom-input" :class="css">
+            <input v-model="message" type="text">
+            <image @tap="handleUploadAvatar" class="img" src="../../static/kefu/tupian.png"></image>
+            <view class="txt" @tap="send()" :class="loading && 'loading'">发送</view>
         </view>
-        <view v-for="(item, index) in list" :key="index" class="item" :class="[item.form != serviceData.id && 'own-item', item.showTime && 'has-time']">
-            <view v-if="item.showTime" class="time"> {{ item.createTime }} </view>
-            <view v-if="item.form == serviceData.id" class="other box">
-                <image class="avatar" src="../../static/kefu/kefu-icon.png" alt=""></image>
-                <view class="content" v-if="item.type == 1">{{ item.content }}</view>
-                <img class="imgs" v-if="item.type == 2" @tap="showPhoto(item.content)" :src="item.content">
-            </view>
-            <view v-else class="own box">
-                <view class="content" v-if="item.type == 1">{{ item.content }}</view>
-                <img class="imgs" v-if="item.type == 2" @tap="showPhoto(item.content)" :src="item.content">
-                <img v-if="$store.state.userInfo.avatar && isOk" @error="isOk = false" :src="$store.state.userInfo.avatar || '../../static/wode/avatar.png'" class="avatar" alt="" />
-                <image v-else class="avatar" src="../../static/wode/avatar.png" alt=""></image>
-            </view>
-        </view>
-    </scroll-view>
-    <view class="bottom-input" :class="css">
-        <input v-model="message" type="text">
-        <image @tap="handleUploadAvatar" class="img" src="../../static/kefu/tupian.png"></image>
-        <view class="txt" @tap="send()" :class="loading && 'loading'">发送</view>
     </view>
-</view>
 </template>
 
 <script>
@@ -61,8 +64,11 @@ export default {
     },
     mounted() {
         this.getService()
+    },
+    onShow() {
         this.toBottom()
         this.getList(1)
+        clearInterval(this.timer)
         this.timer = setInterval(this.getList, 10000)
     },
     beforeDestroy() {
@@ -118,28 +124,30 @@ export default {
                 list.forEach(item => {
                     let time = new Date(item.createTime).getTime()
                     if (time - this.times > this.kTime) {
-                        // item.showTime = true
+                        item.showTime = true
                         this.times = time
                     }
                 })
-                this.list = list
-                if (type === 1) {
+                let len = this.list.length
+                this.list = list.slice(0)
+                if (type === 1 || len < list.length) {
                     this.toBottom()
                 }
+                
             })
         },
         toBottom() {
             this.$nextTick(() => {
                 setTimeout(() => {
-
                     let infos = uni
                         .createSelectorQuery()
                         .in(this)
                         .select('#scroll');
+                    if(!infos) return
                     infos
                         .boundingClientRect(data => {
                             console.log('----------')
-                            this.top = data.height + 2000
+                            this.top = data.height + 2000000
                         })
                         .exec();
                 }, 500);
@@ -165,7 +173,7 @@ export default {
                     this.list.push({
                         form: this.userInfo.id,
                         content,
-                        type: t
+                        type: t,
                         // showTime: (Date.now() - this.times) > this.kTime
                     })
                     this.message = ''
@@ -228,8 +236,13 @@ export default {
     .scroll-box {
         padding: 16px 12px 60px;
         box-sizing: border-box;
-        height: 100vh;
-
+        height: 120vh;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        // min-height: 120vh;
         .item {
             margin-bottom: 16px;
             display: flex;
@@ -324,5 +337,4 @@ export default {
         }
 
     }
-}
-</style>
+}</style>
