@@ -70,7 +70,7 @@ export default {
 			if (this.volid()) {
 				walletTransfer(this.form).then(rt => {
 					if (rt.code === 200) {
-						uni.showToast({ title: '绑定成功' })
+						uni.showToast({ title: '转账成功' })
 						setTimeout(() => {
 							uni.navigateBack({
 								delta: 1
@@ -78,7 +78,7 @@ export default {
 						}, 1000)
 
 					} else {
-						uni.showToast({ title: rt.message || '绑定失败', icon: 'none' })
+						uni.showToast({ title: rt.message || '转账失败', icon: 'none' })
 					}
 				})
 			}
