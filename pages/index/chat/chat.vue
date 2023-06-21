@@ -2,8 +2,8 @@
 	<view class="container">
 		<view class="content">
 			<image class="avatartImg" :src="groupPhoto"></image>
-			<view class="title">{{groupName}}</view>
-			<view class="code">{{groupNum}}</view>
+			<view class="title" @longtap="copyClip(groupName)">{{groupName}}</view>
+			<view class="code" @longtap="copyClip(groupNum)">{{groupNum}}</view>
 			<image class="qrdImg" :src="officialGroup" @longtap="downloadImage"></image>
 			<view class="joinText">扫一扫二维码加入群聊</view>
 		</view>
@@ -63,6 +63,11 @@
 					},
 				});
 				// #endif
+			},
+			copyClip(data) {
+				uni.setClipboardData({
+					data: data
+				});
 			},
 		}
 	}
