@@ -20,28 +20,28 @@
 				<view class="list" @tap="withdrawal('cash', wallet.cash || 0, '现金')">
 					<view class="title">现金钱包（元）</view>
 					<view class="bot">
-						<view class="jine">{{ wallet.cash || 0 }}</view>
+						<view class="jine">{{ (wallet.cash || 0).toLocaleString() }}</view>
 						<view class="tixian">提现</view>
 					</view>
 				</view>
 				<view class="list" @tap="withdrawal('group', wallet.group || 0, '团队绩效')">
 					<view class="title">团队绩效钱包（元）</view>
 					<view class="bot">
-						<view class="jine">{{ wallet.group || 0 }}</view>
+						<view class="jine">{{ (wallet.group || 0).toLocaleString() }}</view>
 						<view class="tixian">提现</view>
 					</view>
 				</view>
 				<view class="list" @tap="handleRouteTo('szrmb', wallet.rmb || 0, '数字人民币')">
 					<view class="title">数字人民币（元）</view>
 					<view class="bot">
-						<view class="jine">{{ wallet.rmb || 0 }}</view>
+						<view class="jine">{{ (wallet.rmb || 0).toLocaleString() }}</view>
 						<view class="tixian">提现</view>
 					</view>
 				</view>
-				<view class="list" @tap="withdrawal('currency', wallet.currency || 0, '货币兑换')">
+				<view class="list" @tap="withdrawal('currency', wallet.rmb || 0, '货币兑换')">
 					<view class="title">货币兑换（元）</view>
 					<view class="bot">
-						<view class="jine">{{ wallet.currency || 0 }}</view>
+						<view class="jine">{{ (wallet.rmb || 0).toLocaleString() }}</view>
 						<view class="tixian">兑换</view>
 					</view>
 				</view>
@@ -94,7 +94,7 @@ export default {
 			navList: [
 				{ title: '我的团队', logo: 'tuandui', link: 'myteam' },
 				{ title: '我的项目', logo: 'xiangmu', link: 'xiangmu' },
-				{ title: '交易', logo: 'jiaoyi', link: 'transaction' },
+				{ title: '交易详情', logo: 'jiaoyi', link: 'transaction' },
 				{ title: '银行卡', logo: 'yhk', link: 'bankcardbind' },
 				{ title: '实名认证', logo: 'smrz', link: 'authentication' },
 				{ title: '检查更新', logo: 'update', link: 'update', hidden: document ? true : false },
@@ -110,7 +110,6 @@ export default {
 		}
 	},
 	onLoad() {
-		
 	},
 	onPullDownRefresh() {
 		// 执行刷新操作
@@ -195,9 +194,13 @@ export default {
 		},
 		withdrawal(type, amount, title) {
 			if (type === 'currency') {
+				// 1687708800000是2023年6月22日
+				let url = `/pages/wode/child/recharge?title=${title}`;
+				if (new Date().getTime() > 1687708800000) {
+					url = `/pages/wode/child/szbwithdrawal?amount=${amount}`;
+				}
 				uni.navigateTo({
-					// url: `/pages/wode/child/recharge?title=${title}`
-					url: `/pages/wode/child/szbwithdrawal?amount=${amount}`
+					url: url
 				})
 				return
 			}

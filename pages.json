@@ -265,7 +265,7 @@
 	},
 	"tabBar": {
 		"backgroundColor": "#fff",
-		"selectedColor": "#fe1e27ff", 
+		"selectedColor": "#fe1e27", 
 		"list": [{
 				"pagePath": "pages/index/index",
 				"iconPath": "static/tabbar/home.png",

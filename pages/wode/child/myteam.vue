@@ -226,6 +226,7 @@
 						}
 						&.price{
 							transform: translateX(10px);
+							font-weight: bold;
 						}
 					}
 				}

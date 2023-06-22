@@ -34,7 +34,7 @@ export default {
 		return {
 			form: {
 				phone: '',
-				amount: 0
+				amount: 10000
 			}
 		}
 	},

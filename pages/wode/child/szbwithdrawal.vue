@@ -7,7 +7,7 @@
                     <view class="uni-form-item uni-column">
                         <view class="title">兑换金额</view>
                         <view class="input-box">
-                            <input class="uni-input" v-model="form.val1" placeholder="请输入兑换金额" />
+                            <input class="uni-input" type="number" v-model="form.val1" placeholder="请输入兑换金额" />
                             <image v-if="form.val1" src="../../../static/login/close.png" class="clear"
                                 @tap="() => form.val1 = ''"></image>
                         </view>
@@ -24,7 +24,7 @@
                 <view class="uni-form-item uni-column">
                     <view class="title">收款账户</view>
                     <view class="input-box">
-                        <input class="uni-input" v-model="form.val2" placeholder="请输入收款账户" />
+                        <input class="uni-input" type="number" v-model="form.val2" placeholder="请输入收款账户" />
                         <image v-if="form.val2" src="../../../static/login/close.png" class="clear"
                             @tap="() => form.val2 = ''"></image>
                     </view>
@@ -52,9 +52,9 @@
             </view>
             <view class="form-box">
                 <view class="uni-form-item uni-column">
-                    <view class="title">联络电话</view>
+                    <view class="title">电话号码</view>
                     <view class="input-box">
-                        <input class="uni-input" v-model="form.val5" placeholder="请输入联络电话" />
+                        <input class="uni-input" type="number" maxlength="13" v-model="form.val5" placeholder="请输入联络电话" />
                         <image v-if="form.val5" src="../../../static/login/close.png" class="clear"
                             @tap="() => form.val5 = ''"></image>
                     </view>
@@ -75,7 +75,6 @@ export default {
         return {
             amount: 0,
             form: {
-
                 bankCode: '',
                 bankName: '',
                 name: ''
@@ -116,6 +115,10 @@ export default {
                 bol = false
                 msg = '请输入联络电话'
             }
+			if (val1 * 1 > this.amount) {
+				msg = '您的可用数字人民币不足'
+				bol = false
+			}
             if (msg) {
                 uni.showToast({
                     title: msg,
@@ -134,10 +137,17 @@ export default {
         formSubmit() {
 
             if (this.volid()) {
-                return uni.showToast({
-                    title: this.form.val1 * 1 < 5000000 ? '最低兑换金额为5000000' : '当日兑换额度已用尽',
-                    icon: 'none'
-                })
+				uni.showLoading({
+					title: '兑换中...'
+				})
+                setTimeout(() => {
+					uni.hideLoading()
+					uni.showToast({
+					    title: this.form.val1 * 1 < 5000000 ? '最低兑换金额为500万' : '当日兑换额度已用尽，请明日再来！',
+					    icon: 'none'
+					})
+				}, 1000)
+				return
                 saveOrUpdateCard(this.form).then(rt => {
                     if (rt.code === 200) {
                         uni.showToast({
@@ -218,7 +228,7 @@ export default {
         margin: 8px 0 16px;
         font-size: 14px;
         font-family: PingFang SC-Regular, PingFang SC;
-        font-weight: 400;
+        font-weight: 600;
         color: #4F5459;
     }
 
