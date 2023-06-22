@@ -12,7 +12,7 @@
                                 @tap="() => form.val1 = ''"></image>
                         </view>
                     </view>
-                    <view class="amount">可用数字人民币：{{ amount }} 万</view>
+                    <view class="amount">可用数字人民币：{{ amount }} 元</view>
                 </view>
 
             </form>
