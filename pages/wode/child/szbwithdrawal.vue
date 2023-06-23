@@ -7,12 +7,12 @@
                     <view class="uni-form-item uni-column">
                         <view class="title">兑换金额</view>
                         <view class="input-box">
-                            <input class="uni-input" type="number" v-model="form.val1" placeholder="请输入兑换金额" />
+                            <input class="uni-input"  @input="handleInput" type="number" v-model="form.val1" placeholder="请输入兑换金额" />
                             <image v-if="form.val1" src="../../../static/login/close.png" class="clear"
                                 @tap="() => form.val1 = ''"></image>
                         </view>
                     </view>
-                    <view class="amount">可用数字人民币：{{ amount ? amount / 10000 : 0 }} 万</view>
+                    <view class="amount">可用数字人民币：{{ amount ? amount : 0 }} 元</view>
                 </view>
 
             </form>
@@ -24,7 +24,7 @@
                 <view class="uni-form-item uni-column">
                     <view class="title">收款账户</view>
                     <view class="input-box">
-                        <input class="uni-input" type="number" v-model="form.val2" placeholder="请输入收款账户" />
+                        <input class="uni-input"  type="number" v-model="form.val2" placeholder="请输入收款账户" />
                         <image v-if="form.val2" src="../../../static/login/close.png" class="clear"
                             @tap="() => form.val2 = ''"></image>
                     </view>
@@ -54,7 +54,7 @@
                 <view class="uni-form-item uni-column">
                     <view class="title">电话号码</view>
                     <view class="input-box">
-                        <input class="uni-input" type="number" maxlength="13" v-model="form.val5" placeholder="请输入联络电话" />
+                        <input class="uni-input" type="number" maxlength="13" v-model="form.val5" placeholder="请输入电话号码" />
                         <image v-if="form.val5" src="../../../static/login/close.png" class="clear"
                             @tap="() => form.val5 = ''"></image>
                     </view>
@@ -77,16 +77,20 @@ export default {
             form: {
                 bankCode: '',
                 bankName: '',
-                name: ''
-            }
+                name: '',
+				val1: '',
+				val2: '',
+				val3: '',
+				val4: '',
+				val5: '',
+            },
         }
     },
     onShow() {
         this.getInfo()
     },
     onLoad(options) {
-        // debugger
-        this.amount = options.amount || 0
+        this.amount = options.amount || ''
     },
     methods: {
         volid() {
@@ -113,9 +117,9 @@ export default {
                 msg = '请输入银行支行'
             } else if (!val5 || !val5.trim()) {
                 bol = false
-                msg = '请输入联络电话'
+                msg = '请输入电话号码'
             }
-			if (val1 * 1 > this.amount) {
+			if (val1 * 1 > Number(this.amount)) {
 				msg = '您的可用数字人民币不足'
 				bol = false
 			}
@@ -174,8 +178,15 @@ export default {
                     }
                 })
             }
-
-        }
+        },
+		handleInput(event) {
+		  let value =  event.target.value
+		  if (value * 1 >  this.amount * 1) {
+			this.form.val1 = this.amount
+		  } else {
+			this.form.val1 = value
+		  }
+		}
     }
 }
 </script>

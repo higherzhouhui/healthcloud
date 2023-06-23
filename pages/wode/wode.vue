@@ -2,13 +2,13 @@
 	<view class="container">
 		<view class="topContent">
 			<view class="userInfo">
-				<view class="left">
+				<view class="left" @tap="handleRouteTo('userInfo')">
 					<image :src="$store.state.userInfo.avatar || '../../static/wode/avatar.png'" class="avatar"></image>
 					<view class="info">
 						<view class="name">{{ $store.state.userInfo.name || '未实名' }}
 						<image class="leavel" :src="leavel" v-if="leavel"></image>
 						</view>
-						<view class="ziliao" @tap="handleRouteTo('userInfo')">个人资料</view>
+						<view class="ziliao">个人资料</view>
 					</view>
 				</view>
 				<view class="right">
@@ -268,7 +268,6 @@ export default {
 					color: $primaryColor;
 					line-height: 20px;
 					text-align: center;
-					padding: 0 10px;
 				}
 			}
 		}
