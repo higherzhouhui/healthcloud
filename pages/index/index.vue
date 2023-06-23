@@ -24,7 +24,7 @@
                 <view class="text">邀请好友</view>
             </view>
         </view>
-        <view class="gonggao">
+        <view class="gonggao" @tap="toggle(true)">
             <image class="ggImg" src="../../static/home/gonggao.png"></image>
 			<TextRoll :text="notice.content"></TextRoll>
 			<!--   <view id="scroll_div" class="fl" ref="scrollDiv">
