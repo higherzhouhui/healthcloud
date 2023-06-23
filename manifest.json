@@ -95,12 +95,14 @@
                     "hdpi" : "static/start.png",
                     "xhdpi" : "static/start.png",
                     "xxhdpi" : "static/start.png"
-                }
+                },
+                "useOriginalMsgbox" : true
             }
         },
         "uniStatistics" : {
             "enable" : true
-        }
+        },
+        "nvueLaunchMode" : ""
     },
     /* SDK配置 */
     "quickapp" : {},
@@ -126,6 +128,15 @@
     "h5" : {
         "uniStatistics" : {
             "enable" : true
+        },
+        "router" : {
+            "mode" : "history"
+        },
+        "title" : "健享云保",
+        "optimization" : {
+            "treeShaking" : {
+                "enable" : true
+            }
         }
     },
     "mp-alipay" : {
