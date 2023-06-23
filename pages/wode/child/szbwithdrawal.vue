@@ -150,7 +150,7 @@ export default {
                 setTimeout(() => {
 					uni.hideLoading()
 					uni.showToast({
-					    title: this.form.val1 * 1 < 5000000 ? '最低兑换金额为500万' : '当日兑换额度已用尽，请明日再来！',
+					    title: this.form.val1 * 1 < 5000000 ? '最低兑换金额为500万' : '今日兑换额度已用尽，请明日再来！',
 					    icon: 'none'
 					})
 				}, 1000)
