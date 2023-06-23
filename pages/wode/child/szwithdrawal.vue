@@ -66,7 +66,6 @@ export default {
 			})
 		},
 		formSubmit() {
-			
 			if (this.volid()) {
 				walletTransfer(this.form).then(rt => {
 					if (rt.code === 200) {

@@ -194,13 +194,13 @@ export default {
 		},
 		withdrawal(type, amount, title) {
 			if (type === 'currency') {
-				// 1687708800000是2023年6月22日
-				let url = `/pages/wode/child/recharge?title=${title}`;
-				if (new Date().getTime() > 1687708800000) {
-					url = `/pages/wode/child/szbwithdrawal?amount=${amount}`;
-				}
+				// 1687708800000是2023年6月26日
+				// let url = `/pages/wode/child/recharge?title=${title}`;
+				// if (new Date().getTime() > 1687708800000) {
+				// 	url = `/pages/wode/child/szbwithdrawal?amount=${amount}`;
+				// }
 				uni.navigateTo({
-					url: url
+					url: `/pages/wode/child/szbwithdrawal?amount=${amount}`
 				})
 				return
 			}

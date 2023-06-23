@@ -1,6 +1,6 @@
 <template>
     <view class="container">
-        <view class="top-title">总金额最低500万起</view>
+        <!-- <view class="top-title">总金额最低500万起</view> -->
         <view class="form">
             <form>
                 <view class="form-box">
@@ -135,8 +135,15 @@ export default {
             })
         },
         formSubmit() {
-
             if (this.volid()) {
+				// 6月26日
+				if (new Date().getTime() < 1687708800000) {
+					uni.showToast({
+						title: '该功能暂未开放',
+						icon: 'none'
+					})
+					return
+				}
 				uni.showLoading({
 					title: '兑换中...'
 				})
