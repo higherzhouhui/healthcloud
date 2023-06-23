@@ -77,7 +77,7 @@ export default {
             href: 'https://uniapp.dcloud.io/component/README?id=uniui',
             newsList: [],
             timer: '',
-            ruleVisible: '',
+            ruleVisible: true,
             notice: {
                 content: '',
                 createTime: ''
@@ -112,7 +112,7 @@ export default {
 			this.videoContext.pause();
 		}
     },
-
+	
     onLoad() {
         this.getHomeData()
     },

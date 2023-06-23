@@ -10,14 +10,14 @@
                     <view class="txts">我的邀请码</view>
                 </view>
                 <!-- <view class="ruleList" v-for="item in rules" :key="item.id">
+							
+				<text class="normal">推荐</text><text class="res">{{item.inviteNum}}</text>
 
-<text class="normal">推荐</text><text class="res">{{item.inviteNum}}</text>
+				<text class="normal">人，</text><text class="normal">赠送推广金</text><text class="red">{{item.amount}}</text>
 
-<text class="normal">人，</text><text class="normal">赠送推广金</text><text class="red">{{item.amount}}</text>
+				<text class="normal">元</text>
 
-<text class="normal">元</text>
-
-</view> -->
+				</view> -->
             </view>
             <view class="nums">{{ inviteCode }}</view>
             <!-- <view class="title">每天签到送<view class="num">1w</view>数字人民币</view> -->
