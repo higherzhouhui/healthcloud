@@ -107,6 +107,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "@/static/customicons.scss"; 
+
 .container {
 	.input-box {
 		position: relative;
@@ -155,7 +157,7 @@ export default {
 		padding: 11px 0;
 		width: 86.7%;
 		margin: 24px auto;
-		background-color: #FE1E27FF;
+		background-color: $primaryColor;
 		color: #fff;
 		font-size: 15px;
 		font-family: PingFang SC-Medium, PingFang SC;

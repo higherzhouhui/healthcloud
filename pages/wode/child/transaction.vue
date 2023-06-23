@@ -91,6 +91,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/static/customicons.scss"; 
+
 .container {
     padding: 0 16px;
     margin-top: 12px;
@@ -119,7 +121,7 @@ export default {
             font-size: 15px;
             font-family: PingFang SC-Semibold, PingFang SC;
             font-weight: 600;
-            color: #FE1E27FF;
+            color: $primaryColor;
         }
 
         .time {

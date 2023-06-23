@@ -26,12 +26,13 @@
         </view>
         <view class="gonggao">
             <image class="ggImg" src="../../static/home/gonggao.png"></image>
-            <view id="scroll_div" class="fl" ref="scrollDiv">
+			<TextRoll :text="notice.content"></TextRoll>
+			<!--   <view id="scroll_div" class="fl" ref="scrollDiv">
                 <view id="scroll_begin" ref="scrollBegin" @tap="toggle(true)">
                     {{notice.content}}
                 </view>
                 <view id="scroll_end" ref="scrollEnd"></view>
-            </view>
+            </view> -->
         </view>
         <view class="bg-video">
             <view v-show="ruleVisible" class="cover" />
@@ -56,6 +57,8 @@
 
 <script>
 import newProduct from '@/components/newProduct.vue'
+// 导入并注册
+import TextRoll from '@/components/beyondGod-roll/text-roll.vue'
 import {
     HOME_NOTICE
 } from '@/common/util/constants.js'
@@ -97,6 +100,7 @@ export default {
     },
     components: {
         newProduct,
+		TextRoll,
     },
     onReady: function (res) {
         this.videoContext = uni.createVideoContext('myVideo')
@@ -215,6 +219,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/static/customicons.scss"; 
+
 .container {
     min-height: 100vh;
     background: #F5F6F7;
@@ -251,7 +257,7 @@ export default {
 }
 
 /deep/.uni-swiper-dot-active {
-    background-color: #FE1E27FF;
+    background-color: $primaryColor;
 }
 
 .content {
@@ -289,19 +295,20 @@ export default {
 }
 
 .gonggao {
-    background: #FFFFFF;
+    background: #fff;
     border-radius: 8px;
-    padding: 12px;
     position: relative;
     margin-top: 12px;
-
+	display: flex;
+	align-content: center;
+	overflow: hidden;
     .ggImg {
         width: 34px;
         height: 20px;
         min-width: 34px;
         min-height: 20px;
         object-fit: fill;
-        margin-top: 5px;
+		margin-top: 5px;
     }
 }
 
@@ -398,7 +405,7 @@ export default {
  	font-size: 16px;
  	font-family: PingFang SC-Semibold, PingFang SC;
  	font-weight: 600;
- 	color: #FE1E27FF;
+ 	color: $primaryColor;
  }
 
     .box-content {
@@ -411,7 +418,7 @@ export default {
         line-height: 21px;
 
         .notice-time {
-            color: #FE1E27;
+            color: $primaryColor;
         }
     }
 
@@ -444,6 +451,5 @@ export default {
             color: #4F5459;
         }
     }
-
 }
 </style>

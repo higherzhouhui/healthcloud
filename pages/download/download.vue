@@ -46,6 +46,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "@/static/customicons.scss"; 
+
 .main {
 	width: 100%;
 	height: calc(100vh - 44px);
@@ -85,7 +87,7 @@ export default {
 .download {
 	width: 256px;
 	height: 50px;
-	background: linear-gradient(90deg, #F57E6A 0%, #FE1E27 100%);
+	background: linear-gradient(90deg, #F57E6A 0%, $primaryColor 100%);
 	border-radius: 28px 28px 28px 28px;
 	opacity: 1;
 	text-decoration: none;

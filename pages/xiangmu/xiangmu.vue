@@ -179,6 +179,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "@/static/customicons.scss"; 
+
 .tabs {
 	position: fixed;
 	top: 0;
@@ -208,7 +210,7 @@ export default {
 		}
 
 		&.active {
-			color: #FE1E27FF;
+			color: $primaryColor;
 			font-weight: 500;
 
 			.txt {
@@ -232,7 +234,7 @@ export default {
 			padding-left: 12px;
 			box-sizing: border-box;
 			display: flex;
-			background-color: #FE1E27FF;
+			background-color: $primaryColor;
 			height: 38px;
 			line-height: 38px;
 			font-size: 13px;
@@ -264,7 +266,7 @@ export default {
 				color: #FFFFFF;
 				height: 32px;
 				line-height: 32px;
-				background: #FE1E27;
+				background: $primaryColor;
 				border-radius: 16px;
 			}
 
@@ -307,7 +309,7 @@ export default {
 				font-size: 20px;
 				font-family: PingFang SC-Semibold, PingFang SC;
 				font-weight: 600;
-				color: #FE1E27;
+				color: $primaryColor;
 			}
 
 			.item {
@@ -392,7 +394,7 @@ export default {
 
 			.button {
 				padding: 5px 16px;
-				background-color: #FE1E27FF;
+				background-color: $primaryColor;
 				font-size: 13px;
 				font-family: PingFang SC-Regular, PingFang SC;
 				font-weight: 400;

@@ -106,6 +106,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "@/static/customicons.scss"; 
+
 .container {
 	.bg-box {
 		width: 100%;
@@ -150,7 +152,7 @@ export default {
 			font-size: 16px;
 			font-family: PingFang SC-Semibold, PingFang SC;
 			font-weight: 600;
-			color: #FE1E27FF;
+			color: $primaryColor;
 		}
 
 		.box-content {

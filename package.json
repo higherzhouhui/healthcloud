@@ -1,20 +1,9 @@
 {
-  "name": "heelthcloudapp",
-  "version": "1.0.2",
-  "description": "健享云保，实现国家富强，民众觉醒，民族振兴",
-  "main": "main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/higherzhouhui/energyApp.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/higherzhouhui/energyApp/issues"
-  },
-  "homepage": "https://github.com/higherzhouhui/energyApp#readme"
+    "id": "beyondGod-roll",
+    "name": "文字滚动",
+    "version": "1.1.0",
+    "description": "文字滚动，可用于广告播放",
+    "keywords": [
+        "文字滚动，广告"
+    ]
 }

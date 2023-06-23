@@ -71,6 +71,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "@/static/customicons.scss"; 
+
 .container {
 	.top-bg {
 		position: relative;
@@ -166,13 +168,13 @@ export default {
 
 					input {
 						font-size: 24px;
-						color: #FE1E27FF;
+						color: $primaryColor;
 					}
 				}
 
 				.all {
 					font-size: 15px;
-					color: #FE1E27FF;
+					color: $primaryColor;
 					white-space: nowrap;
 				}
 			}
@@ -191,7 +193,7 @@ export default {
 		padding: 11px 0;
 		width: 46%;
 		margin: 34px auto 0;
-		background-color: #FE1E27FF;
+		background-color: $primaryColor;
 		color: #fff;
 		font-size: 15px;
 		font-family: PingFang SC-Medium, PingFang SC;
@@ -202,7 +204,7 @@ export default {
 		&.sure-btn1 {
 
 			background: #FEEAEA;
-			color: #FE1E27;
+			color: $primaryColor;
 		}
 	}
 }</style>

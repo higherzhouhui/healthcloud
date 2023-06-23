@@ -122,6 +122,7 @@ import { resetPasswordRequest } from "@/api/user.js"
 </script>
 
 <style scoped lang="scss">
+@import "@/static/customicons.scss"; 
 .loginBg {
 	width: 100%;
 	object-fit: cover;
@@ -212,7 +213,7 @@ import { resetPasswordRequest } from "@/api/user.js"
 .submit {
 	width: 300px;
 	height: 40px;
-	background: #FE1E27;
+	background: $primaryColor;
 	border-radius: 22px;
 	margin: 32px auto 0 auto;
 	font-size: 15px;
@@ -225,7 +226,7 @@ import { resetPasswordRequest } from "@/api/user.js"
 .reback {
 	width: 300px;
 	height: 40px;
-	border: 1px solid #FE1E27;
+	border: 1px solid $primaryColor;
 	border-radius: 22px;
 	margin: 32px auto 0 auto;
 	font-size: 15px;

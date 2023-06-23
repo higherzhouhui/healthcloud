@@ -170,6 +170,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/static/customicons.scss"; 
+
 .container {
     padding: 12px;
 
@@ -184,7 +186,7 @@ export default {
             font-size: 20px;
             font-family: PingFang SC-Semibold, PingFang SC;
             font-weight: 600;
-            color: #FE1E27;
+            color: $primaryColor;
         }
 
         .txt {
@@ -281,7 +283,7 @@ export default {
 
             .button {
                 padding: 5px 16px;
-                background-color: #FE1E27;
+                background-color: $primaryColor;
                 font-size: 13px;
                 font-family: PingFang SC-Regular, PingFang SC;
                 font-weight: 400;
@@ -310,7 +312,7 @@ export default {
                 color: #17191A;
 
                 &.value2 {
-                    color: #FE1E27FF;
+                    color: $primaryColor;
                 }
             }
 
@@ -328,7 +330,7 @@ export default {
 .sure-btn {
     padding: 11px 0;
     margin: 24px auto;
-    background-color: #FE1E27FF;
+    background-color: $primaryColor;
     color: #fff;
     font-size: 15px;
     font-family: PingFang SC-Medium, PingFang SC;

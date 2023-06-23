@@ -125,6 +125,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/static/customicons.scss"; 
+
 .container {
     padding: 12px;
 
@@ -144,7 +146,7 @@ export default {
 
             &.red {
                 padding: 9px 12px;
-                color: #FE1E27;
+                color: $primaryColor;
                 background-color: #FFE6E6;
                 border-radius: 8px;
             }
@@ -218,7 +220,7 @@ export default {
 .sure-btn {
     padding: 11px 0;
     margin: 24px auto;
-    background-color: #FE1E27FF;
+    background-color: $primaryColor;
     color: #fff;
     font-size: 15px;
     font-family: PingFang SC-Medium, PingFang SC;

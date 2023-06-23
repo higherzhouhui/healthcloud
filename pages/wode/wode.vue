@@ -213,6 +213,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "@/static/customicons.scss"; 
+
 .container {
 	padding-bottom: 24px;
 }
@@ -263,7 +265,7 @@ export default {
 					border-radius: 10px 10px 10px 10px;
 					font-family: PingFang SC-Regular, PingFang SC;
 					font-weight: 400;
-					color: #FE1E27FF;
+					color: $primaryColor;
 					line-height: 20px;
 					text-align: center;
 					padding: 0 10px;
@@ -328,7 +330,7 @@ export default {
 
 				.tixian {
 					height: 28px;
-					background: #FE1E27FF;
+					background: $primaryColor;
 					border-radius: 17px 17px 17px 17px;
 					padding: 0 8px;
 					font-size: 13px;

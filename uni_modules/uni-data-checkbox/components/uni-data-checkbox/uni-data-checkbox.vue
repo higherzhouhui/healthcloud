@@ -179,7 +179,7 @@
 				},
 				isLocal:true,
 				styles: {
-					selectedColor: '#fe1e27ff',
+					selectedColor: '#fe1e27',
 					selectedTextColor: '#666',
 				},
 				isTop:0

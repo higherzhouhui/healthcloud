@@ -188,6 +188,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/static/customicons.scss"; 
+
 .container {
     .bottom-input {
         position: fixed;
@@ -227,7 +229,7 @@ export default {
             font-family: PingFang SC-Regular, PingFang SC;
             font-weight: 400;
             color: #FFFFFF;
-            background: #FE1E27;
+            background: $primaryColor;
             border-radius: 17px;
             white-space: nowrap;
         }
@@ -305,13 +307,13 @@ export default {
                 }
 
                 .content {
-                    background: #FE1E27FF;
+                    background: $primaryColor;
                     color: #fff;
 
                     &::after {
                         left: unset;
                         right: -5px;
-                        background: #FE1E27FF;
+                        background: $primaryColor;
                     }
                 }
             }

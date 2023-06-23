@@ -135,6 +135,8 @@
 </script>
 	
 <style scoped lang="scss">
+@import "@/static/customicons.scss"; 
+
 .tabs{
 	display: flex;
 	background-color: #fff;
@@ -150,7 +152,7 @@
 				display: inline-block;
 			}
 			&.active{	
-				color: #FE1E27FF;			
+				color: $primaryColor;			
 				font-weight: 500;
 				
 				.txt{
@@ -166,7 +168,7 @@
 			padding-bottom: 22.8%;
 			height: 0;
 			width: 100%;
-			background: #FE1E27FF;
+			background: $primaryColor;
 			border-radius: 8px;
 			.txt-box{
 				position: absolute;

@@ -187,6 +187,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/static/customicons.scss"; 
+
 .container {
     min-height: 100vh;
     background: #F85B4CFF;
@@ -243,7 +245,7 @@ export default {
                 font-size: 16px;
                 font-family: PingFang SC-Semibold, PingFang SC;
                 font-weight: 600;
-                color: #FE1E27;
+                color: $primaryColor;
             }
 
             .qrdImg {
@@ -264,7 +266,7 @@ export default {
 
                 .btn {
                     height: 40px;
-                    background: #FE1E27FF;
+                    background: $primaryColor;
                     border-radius: 22px 22px 22px 22px;
                     padding: 0 24px;
                     font-size: 15px;

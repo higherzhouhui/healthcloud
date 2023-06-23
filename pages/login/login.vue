@@ -110,6 +110,8 @@ import { ACCESS_TOKEN, USER_INFO } from "@/common/util/constants"
 </script>
 
 <style scoped lang="scss">
+@import "@/static/customicons.scss"; 
+
 .loginBg {
 	width: 100%;
 	object-fit: cover;
@@ -207,7 +209,7 @@ import { ACCESS_TOKEN, USER_INFO } from "@/common/util/constants"
 .submit {
 	width: 300px;
 	height: 40px;
-	background: #FE1E27;
+	background: $primaryColor;
 	border-radius: 22px;
 	margin: 32px auto 0 auto;
 	font-size: 15px;
@@ -246,7 +248,7 @@ import { ACCESS_TOKEN, USER_INFO } from "@/common/util/constants"
 		font-size: 13px;
 		font-family: PingFang SC-Regular, PingFang SC;
 		font-weight: 400;
-		color: #FE1E27FF;
+		color: $primaryColor;
 		line-height: 17px;
 	}
 }

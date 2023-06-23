@@ -91,6 +91,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/static/customicons.scss"; 
+
 .container {
     padding: 12px;
 
@@ -144,7 +146,7 @@ export default {
 
             .button {
                 padding: 5px 16px;
-                background-color: #FE1E27;
+                background-color: $primaryColor;
                 font-size: 13px;
                 font-family: PingFang SC-Regular, PingFang SC;
                 font-weight: 400;
@@ -187,7 +189,7 @@ export default {
                     color: #17191A;
 
                     &.value2 {
-                        color: #FE1E27FF;
+                        color: $primaryColor;
                     }
                 }
 
