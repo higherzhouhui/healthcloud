@@ -102,7 +102,7 @@
         "uniStatistics" : {
             "enable" : true
         },
-        "renderer" : "native"
+        "nvueLaunchMode" : ""
     },
     /* SDK配置 */
     "quickapp" : {},
