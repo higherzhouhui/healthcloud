@@ -133,23 +133,35 @@ uni.addInterceptor('request', {
 				break;
 			case 500:
 				args.message = "服务器内部错误，无法完成请求。";
+				console.error(args.message)
+				args.message = "系统维护中，请稍后重试";
 				break;
 			case 501:
 				args.message = "服务器不支持请求的功能，无法完成请求。";
+				console.error(args.message)
+				args.message = "系统维护中，请稍后重试";
 				break;
 			case 502:
 				args.message =
 					"作为网关或者代理工作的服务器尝试执行请求时，从远程服务器接收到了一个无效的响应。";
+				console.error(args.message)
+				args.message = "系统维护中，请稍后重试";
 				break;
 			case 503:
 				args.message =
 					"由于超载或系统维护，服务器暂时的无法处理客户端的请求。";
+				console.error(args.message)
+				args.message = "系统维护中，请稍后重试";
 				break;
 			case 504:
 				args.message = "充当网关或代理的服务器，未及时从远端服务器获取请求。";
+				console.error(args.message)
+				args.message = "系统维护中，请稍后重试";
 				break;
 			case 505:
 				args.message = "服务器不支持请求的HTTP协议的版本，无法完成处理。";
+				console.error(args.message)
+				args.message = "系统维护中，请稍后重试";
 				break;
 			default:
 				args.message = "状态错误(" + args.statusCode + ")";
