@@ -50,6 +50,7 @@
 		<view class="mainContent">
 			<view class="invite" @tap="handleToInvitePage">
 				<image src="../../static/my/yaoqing.png" class="yaoqingImg"></image>
+				
 			</view>
 			<view class="routeList">
 				<view class="listWrapper" v-if="!item.hidden" v-for="item in navList" :key="item.link"
