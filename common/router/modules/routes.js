@@ -107,7 +107,7 @@ const routes = [
 	},
 	{
 		path: "/pages/xiangmu/buybank",
-		name: 'webview',
+		name: 'buybank',
 			meta: {
 				title: '银行卡支付',
 			},
@@ -158,7 +158,7 @@ const routes = [
 	
 	{
 		path: "/pages/wode/child/szrmb",
-		name: 'userInfo',
+		name: 'szrmb',
 			meta: {
 				title: '数字人民币',
 			}
