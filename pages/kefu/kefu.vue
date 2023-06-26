@@ -40,6 +40,7 @@ import {
 import {
     URL
 } from '@/config/index.js'
+import { uploadImgPath } from '@/api/common'
 import {
     getChatMessageList,
     getService,
@@ -96,7 +97,7 @@ export default {
                 success(res) {
                     const tempFilePaths = res.tempFilePaths[0];
                     uni.uploadFile({
-                        url: `${URL}/admin/upload/uploadImage`,
+                        url: `${URL}${uploadImgPath}`,
                         filePath: tempFilePaths,
                         name: 'file',
                         formData: {

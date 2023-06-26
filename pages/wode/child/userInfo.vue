@@ -49,6 +49,7 @@
 import { updateAvatarRequest } from '@/api/user'
 import { hideMiddlePhone } from "@/utils/common"
 import { mapActions } from "vuex"
+import { uploadImgPath } from '@/api/common'
 import {
     URL
 } from '@/config/index.js'
@@ -119,7 +120,7 @@ export default {
 					title: '上传中...'
 				})
 				uni.uploadFile({
-				  url: `${URL}/admin/upload/uploadImage`,
+				  url: `${URL}${uploadImgPath}`,
 				  filePath: tempFilePaths,
 				  name: 'file',
 				  formData: {
@@ -141,7 +142,7 @@ export default {
 				  },
 				  fail: function (res) {
 				    console.log('上传失败：', res);
-					uni.hideLoading()
+						uni.hideLoading()
 				  }
 				});
 			  }
