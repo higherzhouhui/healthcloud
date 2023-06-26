@@ -111,10 +111,10 @@ export default {
             buyProject({payType:3, id: this.id, num: (this.num * 100 || 1), voucher, projectType: this.projectType}).then(rt=>{
                 this.loading = false
                 if(rt.code == 200){
-                    uni.showToast({ title: '上传成功,请联系在线客服审核！', icon: 'none' })
+                    uni.showToast({ title: '上传打款凭证成功,请联系在线客服审核！', icon: 'none', duration: 3000 })
                     setTimeout(()=>{
                         uni.switchTab({url: '/pages/xiangmu/xiangmu'})
-                    }, 1000)     
+                    }, 3000)     
                 } else {
                     uni.showToast({ title: rt.message, icon: 'none' })
                 }
