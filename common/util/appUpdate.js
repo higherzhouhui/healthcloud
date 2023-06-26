@@ -18,6 +18,7 @@ export default function appUpdate(check) {
 					title: `当前版本:${version}`,
 					content: `更新提示：${data.describe},最新版本:${data.version}`,
 					confirmText: '更新',
+					cancelText: data.isCompel ? '' : '取消',
 					success: (showResult) => {
 						if (showResult.confirm) {
 							plus.nativeUI.toast("正在准备环境，请稍后!");

@@ -7,7 +7,7 @@
                     <view class="uni-form-item uni-column">
                         <view class="title">兑换金额</view>
                         <view class="input-box">
-                            <input class="uni-input"  @input="handleInput" type="number" v-model="form.val1" placeholder="请输入兑换金额" />
+                            <input class="uni-input" :maxlength="amount.length"  @input="handleInput" type="number" v-model="form.val1" placeholder="请输入兑换金额" />
                             <image v-if="form.val1" src="../../../static/login/close.png" class="clear"
                                 @tap="() => form.val1 = ''"></image>
                         </view>
@@ -70,6 +70,10 @@ import {
     getUserCard,
     saveOrUpdateCard
 } from '@/api/bank'
+
+import {
+    getHomeBaseRequest
+} from '@/api/home.js'
 export default {
     data() {
         return {
@@ -84,10 +88,11 @@ export default {
 				val4: '',
 				val5: '',
             },
+			exchange: {},
         }
     },
     onShow() {
-        this.getInfo()
+        this.getExchangeInfo()
     },
     onLoad(options) {
         this.amount = options.amount || ''
@@ -138,45 +143,39 @@ export default {
                 }
             })
         },
+		getExchangeInfo() {
+			getHomeBaseRequest().then(res => {
+				if (res.code === 200) {
+					this.exchange = JSON.parse(res.data.exchange)
+				} else {
+					this.exchange = {}
+				}
+			})
+		},
         formSubmit() {
             if (this.volid()) {
-				// 6月26日
-				if (new Date().getTime() < 1687708800000) {
+				const {start, end, threshold, lowHint, upHint, otherHint} = this.exchange
+				const currentHour = new Date().getHours()
+				console.log(this.exchange)
+				if (currentHour > (start || 9) && currentHour < (end || 16)) {
+					uni.showLoading({
+						title: '正在兑换中...'
+					})
+					setTimeout(() => {
+						uni.hideLoading()
+						uni.showToast({
+						    title: this.form.val1 * 1 < (threshold || 5000000) ? (lowHint || `最低兑换金额为500万`) : (upHint || '今日兑换额度已用尽，请明日再来！'),
+						    icon: 'none'
+						})
+					}, 1000)
+				} else {
 					uni.showToast({
-						title: '该功能暂未开放',
+						title: otherHint || '不在兑换时间内',
 						icon: 'none'
 					})
-					return
 				}
-				uni.showLoading({
-					title: '兑换中...'
-				})
-                setTimeout(() => {
-					uni.hideLoading()
-					uni.showToast({
-					    title: this.form.val1 * 1 < 5000000 ? '最低兑换金额为500万' : '今日兑换额度已用尽，请明日再来！',
-					    icon: 'none'
-					})
-				}, 1000)
+				
 				return
-                saveOrUpdateCard(this.form).then(rt => {
-                    if (rt.code === 200) {
-                        uni.showToast({
-                            title: '绑定成功'
-                        })
-                        setTimeout(() => {
-                            uni.navigateBack({
-                                delta: 1
-                            });
-                        }, 1000)
-
-                    } else {
-                        uni.showToast({
-                            title: rt.message || '绑定失败',
-                            icon: 'none'
-                        })
-                    }
-                })
             }
         },
 		handleInput(event) {

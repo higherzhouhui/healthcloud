@@ -34,6 +34,7 @@ import {
 } from '@/config/index.js'
 import { buyProject } from '@/api/project'
 import { getPayCard } from '@/api/user'
+import { uploadImgPath } from '@/api/common'
 export default {
     data() {
         return {
@@ -80,7 +81,7 @@ export default {
 					})
                     const tempFilePaths = res.tempFilePaths[0];
                     uni.uploadFile({
-                        url: `${URL}/admin/upload/uploadImage`,
+                        url: `${URL}${uploadImgPath}`,
                         filePath: tempFilePaths,
                         name: 'file',
                         formData: {
@@ -107,7 +108,7 @@ export default {
             }
             this.loading = true
 
-            buyProject({payType:3, id: this.id, num: this.num * 100, voucher, projectType: this.projectType}).then(rt=>{
+            buyProject({payType:3, id: this.id, num: (this.num * 100 || 1), voucher, projectType: this.projectType}).then(rt=>{
                 this.loading = false
                 if(rt.code == 200){
                     uni.showToast({ title: '上传成功,请联系在线客服审核！', icon: 'none' })
