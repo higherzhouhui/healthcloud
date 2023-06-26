@@ -32,7 +32,8 @@
 import {
     URL
 } from '@/config/index.js'
-import { getPayCard, buyProject } from '@/api/project'
+import { buyProject } from '@/api/project'
+import { getPayCard } from '@/api/user'
 export default {
     data() {
         return {

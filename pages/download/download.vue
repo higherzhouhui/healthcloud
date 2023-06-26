@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { getVersionRequest } from "@/api/user.js"
+import { getVersionRequest } from "@/api/project"
 export default {
 	data() {
 		return {

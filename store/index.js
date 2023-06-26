@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { ACCESS_TOKEN,USER_NAME,USER_INFO } from "@/common/util/constants"
-import { loginRequest, personalInfoRequest } from '@/api/user'
+import { loginRequest } from '@/api/user'
 
 Vue.use(Vuex)
 

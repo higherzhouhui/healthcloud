@@ -79,7 +79,7 @@ import img4 from '../../static/leavel/4.png'
 import img5 from '../../static/leavel/5.png'
 import img6 from '../../static/leavel/6.png'
 import { mapActions } from "vuex"
-import { getUserWallet, insert, personalInfoRequest } from '@/api/user'
+import { getUserWallet, insert, personalInfo } from '@/api/user'
 import appUpdate from 'common/util/appUpdate.js'
 export default {
 	data() {
@@ -132,7 +132,7 @@ export default {
 	methods: {
 		...mapActions(["Logout"]),
 		async freshCurrentPage() {
-			const res = await Promise.all([personalInfoRequest(), getUserWallet()])
+			const res = await Promise.all([personalInfo(), getUserWallet()])
 			uni.stopPullDownRefresh()
 			this.$store.commit('SET_USERINFO', res[0].data)
 			this.wallet = res[1].data

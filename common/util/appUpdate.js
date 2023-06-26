@@ -1,5 +1,5 @@
 //APP更新
-import {getVersionRequest} from "@/api/user.js"
+import {getVersionRequest} from "@/api/project"
 export default function appUpdate(check) {
 	// 获取系统信息
 	const systemInfo = uni.getSystemInfoSync();
