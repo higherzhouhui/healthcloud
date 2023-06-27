@@ -144,7 +144,7 @@ export default {
                 num = 0, id, type
             } = this.item
             buyProject({
-                num: num * 1 * 100,
+                num: (num * 1 * 100 || 1),
                 projectType: type,
                 payType: this.payType,
                 id,
