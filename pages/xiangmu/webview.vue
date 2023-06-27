@@ -12,23 +12,30 @@ export default {
     data() {
         return {
             url: '',
-            mchOrderNo: ''
+            mchOrderNo: '',
+			timer: '',
         };
     },
     onLoad(item) {//接收上个界面传递来的参数
         this.url = item.url
         this.mchOrderNo = item.mchOrderNo
         // '/#/pages/xiangmu/xiangmu?status=1'
+		this.getPayOrder()
+		if (this.timer) {
+			clearInterval(this.timer)
+		}
+		this.timer = setInterval(()=>{
+		    this.getPayOrder()
+			console.log('getPayOrderTimer', this.timer)
+		}, 5000)
     },
-    beforeDestroy() {
-        clearInterval(this.timer)
-    },
+	onUnload() {
+		clearInterval(this.timer)
+		this.timer = null
+	},
+   
     onShow() {
-        this.getPayOrder()
-        clearInterval(this.timer)
-        this.timer = setInterval(()=>{
-            this.getPayOrder()
-        }, 5000)
+  
     },
     methods: {
         getPayOrder() {
