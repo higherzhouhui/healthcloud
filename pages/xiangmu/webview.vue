@@ -33,7 +33,10 @@ export default {
 		clearInterval(this.timer)
 		this.timer = null
 	},
-   
+	onHide() {
+		clearInterval(this.timer)
+		this.timer = null
+	},
     onShow() {
   
     },
