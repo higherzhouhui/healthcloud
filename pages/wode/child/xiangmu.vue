@@ -22,7 +22,7 @@
                     <view class="value">{{ item.dayEarnings }}</view>
                     <view class="txt">每日社保补贴</view>
                 </view>
-                <view class="in-item" v-else>
+                <view class="in-item" v-else-if="item.projectType == 2">
                     <view class="value">{{ item.num || 0 }}</view>
                     <view class="txt">购买股权数量</view>
                 </view>
