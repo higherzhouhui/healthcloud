@@ -57,7 +57,7 @@
 				<view class="botton-info" style="padding: 0 40px;">
 					<view class="in-item">
 						<view class="value">{{ item.chntSubsidy }}</view>
-						<view class="txt">{{ item.insureType == 2 ? '养老工资数量' : '奖励数字人民币' }} </view>
+						<view class="txt">{{ item.insureType == 2 ? '养老工资' : '奖励数字人民币' }} </view>
 					</view>
 					<view class="in-item">
 						<view class="value value2">{{ item.price }}</view>
