@@ -16,7 +16,7 @@
             <view class="botton-info">
                 <view class="in-item">
                     <view class="value">{{ item.projectType == 2 ? item.equityValue  : item.chntSubsidy }}</view>
-                    <view class="txt">{{ item.insureType == 2 ? '养老工资数量' : item.projectType == 1 ? '奖励数字人民币' : '股权总价值' }}</view>
+                    <view class="txt">{{ item.insureType == 2 ? '养老工资数量' : item.projectType == 2 ? '股权总价值' : '奖励数字人民币' }}</view>
                 </view>
                 <view class="in-item"  v-if="item.projectType == 1">
                     <view class="value">{{ item.dayEarnings }}</view>
