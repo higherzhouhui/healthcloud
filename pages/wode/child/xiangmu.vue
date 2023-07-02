@@ -37,7 +37,7 @@
             </view>
         </view>
     </scroll-view>
-    <view v-if="!list.length" class="no-data">暂无数据</view>
+    <view v-if="!list.length && !loading" class="no-data">暂无数据</view>
 </view>
 </template>
 
@@ -52,6 +52,7 @@ export default {
             list: [],
             pageNum: 1,
             hasmore: true,
+			loading: true,
         }
     },
     onLoad() {
@@ -67,11 +68,17 @@ export default {
     methods: {
         getList() {
             if (!this.hasmore) return
+			this.loading = true
+			uni.showLoading({
+				title: ''
+			})
             getMyProjectList({
                 pageNum: this.pageNum,
                 pageSize: 20
             }).then(rt => {
                 uni.stopPullDownRefresh();
+				uni.hideLoading()
+				this.loading = false
                 let list = rt.data ?.list || []
                 if (!list.length) return this.hasmore = false
                 if (this.pageNum == 1) {
