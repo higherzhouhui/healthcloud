@@ -122,8 +122,8 @@
     "locale" : "zh-Hans",
     "uniStatistics" : {
         "version" : "2",
-        "enable" : true,
-        "reportInterval" : "50"
+        "enable" : false,
+        "reportInterval" : "10"
     },
     "h5" : {
         "uniStatistics" : {

@@ -37,7 +37,7 @@
         </view>
         <view class="bg-video">
             <view v-show="ruleVisible" class="cover" />
-            <video id="myVideo" v-show="!ruleVisible" class="video" :src="videoUrl" loop autoplay controls :show-mute-bt="true" play-btn-position="middle" mobilenet-hint-type="1" :enable-play-gesture="true" poster="../../static/home/cover.png"></video>
+            <video id="myVideo" v-show="!ruleVisible" class="video" :src="videoUrl" loop controls :show-mute-bt="true" play-btn-position="middle" mobilenet-hint-type="1" :enable-play-gesture="true" poster="../../static/home/cover.png"></video>
         </view>
         <view class="newsContainer">
             <text class="title">新闻动态</text>
@@ -49,7 +49,7 @@
             <view class="txt">
                 公告信息
             </view>
-            <view class="box-content">{{notice.content}}</view>
+            <view class="box-content" v-html="notice.content"></view>
             <image class="close" src="../../static/tuiguang/close.png"></image>
         </view>
     </view>
