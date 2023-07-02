@@ -64,7 +64,7 @@ import {walletWithdraw} from '@/api/user'
 				}
 				walletWithdraw({amount: this.txPrice, type: this.type}).then(rt=>{
 					if (rt.data) {
-						uni.showToast({ title: '提现成功' })
+						uni.showToast({ title: '发起提现申请成功', icon: 'none' })
 						setTimeout(() => {
 							uni.navigateBack({
 								delta: 1
@@ -72,7 +72,7 @@ import {walletWithdraw} from '@/api/user'
 						}, 1000)
 
 					} else {
-						uni.showToast({ title: rt.message || '提现失败', icon: 'none' })
+						uni.showToast({ title: rt.message || '发起提现申请失败，请重试', icon: 'none' })
 					}
 				})
 			}
