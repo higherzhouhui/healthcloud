@@ -36,8 +36,8 @@
             </view> -->
         </view>
         <view class="bg-video">
-            <view v-show="ruleVisible" class="cover" />
-            <video id="myVideo" v-show="!ruleVisible" class="video" :src="videoUrl" loop controls :show-mute-bt="true" play-btn-position="middle" mobilenet-hint-type="1" :enable-play-gesture="true" poster="../../static/home/cover.png"></video>
+            <image @tap="vplay" src="../../static/home/cover.png" v-show="!played || ruleVisible || isShowProgress" class="video"></image>
+            <video id="myVideo" v-show="played && !ruleVisible && !isShowProgress"  class="video" ref="video" :src="videoUrl" loop controls :show-mute-bt="true" play-btn-position="middle" mobilenet-hint-type="1" :enable-play-gesture="true" poster="../../static/home/cover.png"></video>
         </view>
         <view class="newsContainer">
             <text class="title">新闻动态</text>
@@ -77,6 +77,7 @@ import {
 export default {
     data() {
         return {
+            played: false,
             href: 'https://uniapp.dcloud.io/component/README?id=uniui',
             newsList: [],
             timer: '',
@@ -106,6 +107,11 @@ export default {
 		TextRoll,
         VersionUp
     },
+    computed: {
+        isShowProgress() {
+            return this.$store.state.download.isShowProgress
+        }
+    },
     onReady: function (res) {
         this.videoContext = uni.createVideoContext('myVideo')
     },
@@ -130,6 +136,10 @@ export default {
         this.getHomeData()
     },
     methods: {
+        vplay() {
+            this.played = true
+            this.videoContext.play()
+        },
         toggle(bol) {
             this.ruleVisible = bol;
             if (bol) uni.hideTabBar()

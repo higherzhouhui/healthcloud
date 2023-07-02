@@ -1,5 +1,6 @@
 <template>
 	<view class="container">
+		<VersionUp></VersionUp>
 		<view class="topContent">
 			<view class="userInfo">
 				<view class="left" @tap="handleRouteTo('userInfo')">
@@ -79,6 +80,7 @@ import img4 from '../../static/leavel/4.png'
 import img5 from '../../static/leavel/5.png'
 import img6 from '../../static/leavel/6.png'
 import { mapActions } from "vuex"
+import VersionUp from '@/components/versionUp.vue'
 import { getUserWallet, insert, personalInfo } from '@/api/user'
 import appUpdate from 'common/util/appUpdate.js'
 import {
@@ -113,6 +115,7 @@ export default {
 			avatarUrlError: false,
 		}
 	},
+	components: {VersionUp},
 	onLoad() {
 	},
 	onPullDownRefresh() {
