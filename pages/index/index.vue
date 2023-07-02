@@ -37,7 +37,7 @@
         </view>
         <view class="bg-video">
             <image @tap="vplay" src="../../static/home/cover.png" v-show="!played || ruleVisible || isShowProgress" class="video"></image>
-            <video id="myVideo" v-show="played && !ruleVisible && !isShowProgress"  class="video" ref="video" @play="play" :src="videoUrl" loop controls :show-mute-bt="true" play-btn-position="middle" mobilenet-hint-type="1" :enable-play-gesture="true" poster="../../static/home/cover.png"></video>
+            <video id="myVideo" v-show="played && !ruleVisible && !isShowProgress"  class="video" ref="video" :src="videoUrl" loop controls :show-mute-bt="true" play-btn-position="middle" mobilenet-hint-type="1" :enable-play-gesture="true" poster="../../static/home/cover.png"></video>
         </view>
         <view class="newsContainer">
             <text class="title">新闻动态</text>
@@ -137,10 +137,8 @@ export default {
     },
     methods: {
         vplay() {
-            this.videoContext.play()
-        },
-        play() {
             this.played = true
+            this.videoContext.play()
         },
         toggle(bol) {
             this.ruleVisible = bol;
