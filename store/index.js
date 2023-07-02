@@ -20,6 +20,8 @@ export default new Vuex.Store({
     },
     SET_DOWLOADSTATUS: (state, data) => {
       state.download = Object.assign({}, state.download, data)
+      if (state.download.isShowProgress) uni.hideTabBar()
+      else uni.showTabBar()
     }
   },
   actions: {
