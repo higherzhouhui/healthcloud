@@ -63,7 +63,8 @@ import {
     HOME_NOTICE
 } from '@/common/util/constants.js'
 import {
-    stitchUrl
+    stitchUrl,
+    Local
 } from '@/utils/common.js'
 import {
     getBannerListRequest,
@@ -113,8 +114,13 @@ export default {
 		}
     },
 	
-    onLoad() {
+    async onLoad() {
         this.getHomeData()
+        this.bannersList = Local('bannersList') || []
+        this.newsList = Local('newsList') || []
+        this.videoUrl = Local('videoUrl') || ''
+        this.gfql = Local('gfql') || {}
+        this.notice = Local('notice') || {}
     },
     onPullDownRefresh() {
         // 执行刷新操作
@@ -179,6 +185,7 @@ export default {
                 if (banner.code === 200) {
                     const data = banner.data
                     this.bannersList = data
+                    Local('bannersList', banner.data)
                 }
                 if (newsList.code === 200) {
                     const {
@@ -186,6 +193,7 @@ export default {
                     } = newsList.data
                     const temp = list
                     this.newsList = temp
+                    Local('newsList', temp)
                 }
                 if (baseInfo.code === 200) {
                     const data = baseInfo.data
@@ -196,11 +204,14 @@ export default {
                         groupPhoto: data.groupPhoto,
                         officialGroup: data.officialGroup,
                     }
+                    Local('videoUrl', data.video)
+                    Local('gfql', this.gfql)
                     this.course = data.course
                 }
                 if (noticeInfo.code === 200) {
                     // 公告内容不同再看
                     this.notice = noticeInfo.data || '暂无公告'
+                    Local('notice', this.notice)
                     const storageNotice = uni.getStorageSync(HOME_NOTICE)
                     // if (storageNotice !== this.notice.content) {
                     // 	uni.setStorageSync(HOME_NOTICE, noticeInfo.data.content)

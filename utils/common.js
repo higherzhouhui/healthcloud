@@ -35,3 +35,10 @@ export const hideMiddlePhone = (phone) => {
   return ''
 }
 
+export const Local = (key, obj)=> {
+  if(obj) {
+    return  uni.setStorage({key, data: obj})
+  }
+  let params  =  uni.getStorageSync(key)
+  return params
+}
