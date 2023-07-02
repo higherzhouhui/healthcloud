@@ -19,7 +19,7 @@
             </view>
 
         </scroll-view>
-        <view v-if="!list.length" class="no-data">暂无数据</view>
+        <view v-if="!list.length && !loading" class="no-data">暂无数据</view>
     </view>
 
 </view>
@@ -49,7 +49,8 @@ export default {
             total: 0,
             pageNum: 1,
             hasmore: true,
-            list: []
+            list: [],
+			loading: true,
         }
     },
     onPullDownRefresh() {
@@ -63,10 +64,16 @@ export default {
     methods: {
         getList() {
             if (!this.hasmore) return
+			uni.showLoading({
+				title: ''
+			})
+			this.loading = true
             getWalletFlowList({
                 pageNum: this.pageNum,
                 pageSize: 20
             }).then(rt => {
+				uni.hideLoading()
+				this.loading = false
 				uni.stopPullDownRefresh();
                 let {
                     list
