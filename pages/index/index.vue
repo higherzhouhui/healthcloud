@@ -209,6 +209,7 @@ export default {
                     }
                     Local('videoUrl', data.video)
                     Local('gfql', this.gfql)
+					Local('baseInfo', data)
                     this.course = data.course
                 }
                 if (noticeInfo.code === 200) {

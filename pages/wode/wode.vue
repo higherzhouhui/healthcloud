@@ -81,6 +81,9 @@ import img6 from '../../static/leavel/6.png'
 import { mapActions } from "vuex"
 import { getUserWallet, insert, personalInfo } from '@/api/user'
 import appUpdate from 'common/util/appUpdate.js'
+import {
+    Local
+} from '@/utils/common.js'
 export default {
 	data() {
 		return {
@@ -199,11 +202,14 @@ export default {
 		},
 		withdrawal(type, amount, title) {
 			if (type === 'currency') {
-				// 1687708800000是2023年6月26日
-				// let url = `/pages/wode/child/recharge?title=${title}`;
-				// if (new Date().getTime() > 1687708800000) {
-				// 	url = `/pages/wode/child/szbwithdrawal?amount=${amount}`;
-				// }
+				const zuidi = Local('baseInfo').rmbWithdrawAmount || 5000000
+				if (Number(zuidi) > Number(amount)) {
+					uni.showToast({
+						title: `最低兑换额度为:${zuidi}`,
+						icon: 'none'
+					})
+					return
+				}
 				uni.navigateTo({
 					url: `/pages/wode/child/szbwithdrawal?amount=${amount}`
 				})

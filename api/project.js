@@ -14,3 +14,4 @@ export function getMyProjectList(params) {
 export function getVersionRequest(params) {
 	return request('/project-service/insurance/banner/getVersion', 'GET', params)	
 }
+

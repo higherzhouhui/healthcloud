@@ -37,3 +37,15 @@ export function updateAvatarRequest(params) {
 export function getPayCard(params) {
 	return request('/personal-service/insurance/user-card/getPayCard', 'GET', params)	
 }
+
+/**
+ * {
+  "bankCode": "",
+  "bankName": "",
+  "name": "",
+  "phone": ""
+}
+ */
+export function rmbWithdraw(params) {
+	return request('/personal-service/insurance/user-wallet/rmbWithdraw', 'POST', params)	
+}
