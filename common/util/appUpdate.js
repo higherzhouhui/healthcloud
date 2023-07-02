@@ -1,6 +1,8 @@
 //APP更新
 import {getVersionRequest} from "@/api/project"
+import store from '@/store'
 export default function appUpdate(check) {
+	let timer
 	// 获取系统信息
 	const systemInfo = uni.getSystemInfoSync();
 	// 获取应用版本号
@@ -34,6 +36,17 @@ export default function appUpdate(check) {
 								}
 							});
 							dtask.start();
+							store.commit('SET_DOWLOADSTATUS', {isShowProgress: true, percent: 0})
+							timer = setInterval(() => {
+								if (!dtask.totalSize || !dtask.downloadedSize) return
+								let percent = (dtask.downloadedSize / dtask.totalSize).toFixed(2) // fileSize文件总大小，后端返回的
+								store.commit('SET_DOWLOADSTATUS', {percent: Math.floor(percent * 100)})
+								if (percent >= 1) { // 注意百分比，及时清除定时器即可
+									clearInterval(timer)
+									store.commit('SET_DOWLOADSTATUS', {isShowProgress: false, percent: 0})
+					
+								}
+							}, 1000)
 						}
 					}
 				})
