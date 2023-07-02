@@ -57,20 +57,19 @@ import {walletWithdraw} from '@/api/user'
 				if(this.type == 'currency') {
 					return uni.showToast({title: '暂未开放，敬请期待', icon: 'none'})
 				}
-				if(!this.txPrice) {
+				if (!this.txPrice) {
 					return uni.showToast({ title: '请填写提现金额', icon: 'none' })
-				}else if(this.txPrice > this.amount) {
-					return uni.showToast({ title: '提现金额不可大于可提现金额', icon: 'none' })
+				} else if (this.txPrice > this.amount) {
+					return uni.showToast({ title: '可提现金额不足', icon: 'none' })
 				}
 				walletWithdraw({amount: this.txPrice, type: this.type}).then(rt=>{
 					if (rt.data) {
 						uni.showToast({ title: '发起提现申请成功', icon: 'none' })
 						setTimeout(() => {
-							uni.navigateBack({
-								delta: 1
-							});
+							this.$Router.replaceAll({
+							    name: 'wode'
+							})
 						}, 1000)
-
 					} else {
 						uni.showToast({ title: rt.message || '发起提现申请失败，请重试', icon: 'none' })
 					}

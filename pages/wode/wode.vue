@@ -184,7 +184,11 @@ export default {
 			});
 		},
 		signToday() {
+			uni.showLoading({
+				title: '签到中...',
+			})
 			insert().then(rt => {
+				uni.hideLoading()
 				if (rt.code == 200) {
 					uni.showToast({ title: '签到成功！' })
 					this.getWallet()
