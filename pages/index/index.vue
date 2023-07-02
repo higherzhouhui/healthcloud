@@ -1,5 +1,6 @@
 <template>
 <view class="container">
+    <VersionUp></VersionUp>
     <swiper circular indicator-dots autoplay interval="3000" duration="1000">
         <swiper-item v-for="(item, index) in bannersList" :key="index">
             <image class="bannerImg" :src="item.image"></image>
@@ -56,6 +57,7 @@
 </template>
 
 <script>
+import VersionUp from '@/components/versionUp.vue'
 import newProduct from '@/components/newProduct.vue'
 // 导入并注册
 import TextRoll from '@/components/beyondGod-roll/text-roll.vue'
@@ -102,6 +104,7 @@ export default {
     components: {
         newProduct,
 		TextRoll,
+        VersionUp
     },
     onReady: function (res) {
         this.videoContext = uni.createVideoContext('myVideo')
