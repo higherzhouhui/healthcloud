@@ -205,14 +205,6 @@ export default {
 		},
 		withdrawal(type, amount, title) {
 			if (type === 'currency') {
-				const zuidi = Local('baseInfo').rmbWithdrawAmount || 5000000
-				if (Number(zuidi) > Number(amount)) {
-					uni.showToast({
-						title: `最低兑换额度为:${zuidi}`,
-						icon: 'none'
-					})
-					return
-				}
 				uni.navigateTo({
 					url: `/pages/wode/child/szbwithdrawal?amount=${amount}`
 				})

@@ -5,7 +5,7 @@
             <form>
                 <view class="form-box">
                     <view class="uni-form-item uni-column">
-                        <view class="title">单笔最大兑换金额</view>
+                        <view class="title">兑换金额</view>
                         <view class="input-box">
                             <input class="uni-input" disabled :maxlength="amount.length"  @input="handleInput" type="number" v-model="val1" placeholder="请输入兑换金额" />
                             <!-- <image v-if="val1" src="../../../static/login/close.png" class="clear"
@@ -80,7 +80,7 @@ export default {
     data() {
         return {
             amount: 0,
-			val1: Local('baseInfo').rmbWithdrawAmount || 5000000,
+			val1: '',
             form: {
                 // bankCode: '',
                 // bankName: '',
@@ -98,6 +98,7 @@ export default {
     },
     onLoad(options) {
         this.amount = options.amount || ''
+		this.val1 = Math.min(options.amount || '', Local('baseInfo').rmbWithdrawAmount || 5000000)
     },
     methods: {
         volid() {

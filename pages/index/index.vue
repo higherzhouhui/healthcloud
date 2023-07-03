@@ -27,7 +27,7 @@
         </view>
         <view class="gonggao" @tap="toggle(true)">
             <image class="ggImg" src="../../static/home/gonggao.png"></image>
-			<TextRoll :text="notice.content"></TextRoll>
+			<TextRoll :text="removeHtmlTag(notice.content)"></TextRoll>
 			<!--   <view id="scroll_div" class="fl" ref="scrollDiv">
                 <view id="scroll_begin" ref="scrollBegin" @tap="toggle(true)">
                     {{notice.content}}
@@ -66,7 +66,8 @@ import {
 } from '@/common/util/constants.js'
 import {
     stitchUrl,
-    Local
+    Local,
+	removeHtmlTag
 } from '@/utils/common.js'
 import {
     getBannerListRequest,
@@ -86,6 +87,7 @@ export default {
                 content: '',
                 createTime: ''
             },
+			removeHtmlTag: removeHtmlTag,
             pageNum: 1,
             pageSize: 10,
             videoUrl: '',

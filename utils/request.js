@@ -196,12 +196,13 @@ uni.addInterceptor('request', {
 		//返回消息 
 		return Promise.resolve(args.data)
 	},
-	fail() { //失败回调拦截
+	fail(error) { //失败回调拦截
+		console.log(error)
 	    if (!modelShow) {
 			modelShow = true
 			uni.showModal({
 				title: "提示",
-				content: "无法发起请求, 请检查网络",
+				content: "当前网络异常，请稍后重试",
 				showCancel: false,
 				complete() {
 					modelShow = false
@@ -217,6 +218,7 @@ function request(url, method, params = {}) {
 			url: url,
 			method: method,
 			data: params,
+			sslVerify: false,
 			header: {}, //必须的，用于拦截请求
 			success: (res) => {
 				//上面已经对错误进行了处理，直接返回的就是data
