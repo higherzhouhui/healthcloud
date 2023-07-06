@@ -110,7 +110,8 @@ export default {
 				cash: 0, // 现金钱包
 				group: 0, // 团队绩效浅薄啊
 				rmb: 0, // 数字人民币
-				currency: 0 //货币兑换
+				currency: 0 ,//货币兑换
+				cashNumber: 0, // 提现卡
 			},
 			avatarUrlError: false,
 		}
@@ -211,7 +212,7 @@ export default {
 				return
 			}
 			uni.navigateTo({
-				url: `/pages/wode/child/withdrawal?type=${type}&amount=${amount}&title=${title}`
+				url: `/pages/wode/child/withdrawal?type=${type}&amount=${amount}&title=${title}&cashNumber=${this.wallet.cashNumber}`
 			})
 		}
 	}

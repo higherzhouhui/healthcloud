@@ -145,6 +145,12 @@ export default {
 	onLoad() {
 		this.getList()
 	},
+	onShow() {
+		if (uni.getStorageSync('xiangmu-type')) {
+			this.type = uni.getStorageSync('xiangmu-type') * 1
+			uni.removeStorageSync('xiangmu-type')
+		}
+	},
 	onPullDownRefresh() {
 		// 执行刷新操作
 		this.getList()
