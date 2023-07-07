@@ -17,14 +17,24 @@
 					<text class="signText" @tap="signToday()">签到</text>
 				</view>
 			</view>
+			<view class="cashWrapper">
+				<view class="title">现金钱包（元）</view>
+				<view class="bot">
+					<view class="jine">{{ (wallet.cash || 0).toLocaleString() }}</view>
+					<view class="txordh">
+						<view class="tixian dh">兑换</view>
+						<view class="tixian" @tap="withdrawal('cash', wallet.cash || 0, '现金')">提现</view>
+					</view>
+				</view>
+			</view>
 			<view class="moneyContainer">
-				<view class="list" @tap="withdrawal('cash', wallet.cash || 0, '现金')">
+				<!-- <view class="list" @tap="withdrawal('cash', wallet.cash || 0, '现金')">
 					<view class="title">现金钱包（元）</view>
 					<view class="bot">
 						<view class="jine">{{ (wallet.cash || 0).toLocaleString() }}</view>
 						<view class="tixian">提现</view>
 					</view>
-				</view>
+				</view> -->
 				<view class="list" @tap="withdrawal('group', wallet.group || 0, '团队绩效')">
 					<view class="title">团队绩效钱包（元）</view>
 					<view class="bot">
@@ -36,7 +46,7 @@
 					<view class="title">数字人民币（元）</view>
 					<view class="bot">
 						<view class="jine">{{ (wallet.rmb || 0).toLocaleString() }}</view>
-						<view class="tixian">提现</view>
+						<view class="tixian">详情</view>
 					</view>
 				</view>
 				<view class="list" @tap="withdrawal('currency', wallet.rmb || 0, '货币兑换')">
@@ -46,12 +56,18 @@
 						<view class="tixian">兑换</view>
 					</view>
 				</view>
+				<view class="list" @tap="withdrawal('cash', wallet.cash || 0, '现金')">
+					<view class="title">健享币（枚）</view>
+					<view class="bot">
+						<view class="jine">{{ (wallet.cash || 0).toLocaleString() }}</view>
+						<view class="tixian">兑换</view>
+					</view>
+				</view>
 			</view>
 		</view>
 		<view class="mainContent">
 			<view class="invite" @tap="handleToInvitePage">
 				<image src="../../static/my/yaoqing.png" class="yaoqingImg"></image>
-				
 			</view>
 			<view class="routeList">
 				<view class="listWrapper" v-if="!item.hidden" v-for="item in navList" :key="item.link"
@@ -101,10 +117,10 @@ export default {
 				{ title: '我的团队', logo: 'tuandui', link: 'myteam' },
 				{ title: '我的项目', logo: 'xiangmu', link: 'xiangmu' },
 				{ title: '交易详情', logo: 'jiaoyi', link: 'transaction' },
-				{ title: '银行卡', logo: 'yhk', link: 'bankcardbind' },
 				{ title: '实名认证', logo: 'smrz', link: 'authentication' },
+				{ title: '银行卡', logo: 'yhk', link: 'bankcardbind' },
 				{ title: '检查更新', logo: 'update', link: 'update', hidden: document ? true : false },
-				{ title: '下载APP', logo: 'download', link: 'download', hidden: document ? false : true },
+				{ title: 'APP下载', logo: 'download', link: 'download' },
 			],
 			wallet: {
 				cash: 0, // 现金钱包
@@ -214,6 +230,9 @@ export default {
 			uni.navigateTo({
 				url: `/pages/wode/child/withdrawal?type=${type}&amount=${amount}&title=${title}&cashNumber=${this.wallet.cashNumber}`
 			})
+		},
+		exchange(from, to, fromAmount, toAmount) {
+			
 		}
 	}
 }
@@ -300,7 +319,53 @@ export default {
 			}
 		}
 	}
-
+	.cashWrapper {
+		background: #FFFFFF;
+		border-radius: 8px 8px 8px 8px;
+		padding: 12px 8px;
+		margin-bottom: 12px;
+		.title {
+			font-size: 14px;
+			font-family: PingFang SC-Regular, PingFang SC;
+			font-weight: 400;
+			color: #4F5459;
+			line-height: 20px;
+		}
+		
+		.bot {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-top: 12px;
+		
+			.jine {
+				font-size: 20px;
+				font-family: DIN-Bold, DIN;
+				font-weight: bold;
+				color: #17191A;
+				line-height: 30px;
+			}
+			.txordh {
+				display: flex;
+			}
+			.tixian {
+				height: 28px;
+				background: $primaryColor;
+				border-radius: 17px 17px 17px 17px;
+				padding: 0 8px;
+				font-size: 13px;
+				font-family: PingFang SC-Regular, PingFang SC;
+				font-weight: 400;
+				color: #FFFFFF;
+				line-height: 28px;
+			}
+			.dh {
+				margin-right: 8px;
+				background: rgba(254, 130, 22, 0.1);
+				color: $primaryColor;
+			}
+		}
+	}
 	.moneyContainer {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
@@ -430,4 +495,5 @@ export default {
 		text-align: center;
 		line-height: 52px;
 	}
-}</style>
+}
+</style>

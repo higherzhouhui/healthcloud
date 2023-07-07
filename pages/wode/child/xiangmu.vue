@@ -102,7 +102,8 @@ export default {
 
 .container {
     padding: 12px;
-
+	background: #fff;
+	margin-top: 12px;
     .item {
         margin-bottom: 12px;
         padding: 12px;

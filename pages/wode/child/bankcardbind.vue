@@ -14,7 +14,7 @@
 			</view>
 			<view class="form-box">
 				<view class="uni-form-item uni-column">
-					<view class="title">所属银行</view>
+					<view class="title">所属银行(例：中国人民银行北京市分行城市中心支行)</view>
 					<view class="input-box">
 						<input class="uni-input" v-model="form.bankName" placeholder="请输入所属银行" />
 						<image v-if="form.bankName" src="../../../static/login/close.png" class="clear"
@@ -26,7 +26,7 @@
 				<view class="uni-form-item uni-column">
 					<view class="title">银行卡号</view>
 					<view class="input-box">
-						<input class="uni-input" v-model="form.bankCode" placeholder="请输入银行卡号" />
+						<input class="uni-input" type='number' v-model="form.bankCode" placeholder="请输入银行卡号" />
 						<image v-if="form.bankCode" src="../../../static/login/close.png" class="clear"
 							@tap="() => form.bankCode = ''"></image>
 					</view>
@@ -108,7 +108,7 @@ export default {
 .container {
 	.top-title {
 		padding: 13px;
-		font-size: 13px;
+		font-size: 15px;
 		font-family: PingFang SC-Regular, PingFang SC;
 		font-weight: 400;
 		color: #969899;

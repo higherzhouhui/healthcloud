@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="container">
 		<!-- <image src="../../static/login/loginBg.png" class="loginBg"></image> -->
 		<view class="main">
 			<view class="title">找回密码</view>
@@ -126,6 +126,10 @@ import { resetPasswordRequest } from "@/api/user.js"
 .loginBg {
 	width: 100%;
 	object-fit: cover;
+}
+.container {
+	min-height: 100vh;
+	background-color: #fff;
 }
 .main {
 	padding: 59px 28px 50px 28px;

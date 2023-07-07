@@ -3,7 +3,7 @@ const routes = [
 	 path: "/pages/download/download",
 	 name: 'download',
 		 meta: {
-			 title: '健享云保——APP下载',
+			 title: '健行公益——APP下载',
 		 },
 	},
 	{

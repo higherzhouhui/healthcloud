@@ -61,7 +61,7 @@
                 ￥{{ item.price || 0 }}
             </view>
             <view class="txt">
-                健享云保健康医疗原始股权
+                健行公益健康医疗原始股权
             </view>
         </view>
         <view class="item">

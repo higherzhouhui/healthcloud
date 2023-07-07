@@ -16,7 +16,7 @@
 				<view class="uni-form-item uni-column">
 					<view class="input-box">
 						<view class="title">身份证号</view>
-						<input class="uni-input" :disabled="disabled" v-model="idCard" placeholder="请输入您的身份证号" />
+						<input class="uni-input" maxlength="18" :disabled="disabled" v-model="idCard" placeholder="请输入您的身份证号" />
 						<image v-if="idCard && !disabled" src="../../../static/login/close.png" class="clear"
 							@tap="() => idCard = ''"></image>
 					</view>
@@ -65,11 +65,26 @@ export default {
 			}
 			return bol
 		},
+		formatIDCardNumber(idNumber) {
+		  // 去除空格和其他非数字字符
+		  idNumber = idNumber.replace(/\s|\D/g, '');
+		
+		  // 插入分隔符
+		  let formattedNumber = '';
+		  for (let i = 0; i < idNumber.length; i++) {
+		    if (i > 0 && i % 4 === 0) {
+		      formattedNumber += ' ';
+		    }
+		    formattedNumber += idNumber.charAt(i);
+		  }
+		
+		  return formattedNumber;
+		},
 		formSubmit() {
 			if (this.volid()) {
 				uni.showModal({
 					title: '再次确认',
-					content: `姓名：${this.name},身份证号：${this.idCard}`,
+					content: `姓名：${this.name}\n身份证号：${this.formatIDCardNumber(this.idCard)}`,
 					confirmText: '确认无误',
 					cancelText: '我要修改',
 					success: (showResult) => {

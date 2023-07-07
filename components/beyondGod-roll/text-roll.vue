@@ -1,5 +1,5 @@
 <template>
-	<view class="content" :style="{ backgroundColor: backgroundColor || '#F5F5F5' }">
+	<view class="content" :style="{ backgroundColor: backgroundColor || '#fff' }">
 		<view class="tips"><span class="iconfont iconlaba" :style="{ color: iconColor , fontSize:iconSize }"></span></view>
 		<view class="text"><p :style="{ color: textColor , fontSize:textSize,animationDuration:speed }">{{text}}</p></view>
 	</view>

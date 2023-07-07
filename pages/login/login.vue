@@ -2,7 +2,7 @@
 	<view class="container">
 		<VersionUp></VersionUp>
 		<view class="main">
-			<view class="title">Hi，欢迎来到健享云保！</view>
+			<view class="title">Hi，欢迎来到健行公益！</view>
 			<form class="formStyle" @submit="formSubmit">
 				<view class="label">
 					<image src="../../static/login/phone.png" class="phoneImg"></image>手机号
@@ -129,8 +129,11 @@ export default {
 
 .container {
 	background-color: #fff;
-	height: 100vh;
+	min-height: calc(100vh - 44px - env(safe-area-inset-top));
 	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .main {
@@ -138,8 +141,7 @@ export default {
 	padding: 59px 28px 0;
 	position: relative;
 	z-index: 9;
-
-
+	flex: 1;
 }
 
 .label {
@@ -259,11 +261,9 @@ export default {
 }
 
 .bottom {
-	position: absolute;
-	bottom: 50px;
 	width: 100%;
 	text-align: center;
-
+	padding: 20px 0;
 	.agress {
 		font-size: 13px;
 		font-family: PingFang SC-Regular, PingFang SC;

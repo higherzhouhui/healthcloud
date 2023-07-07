@@ -2,7 +2,7 @@
 	<view class="container">
 		<!-- <image src="../../static/login/loginBg.png" class="loginBg"></image> -->
 		<view class="main">
-			<view class="title">Hi，欢迎来到健享云保！</view>
+			<view class="title">Hi，欢迎来到健行公益！</view>
 			<form class="formStyle" @submit="formSubmit">
 				<view class="label"><image src="../../static/login/phone.png" class="phoneImg"></image>手机号</view>
 				<view class="inputForm">
@@ -168,9 +168,10 @@ import { getQueryString } from "@/utils/common.js"
 </script>
 
 <style scoped lang="scss">
-.container{
+@import "@/static/customicons.scss"; 
+.container {
 	background-color: #fff;
-	height: 100vh;
+	min-height: 100vh;
 	box-sizing: border-box;
 }
 .loginBg {
@@ -246,7 +247,7 @@ import { getQueryString } from "@/utils/common.js"
 		font-size: 13px;
 		font-family: PingFang SC-Regular, PingFang SC;
 		font-weight: 400;
-		color: #FF4B4B;
+		color: $primaryColor;
 		line-height: 17px;
 	}
 }
@@ -264,7 +265,7 @@ import { getQueryString } from "@/utils/common.js"
 .submit {
 	width: 300px;
 	height: 40px;
-	background: #FF4B4B;
+	background: $primaryColor;
 	border-radius: 22px;
 	margin: 32px auto 0 auto;
 	font-size: 15px;
@@ -303,7 +304,7 @@ import { getQueryString } from "@/utils/common.js"
 		font-size: 13px;
 		font-family: PingFang SC-Regular, PingFang SC;
 		font-weight: 400;
-		color: #FF4B4B;
+		color: $primaryColor;
 		line-height: 17px;
 	}
 }

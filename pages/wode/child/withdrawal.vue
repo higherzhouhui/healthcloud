@@ -12,7 +12,7 @@
 					{{amount}}
 				</view>
 			</view>
-			<view class="cashNumber" v-if="type === 'cash'">提现卡:<text>{{cashNumber}}</text>张</view>
+			<!-- <view class="cashNumber" v-if="type === 'cash'">提现卡:<text>{{cashNumber}}</text>张</view> -->
 		</view>
 		<view class="top-info">
 			<view class="top-info-box">
@@ -98,8 +98,8 @@
 					})
 				}
 				
-				// 对提现卡进行拦截
-				if (this.type === 'cash') {
+				// 忽略对现金钱包的拦截
+				if (this.type === 'cash999') {
 					if (this.cashNumber * 1) {
 						uni.showModal({
 							title: '提示',
@@ -160,11 +160,12 @@
 				color: #fff;
 
 				.count-txt {
-					margin-top: 5px;
+					margin-top: 8px;
 					font-size: 32px;
 					font-family: DIN-Bold, DIN;
 					font-weight: bold;
-
+					display: flex;
+					align-items: center;
 					.fh {
 						display: inline-block;
 						font-size: 20px;

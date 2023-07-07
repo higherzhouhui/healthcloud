@@ -38,6 +38,8 @@
 			"path": "pages/forget/forget",
 			"style": {
 				"navigationBarTitleText": "忘记密码",
+				"navigationBarBackgroundColor": "#fff",
+				"backgroundColor": "#fff",
 				"enablePullDownRefresh": false
 			}
 			
@@ -242,7 +244,7 @@
 		}, {
 			"path": "pages/download/download",
 			"style": {
-				"navigationBarTitleText": "健享云保———APP下载",
+				"navigationBarTitleText": "健行公益———APP下载",
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor": "#fff",
 				"app-plus": {
@@ -256,7 +258,7 @@
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "健享云保",
+		"navigationBarTitleText": "健行公益",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8",
 		"app-plus": {
@@ -265,7 +267,7 @@
 	},
 	"tabBar": {
 		"backgroundColor": "#fff",
-		"selectedColor": "#fe1e27", 
+		"selectedColor": "#FE8216", 
 		"list": [{
 				"pagePath": "pages/index/index",
 				"iconPath": "static/tabbar/home.png",
