@@ -35,10 +35,15 @@
                 <view id="scroll_end" ref="scrollEnd"></view>
             </view> -->
         </view>
-        <view class="bg-video">
+       <!-- <view class="bg-video">
             <image @tap="vplay" src="../../static/home/cover.png" v-show="!played || ruleVisible || isShowProgress" class="video"></image>
             <video id="myVideo" v-show="played && !ruleVisible && !isShowProgress"  class="video" ref="video" :src="videoUrl" loop controls :show-mute-bt="true" play-btn-position="middle" mobilenet-hint-type="1" :enable-play-gesture="true" poster="../../static/home/cover.png"></video>
-        </view>
+        </view> -->
+		<view class="newsContainer">
+		    <text class="title">趋势图</text>
+		    <Canvas :options="chartOptions" :tabs="chartTabs"/>
+		</view>
+		
         <view class="newsContainer">
             <text class="title">新闻动态</text>
             <newProduct v-for="(item, index) in newsList" :product="item" :key="index"></newProduct>
@@ -61,6 +66,7 @@ import VersionUp from '@/components/versionUp.vue'
 import newProduct from '@/components/newProduct.vue'
 // 导入并注册
 import TextRoll from '@/components/beyondGod-roll/text-roll.vue'
+import Canvas from '@/components/canvas'
 import {
     HOME_NOTICE
 } from '@/common/util/constants.js'
@@ -75,11 +81,16 @@ import {
     getNewsListRequest,
     getHomeBaseRequest
 } from '@/api/home.js'
+import {
+    getHealthyCurrencyPrice,
+    getHealthyCurrencyCount,
+    getNewHealthyCurrencyPrice
+} from '@/api/common.js'
+
 export default {
     data() {
         return {
             played: false,
-            href: 'https://uniapp.dcloud.io/component/README?id=uniui',
             newsList: [],
             timer: '',
             ruleVisible: true,
@@ -102,12 +113,15 @@ export default {
             course: '',
             // 视频封面图
             poster: '',
+			chartOptions: Local('chartOptions') || {},
+			chartTabs: Local('chartTabs') || [],
         }
     },
     components: {
         newProduct,
 		TextRoll,
-        VersionUp
+        VersionUp,
+		Canvas
     },
     computed: {
         isShowProgress() {
@@ -193,10 +207,10 @@ export default {
             Promise.all([getBannerListRequest(), getNewsListRequest({
                 pageSize: this.pageSize,
                 pageNum: this.pageNum
-            }), getHomeBaseRequest(), getNewNoticeRequest()]).then(res => {
+            }), getHomeBaseRequest(), getNewNoticeRequest(), getHealthyCurrencyPrice({day: 7}), getHealthyCurrencyCount()]).then(res => {
                 // 停止刷新转动
                 uni.stopPullDownRefresh()
-                const [banner, newsList, baseInfo, noticeInfo] = res
+                const [banner, newsList, baseInfo, noticeInfo, rchartOption, rchartTabs] = res
                 if (banner.code === 200) {
                     const data = banner.data
                     this.bannersList = data
@@ -231,10 +245,52 @@ export default {
                     const storageNotice = uni.getStorageSync(HOME_NOTICE)
                     // if (storageNotice !== this.notice.content) {
                     // 	uni.setStorageSync(HOME_NOTICE, noticeInfo.data.content)
-                    this.toggle(true)
                     // }
                 }
-            }).catch(() => {
+				if (rchartOption.code === 200) {
+					const listData = rchartOption.data
+					const xdata = [], yseries = [];
+					listData.map(item => {
+						xdata.push(item.date.replace('2023-', ''))
+						yseries.push(item.price * 1)
+					})
+					const options = {
+						grid: {
+							left: '5px',
+							right: '0%',
+							top: '20%',
+							bottom: '10%',
+						    containLabel: true
+						},
+						xAxis: {
+							type: 'category',
+							data: xdata
+						},
+						yAxis: {
+							type: 'value',
+							name: '健享币/元'
+						},
+						series: [{
+							data: yseries,
+							type: 'line'
+						}]
+					}
+					Local('chartOptions', options)
+					this.chartOptions = options
+				}
+				if (rchartTabs.code === 200) {
+					const {price, rose, todayRose, sumRose } = rchartTabs.data
+					const tabs = [
+						{'label': '今日价格', 'value': price},
+						{'label': '当前涨幅', 'value': rose + '%'},
+						{'label': '今日涨幅', 'value': todayRose + '%'},
+						{'label': '累计涨幅', 'value': sumRose + '%'},
+					]
+					Local('chartTabs', tabs)
+					this.chartTabs = tabs
+				}
+            }).catch((error) => {
+				console.log(error)
                 uni.stopPullDownRefresh()
             })
         },

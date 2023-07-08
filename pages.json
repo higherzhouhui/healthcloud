@@ -160,6 +160,13 @@
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor": "#fff"
 			}
+		},{
+			"path": "pages/wode/child/exchange",
+			"style": {
+				"navigationBarTitleText": "兑换",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#fff"
+			}
 		}, {
 			"path": "pages/xiangmu/xiangmu",
 			"style": {

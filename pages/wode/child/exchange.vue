@@ -3,12 +3,12 @@
 		<view class="top-bg">
 			<view class="top-box">
 				<view class="txt">
-					可提现金额(元)
+					可兑换健享币（枚）
 				</view>
 				<view class="count-txt">
-					<view class="fh">
+					<!-- <view class="fh">
 						￥
-					</view>
+					</view> -->
 					{{amount}}
 				</view>
 			</view>
@@ -16,20 +16,37 @@
 		</view>
 		<view class="top-info">
 			<view class="top-info-box">
-				<view class="txt">
-					提现金额
+				<view class="itemWrapper">
+					<view
+						class="item" 
+						v-for="(item, index) in list" 
+						:key="item" 
+						:class="exchangeAmount == item ? 'activeItem' : ''"
+						@tap="exchangeAmount = item"
+						>
+						<view class="price">{{item}}</view>
+						<view class="almost">约{{item * currentPrice / pro}}元</view>
+					</view>
 				</view>
-				<view class='input-form'>
-					<view class="input-box">
-						<view class="fh">￥</view>
-						<input type="number" v-model="txPrice">
+				<view class="content">
+					<view class="txt">
+						自定义
 					</view>
-					<view class="all" @tap="txPrice = amount">
-						全部提现
+					<view class='input-form'>
+						<view class="input-title">
+							兑换数量
+						</view>
+						<view class="input-wrapper">
+							<input type="number" v-model="exchangeAmount" class="input-box" />
+							<view class="all" @tap="exchangeAmount = amount">
+								全部提现
+							</view>
+						</view>
+						
 					</view>
+					<view class="sure-btn" @tap="withdrawal">申请兑换</view>
 				</view>
 			</view>
-			<view class="sure-btn" @tap="withdrawal">申请提现</view>
 		</view>
 
 	</view>
@@ -37,25 +54,42 @@
 
 <script>
 	import {
-		walletWithdraw
+		walletChange,
+		getNewHealthyCurrencyPrice,
 	} from '@/api/user'
 	export default {
 		data() {
 			return {
-				amount: 10000,
-				txPrice: null,
-				type: ''
+				amount: 0,
+				type: '',
+				list: [1000, 3000, 5000, 10000, 30000, 50000],
+				pro: 100,
+				currentPrice: 0,
+				exchangeAmount: 0,
 			}
 		},
 		onLoad(option) {
 			this.type = option.type;
 			this.amount = option.amount;
-			this.cashNumber = option.cashNumber
 			uni.setNavigationBarTitle({
-				title: `${option.title}提现`
+				title: option.type == 'cash' ? '现金兑换健享币' : '健享币兑换现金'
 			});
+			this.getPrice()
 		},
 		methods: {
+			getPrice() {
+				getNewHealthyCurrencyPrice().then(res => {
+					if (res.code === 200) {
+						this.currentPrice = res.data
+					} else {
+						uni.showToast({
+							title: res.msg || res.message,
+							icon: 'none'
+						})
+					}
+				})
+			},
+			
 			withdrawal() {
 				if (this.type == 'currency') {
 					return uni.showToast({
@@ -63,20 +97,20 @@
 						icon: 'none'
 					})
 				}
-				if (!this.txPrice) {
+				if (!this.exchangeAmount) {
 					return uni.showToast({
 						title: '请填写提现金额',
 						icon: 'none'
 					})
-				} else if (this.txPrice > this.amount) {
+				} else if (this.exchangeAmount > this.amount) {
 					return uni.showToast({
 						title: '可提现金额不足',
 						icon: 'none'
 					})
 				}
 				const appWidthDraw = () => {
-					walletWithdraw({
-						amount: this.txPrice,
+					walletChange({
+						amount: this.exchangeAmount,
 						type: this.type
 					}).then(rt => {
 						if (rt.code === 200) {
@@ -190,7 +224,6 @@
 		}
 
 		.top-info {
-			width: 93.33%;
 			padding-bottom: 30.07%;
 			position: relative;
 			margin: auto;
@@ -202,37 +235,67 @@
 				left: 0;
 				top: -50%;
 				width: 100%;
-				height: 100%;
-				background-color: #fff;
 				border-radius: 8px;
 				font-size: 15px;
 				font-family: PingFang SC-Regular, PingFang SC;
-				font-weight: 400;
-				color: #17191AFF;
-
+			
+				.itemWrapper {
+					color: #17191A;
+					display: grid;
+					grid-template-columns: repeat(3, 1fr);
+					row-gap: 12px;
+					column-gap: 12px;
+				}
+				.item {
+					background-color: #fff;
+					border-radius: 12px;
+					padding: 15px 0;
+					text-align: center;
+					color: #111;
+					border: 1px solid transparent;
+					.price {
+						font-weight: bold;
+						font-size: 20px;
+						margin-bottom: 8px;
+					}
+					.almost {
+						font-size: 14px;
+					}
+				}
+				.activeItem {
+					color: $primaryColor;
+					border: 1px solid $primaryColor;
+				}
+				.content {
+					width: 100%;
+					.txt {
+						color: #999;
+						margin: 12px 0;
+					}
+				}
 				.input-form {
-					margin-top: 24px;
-					display: flex;
-					justify-content: space-between;
-					align-items: baseline;
-
-					.fh {
-						display: inline-block;
-						font-size: 32px;
-						margin-right: 5px;
+					background: #fff;
+					border-radius: 8px;
+					padding: 16px;
+					.input-title {
+						margin-bottom: 20px;
+						font-size: 15px;
+						color: #17191A;
 					}
-
+					.input-wrapper {
+						position: relative;
+					}
 					.input-box {
-						display: flex;
-						align-items: center;
-
-						input {
-							font-size: 24px;
-							color: $primaryColor;
-						}
+						font-size: 28px;
+						font-family: PingFang SC-Regular, PingFang SC;
+						color: #17191A;
+						line-height: 36px;
 					}
-
 					.all {
+						top: 50%;
+						right: 12px;
+						transform: translate(0, -50%);
+						position: absolute;
 						font-size: 15px;
 						color: $primaryColor;
 						white-space: nowrap;
@@ -242,7 +305,6 @@
 		}
 
 		.sure-btn {
-			position: absolute;
 			bottom: -24px;
 			padding: 11px 0;
 			width: 100%;

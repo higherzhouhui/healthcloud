@@ -134,6 +134,13 @@ const routes = [
 			}
 	},
 	{
+		path: "/pages/wode/child/exchange",
+		name: 'exchange',
+			meta: {
+				title: '兑换',
+			}
+	},
+	{
 		path: "/pages/wode/child/recharge",
 		name: 'recharge',
 			meta: {

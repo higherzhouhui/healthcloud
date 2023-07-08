@@ -46,6 +46,20 @@ export function getPayCard(params) {
   "phone": ""
 }
  */
+
+// 数字人民币兑换
 export function rmbWithdraw(params) {
 	return request('/personal-service/insurance/user-wallet/rmbWithdraw', 'POST', params)	
 }
+
+// 健享币当前价格
+export function getNewHealthyCurrencyPrice(params) {
+	return request('/project-service/insurance/banner/getNewHealthyCurrencyPrice', 'GET', params)	
+}
+
+// 健享币->现金
+
+export function walletChange(params) {
+	return request('/personal-service/insurance/user-wallet/walletChange', 'POST', params)	
+}
+
