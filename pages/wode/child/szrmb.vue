@@ -78,8 +78,7 @@ export default {
 		position: relative;
 		width: 100%;
 		padding-bottom: 90%;
-		background: linear-gradient(180deg, #F31E27 0%, #F58972 56%, #F5F6F7 100%);
-
+		background: linear-gradient(180deg, #FE8216 0%, #FFA65A 69%, #FFDEC2 100%);
 		.top-box {
 			position: absolute;
 			padding: 24px 16px;

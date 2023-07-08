@@ -22,7 +22,7 @@
 				<view class="bot">
 					<view class="jine">{{ (wallet.cash || 0).toLocaleString() }}</view>
 					<view class="txordh">
-						<view class="tixian dh" @tap="exchange('cash', wallet.cash)">兑换</view>
+						<view class="tixian dh" @tap="exchange('healthy_currency', wallet.cashChangeQuota)">兑换</view>
 						<view class="tixian" @tap="withdrawal('cash', wallet.cash || 0, '现金')">提现</view>
 					</view>
 				</view>
@@ -60,7 +60,7 @@
 					<view class="title">健享币（枚）</view>
 					<view class="bot">
 						<view class="jine">{{ (wallet.healthy_currency || 0).toLocaleString() }}</view>
-						<view class="tixian"  @tap="exchange('healthy_currency', wallet.healthy_currency)">兑换</view>
+						<view class="tixian"  @tap="exchange('cash', wallet.healthy_currency)">兑换</view>
 					</view>
 				</view>
 			</view>

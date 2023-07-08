@@ -4,6 +4,7 @@
 			<view class="top-box">
 				<view class="txt">
 					可兑换健享币（枚）
+					
 				</view>
 				<view class="count-txt">
 					<!-- <view class="fh">
@@ -11,12 +12,13 @@
 					</view> -->
 					{{amount}}
 				</view>
+				
 			</view>
 			<!-- <view class="cashNumber" v-if="type === 'cash'">提现卡:<text>{{cashNumber}}</text>张</view> -->
 		</view>
 		<view class="top-info">
 			<view class="top-info-box">
-				<view class="itemWrapper">
+			<!-- 	<view class="itemWrapper">
 					<view
 						class="item" 
 						v-for="(item, index) in list" 
@@ -25,13 +27,13 @@
 						@tap="exchangeAmount = item"
 						>
 						<view class="price">{{item}}</view>
-						<view class="almost">约{{item * currentPrice / pro}}元</view>
+						<view class="almost">约{{Math.round(item * currentPrice / pro)}}元</view>
 					</view>
-				</view>
+				</view> -->
 				<view class="content">
-					<view class="txt">
+					<!-- <view class="txt">
 						自定义
-					</view>
+					</view> -->
 					<view class='input-form'>
 						<view class="input-title">
 							兑换数量
@@ -39,12 +41,12 @@
 						<view class="input-wrapper">
 							<input type="number" v-model="exchangeAmount" class="input-box" />
 							<view class="all" @tap="exchangeAmount = amount">
-								全部提现
+								全部兑换
 							</view>
 						</view>
-						
+						<view class="amountPrice" v-if="type == 'cash' && amountPrice">预估金额￥：{{ amountPrice }}元</view>
 					</view>
-					<view class="sure-btn" @tap="withdrawal">申请兑换</view>
+					<view class="sure-btn" @tap="exchange">立即兑换</view>
 				</view>
 			</view>
 		</view>
@@ -65,14 +67,15 @@
 				list: [1000, 3000, 5000, 10000, 30000, 50000],
 				pro: 100,
 				currentPrice: 0,
-				exchangeAmount: 0,
+				exchangeAmount: '',
+				amountPrice: 0,
 			}
 		},
 		onLoad(option) {
 			this.type = option.type;
 			this.amount = option.amount;
 			uni.setNavigationBarTitle({
-				title: option.type == 'cash' ? '现金兑换健享币' : '健享币兑换现金'
+				title: option.type != 'cash' ? '现金兑换健享币' : '健享币兑换现金'
 			});
 			this.getPrice()
 		},
@@ -83,39 +86,42 @@
 						this.currentPrice = res.data
 					} else {
 						uni.showToast({
-							title: res.msg || res.message,
+							title: res.msg,
 							icon: 'none'
 						})
 					}
 				})
 			},
-			
-			withdrawal() {
-				if (this.type == 'currency') {
-					return uni.showToast({
-						title: '暂未开放，敬请期待',
-						icon: 'none'
-					})
+			getAlmostMoney() {
+				this.amountPrice = Math.round(this.currentPrice * this.exchangeAmount * 100) / 100
+			},
+			exchange() {
+				if (this.exchangeAmount == '0') {
+					return
 				}
 				if (!this.exchangeAmount) {
 					return uni.showToast({
-						title: '请填写提现金额',
+						title: '请填写兑换数',
 						icon: 'none'
 					})
 				} else if (this.exchangeAmount > this.amount) {
 					return uni.showToast({
-						title: '可提现金额不足',
+						title: '可兑换不足',
 						icon: 'none'
 					})
 				}
 				const appWidthDraw = () => {
+					uni.showLoading({
+						title: '兑换中...'
+					})
 					walletChange({
 						amount: this.exchangeAmount,
 						type: this.type
 					}).then(rt => {
+						uni.hideLoading()
 						if (rt.code === 200) {
 							uni.showToast({
-								title: '发起提现申请成功',
+								title: '兑换成功',
 								icon: 'none'
 							})
 							setTimeout(() => {
@@ -125,56 +131,28 @@
 							}, 1000)
 						} else {
 							uni.showToast({
-								title: rt.message || '发起提现申请失败，请重试',
+								title: rt.msg || '发起兑换申请失败，请重试',
 								icon: 'none'
 							})
 						}
+					}).catch(() => {
+						uni.hideLoading()
 					})
 				}
-				
-				// 忽略对现金钱包的拦截
-				if (this.type === 'cash999') {
-					if (this.cashNumber * 1) {
-						uni.showModal({
-							title: '提示',
-							content: '需要消耗一张提现卡，是否继续？',
-							success: (res) => {
-								if (res.confirm) {
-									appWidthDraw()
-								} else if (res.cancel) {
-									console.log('用户点击取消');
-								}
-							}
-						});
-					} else {
-						uni.showModal({
-							title: '提示',
-							content: '您暂无提现卡，购买股权可获得',
-							confirmText: '去购买',
-							cancelText: '我再想想',
-							success: (res) => {
-								if (res.confirm) {
-									uni.switchTab({
-										url: '/pages/xiangmu/xiangmu'
-									})
-									uni.setStorageSync('xiangmu-type', 2);
-								} else if (res.cancel) {
-									console.log('用户点击取消');
-								}
-							}
-						});
-					}
-				} else {
-					appWidthDraw()
-				}
+				appWidthDraw()
 			}
 		},
+		watch: {
+			exchangeAmount(newVal, oldVal) {
+				this.getAlmostMoney()
+			},
+			
+		}
 	}
 </script>
 
 <style scoped lang="scss">
 	@import "@/static/customicons.scss";
-
 	.container {
 		.top-bg {
 			position: relative;
@@ -207,8 +185,8 @@
 						font-weight: 400;
 					}
 				}
-			}
 
+			}
 			.cashNumber {
 				position: absolute;
 				right: 10px;
@@ -222,7 +200,10 @@
 				}
 			}
 		}
-
+		.amountPrice {
+			margin-top: 8px;
+			color: #999;
+		}
 		.top-info {
 			padding-bottom: 30.07%;
 			position: relative;

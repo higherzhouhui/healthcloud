@@ -72,7 +72,7 @@
 			"style": {
 				"navigationBarTitleText": "分红提现",
 				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor": "#F31E27",
+				"navigationBarBackgroundColor": "#FE8216",
 				"navigationBarTextStyle": "white"
 			}
 		},
@@ -81,7 +81,7 @@
 			"style": {
 				"navigationBarTitleText": "数字人民币",
 				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor": "#F31E27",
+				"navigationBarBackgroundColor": "#FE8216",
 				"navigationBarTextStyle": "white"
 			}
 		},
@@ -130,7 +130,7 @@
 			"style": {
 				"navigationBarTitleText": "我的",
 				"enablePullDownRefresh": true,
-				"navigationBarBackgroundColor": "#fff"
+				"navigationBarBackgroundColor": "#FFE7E6"
 			}
 		}, {
 			"path": "pages/wode/child/myteam",
@@ -165,14 +165,15 @@
 			"style": {
 				"navigationBarTitleText": "兑换",
 				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor": "#fff"
+				"navigationBarBackgroundColor": "#FE8216",
+				"navigationBarTextStyle": "white"
 			}
 		}, {
 			"path": "pages/xiangmu/xiangmu",
 			"style": {
 				"navigationBarTitleText": "项目",
 				"enablePullDownRefresh": true,
-				"navigationBarBackgroundColor": "#fff"
+				"navigationBarBackgroundColor": "#eee"
 			}
 
 		},{
@@ -197,7 +198,7 @@
 			"style": {
 				"navigationBarTitleText": "客服",
 				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor": "#fff"
+				"navigationBarBackgroundColor": "#eee"
 			}
 
 		}, {
@@ -226,7 +227,6 @@
 				"navigationBarTitleText": "隐私协议",
 				"enablePullDownRefresh": false
 			}
-
 		}, {
 			"path": "pages/index/chat/chat",
 			"style": {
@@ -240,14 +240,12 @@
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor": "#fff"
 			}
-
 		}, {
 			"path": "pages/index/course/course",
 			"style": {
 				"navigationBarTitleText": "操作教程",
 				"enablePullDownRefresh": false
 			}
-
 		}, {
 			"path": "pages/download/download",
 			"style": {
@@ -260,7 +258,6 @@
 					}
 				}
 			}
-
 		}
 	],
 	"globalStyle": {
