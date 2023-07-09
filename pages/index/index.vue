@@ -41,7 +41,7 @@
         </view> -->
 		<view class="newsContainer">
 		    <text class="title">趋势图</text>
-		    <Canvas :options="chartOptions" :tabs="chartTabs"/>
+		    <Canvas v-if="chartTabs.length" :options="chartOptions" :tabs="chartTabs" />
 		</view>
 		
         <view class="newsContainer">

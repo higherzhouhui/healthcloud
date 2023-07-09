@@ -3,8 +3,7 @@
 		<view class="top-bg">
 			<view class="top-box">
 				<view class="txt">
-					可兑换健享币（枚）
-					
+					{{type == 'cash' ? '可兑换健享币（枚）' : '可兑换现金（元）'}}
 				</view>
 				<view class="count-txt">
 					<!-- <view class="fh">
@@ -36,7 +35,8 @@
 					</view> -->
 					<view class='input-form'>
 						<view class="input-title">
-							兑换数量
+							
+							{{type == 'cash' ? '兑换数量' : '兑换金额'}}
 						</view>
 						<view class="input-wrapper">
 							<input type="number" v-model="exchangeAmount" class="input-box" />
@@ -44,7 +44,8 @@
 								全部兑换
 							</view>
 						</view>
-						<view class="amountPrice" v-if="type == 'cash' && amountPrice">预估金额￥：{{ amountPrice }}元</view>
+						<view class="amountPrice" v-if="type == 'cash' && amountPrice">预估金额：{{ amountPrice }}元</view>
+						<view class="amountPrice" v-if="type == 'healthy_currency' && amountPrice">预估健享币：{{ amountPrice }}枚</view>
 					</view>
 					<view class="sure-btn" @tap="exchange">立即兑换</view>
 				</view>
@@ -93,7 +94,11 @@
 				})
 			},
 			getAlmostMoney() {
-				this.amountPrice = Math.round(this.currentPrice * this.exchangeAmount * 100) / 100
+				let ap = Math.round(this.currentPrice * this.exchangeAmount * 100) / 100
+				if (this.type == 'healthy_currency') {
+					ap = Math.round(this.exchangeAmount / this.currentPrice * 100) / 100
+				}
+				this.amountPrice =ap
 			},
 			exchange() {
 				if (this.exchangeAmount == '0') {
