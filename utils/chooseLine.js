@@ -16,21 +16,22 @@ export default async function chooseLine() {
 	// 检查网络状态
 	let timer = ''
 	let time = 0
-	console.log(store.state.userInfo)
+	store.commit('SET_CHOOSELINESTATUS', true)
 	timer = setInterval(() => {
 		time += 1
+		if (time > 1) {
+			uni.showLoading({
+				title: '正在为您自动切换网络，请稍后',
+				icon: 'none'
+			})
+		}
 		if (!store.state.chooseLineStatus) {
 			uni.hideLoading()
 			clearInterval(timer)
 		}
 	}, 1000)
 	
-	if (time > 3) {
-		uni.showLoading({
-			title: '正在为您自动切换网络，请稍后',
-			icon: 'none'
-		})
-	}
+
 	uni.getNetworkType({
 		success: async (res) => {
 			const networkType = res.networkType;
