@@ -11,7 +11,8 @@ export default new Vuex.Store({
     download: {
       isShowProgress: false,
       percent: 0
-    }
+    },
+	chooseLineStatus: true,
   },
   mutations: {
     SET_USERINFO: (state, userInfo) => {
@@ -22,7 +23,10 @@ export default new Vuex.Store({
       state.download = Object.assign({}, state.download, data)
       if (state.download.isShowProgress) uni.hideTabBar()
       else uni.showTabBar()
-    }
+    },
+	SET_CHOOSELINESTATUS: (state, data) =>{
+		state.chooseLineStatus = data
+	}
   },
   actions: {
     //手机号登录

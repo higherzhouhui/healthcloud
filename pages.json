@@ -253,7 +253,20 @@
 			}
 
 		}
-	],
+	    ,{
+            "path" : "pages/loading/loading",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": false
+				}
+            }
+            
+        }
+    ],
+	"launch_path": "pages/loading/loading",
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "健享云保",

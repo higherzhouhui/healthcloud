@@ -1,11 +1,19 @@
-import {
-	baseURL
-} from '@/config/index.js'
-import { ACCESS_TOKEN, USER_INFO } from "@/common/util/constants"
+import { ACCESS_TOKEN, USER_INFO, CURRENT_API } from "@/common/util/constants"
+import { Local } from './common'
+import { URL } from '@/config/index.js'
+import chooseLine from "./chooseLine"
+import store from '@/store/index.js'
 let modelShow = false
 uni.addInterceptor('request', {
 	invoke(args) { //拦截前触发
-		args.url = `${baseURL}${args.url}`
+		let baseURL = ''
+		if (args.url.includes('banner/getDomainList')) {
+			baseURL = ''
+		} else {
+			baseURL = Local(CURRENT_API).API || URL
+		}
+		args.url = baseURL + args.url
+		console.log('currentDomain:', baseURL)
 		args.header["Content-Type"] = "application/json;charset=UTF-8"
 		//获取token
 		let token = uni.getStorageSync('Access-Token')
@@ -197,17 +205,18 @@ uni.addInterceptor('request', {
 		return Promise.resolve(args.data)
 	},
 	fail(error) { //失败回调拦截
-		console.log(error)
 	    if (!modelShow) {
 			modelShow = true
-			uni.showModal({
-				title: "提示",
-				content: "当前网络异常，请稍后重试",
-				showCancel: false,
-				complete() {
-					modelShow = false
-				}
-			})
+			store.commit('SET_CHOOSELINESTATUS', false)
+			chooseLine()
+			// uni.showModal({
+			// 	title: "提示",
+			// 	content: "当前网络异常，请刷新重试",
+			// 	showCancel: false,
+			// 	complete() {
+			// 		modelShow = false,
+			// 	}
+			// })
 		}
 	},
 })
@@ -218,7 +227,7 @@ function request(url, method, params = {}) {
 			url: url,
 			method: method,
 			data: params,
-			sslVerify: false,
+			timeout: 20000,
 			header: {}, //必须的，用于拦截请求
 			success: (res) => {
 				//上面已经对错误进行了处理，直接返回的就是data

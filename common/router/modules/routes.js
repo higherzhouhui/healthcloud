@@ -220,6 +220,13 @@ const routes = [
 				title: '银行卡绑定',
 			}
 	},
+	{
+		path: "/pages/loading/loading",
+		name: 'loading',
+			meta: {
+				title: '启动等待页面',
+			}
+	},
 	
 	
 ]

@@ -251,6 +251,7 @@ export default {
 .container {
     min-height: 100vh;
     background: #F5F6F7;
+
 }
 
 .bannerImgContainer {
