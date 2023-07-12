@@ -204,10 +204,10 @@ uni.addInterceptor('request', {
 		//返回消息 
 		return Promise.resolve(args.data)
 	},
-	fail(error) { //失败回调拦截
+	async fail(error) { //失败回调拦截
 	    if (!modelShow) {
-			modelShow = true
-			chooseLine()
+				await chooseLine()
+				modelShow = true
 		}
 	},
 })
