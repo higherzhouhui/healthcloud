@@ -1,10 +1,4 @@
-//APP更新
-import {
-	getDomainList
-} from "@/api/common"
-import {
-	CURRENT_API
-} from '@/common/util/constants.js'
+//APP线路切换
 import store from '@/store'
 import {
 	Local
@@ -12,22 +6,27 @@ import {
 import {
 	request
 } from "@/utils/request.js"
+import {URL} from '@/config/index.js'
 export default async function chooseLine() {
 	// 检查网络状态
 	let timer = ''
 	let time = 0
 	store.commit('SET_CHOOSELINESTATUS', true)
+	let isloading = false
 	timer = setInterval(() => {
 		time += 1
-		if (time > 1) {
-			uni.showLoading({
-				title: '正在为您自动切换网络，请稍后',
-				icon: 'none'
-			})
+		if (time > 3) {
+			if (!isloading) {
+				isloading = true
+				uni.showLoading({
+					title: '',
+				})
+			}
 		}
 		if (!store.state.chooseLineStatus) {
 			uni.hideLoading()
 			clearInterval(timer)
+			isloading = false
 		}
 	}, 1000)
 	
@@ -43,7 +42,7 @@ export default async function chooseLine() {
 				});
 			} else {
 				const result = await request(
-					'http://domain.jxybao.com/project-service/insurance/banner/getDomainList?url=http://domain.jxybao.com',
+					`${URL}/project-service/insurance/banner/getDomainList?url=${URL}`,
 					'GET'
 				)
 				const lineList = result.data
@@ -73,6 +72,7 @@ export default async function chooseLine() {
 				fetchFastestData().then(result => {
 						uni.hideLoading()
 						clearInterval(timer)
+						isloading = false
 						time = 0
 						console.log('Fastest response:', result.extra);
 						if (result.extra) {
@@ -81,6 +81,7 @@ export default async function chooseLine() {
 					})
 					.catch(error => {
 						uni.hideLoading()
+						isloading = false
 						clearInterval(timer)
 						time = 0
 						console.error('Error:', error);
