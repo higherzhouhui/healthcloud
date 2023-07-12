@@ -1,5 +1,4 @@
 //APP线路切换
-import store from '@/store'
 import {
 	Local
 } from "./common"
@@ -9,28 +8,6 @@ import {
 import {URL} from '@/config/index.js'
 export default async function chooseLine() {
 	// 检查网络状态
-	let timer = ''
-	let time = 0
-	store.commit('SET_CHOOSELINESTATUS', true)
-	let isloading = false
-	timer = setInterval(() => {
-		time += 1
-		if (time > 3) {
-			if (!isloading) {
-				isloading = true
-				uni.showLoading({
-					title: '',
-				})
-			}
-		}
-		if (!store.state.chooseLineStatus) {
-			uni.hideLoading()
-			clearInterval(timer)
-			isloading = false
-		}
-	}, 1000)
-	
-
 	uni.getNetworkType({
 		success: async (res) => {
 			const networkType = res.networkType;
@@ -38,7 +15,8 @@ export default async function chooseLine() {
 				// 未联网
 				uni.showToast({
 					title: '请检查网络连接',
-					icon: 'none',
+					icon: 'error',
+					duration: 5000
 				});
 			} else {
 				const result = await request(
@@ -69,23 +47,11 @@ export default async function chooseLine() {
 					const fastestResponse = await Promise.race(racePromises);
 					return fastestResponse;
 				}
-				fetchFastestData().then(result => {
-						uni.hideLoading()
-						clearInterval(timer)
-						isloading = false
-						time = 0
-						console.log('Fastest response:', result.extra);
-						if (result.extra) {
-							Local(CURRENT_API, {API: result.extra})
-						}
-					})
-					.catch(error => {
-						uni.hideLoading()
-						isloading = false
-						clearInterval(timer)
-						time = 0
-						console.error('Error:', error);
-					});
+				const fetchResult = await fetchFastestData()
+				console.log('Fastest response:', fetchResult.extra);
+				if (fetchResult.extra) {
+					Local(CURRENT_API, {API: fetchResult.extra})
+				}
 			}
 		},
 	});

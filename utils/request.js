@@ -207,16 +207,7 @@ uni.addInterceptor('request', {
 	fail(error) { //失败回调拦截
 	    if (!modelShow) {
 			modelShow = true
-			store.commit('SET_CHOOSELINESTATUS', false)
 			chooseLine()
-			// uni.showModal({
-			// 	title: "提示",
-			// 	content: "当前网络异常，请刷新重试",
-			// 	showCancel: false,
-			// 	complete() {
-			// 		modelShow = false,
-			// 	}
-			// })
 		}
 	},
 })
@@ -227,7 +218,7 @@ function request(url, method, params = {}) {
 			url: url,
 			method: method,
 			data: params,
-			timeout: 20000,
+			timeout: 50000,
 			header: {}, //必须的，用于拦截请求
 			success: (res) => {
 				//上面已经对错误进行了处理，直接返回的就是data
