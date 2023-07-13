@@ -394,7 +394,7 @@ export default {
 				margin-top: 12px;
 
 				.jine {
-					font-size: 20px;
+					font-size: 17px;
 					font-family: DIN-Bold, DIN;
 					font-weight: bold;
 					color: #17191A;

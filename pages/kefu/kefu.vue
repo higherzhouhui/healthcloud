@@ -101,11 +101,12 @@ export default {
                         filePath: tempFilePaths,
                         name: 'file',
                         formData: {
-                            'user': 'test'
+                            type: 'image',
+							path: 'appservice'
                         },
                         success: function (res) {
                             const response = JSON.parse((res.data))
-                            that.send(response.data, 2)
+                            that.send(response.data.path, 2)
                         },
                         fail: function (res) {
                             console.log('上传失败：', res);

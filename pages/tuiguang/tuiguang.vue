@@ -149,7 +149,7 @@ export default {
 			// transform: translateY(-50%);
 			margin-bottom: 12px;
 			text-align: center;
-			font-size: 16px;
+			font-size: 18px;
 			font-family: PingFang SC-Semibold, PingFang SC;
 			font-weight: 600;
 			color: $primaryColor;

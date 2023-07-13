@@ -19,11 +19,11 @@
                 </view>
                 <view class="in-item">
                     <view class="value">{{ item.dayEarnings }}</view>
-                    <view class="txt">每日社保补贴</view>
+                    <view class="txt">每日补贴</view>
                 </view>
                 <view class="in-item">
                     <view class="value value2">{{ item.price }}</view>
-                    <view class="txt">购买价格</view>
+                    <view class="txt">价格</view>
 
                 </view>
             </view>

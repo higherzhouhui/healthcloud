@@ -124,18 +124,21 @@ export default {
 				  filePath: tempFilePaths,
 				  name: 'file',
 				  formData: {
-				    'user': 'test'
+				    path: 'appuser',
+				    type: 'images',
 				  },
 				  success: function (res) {
 					  const response = JSON.parse((res.data))
+					  const path = response.data.path
+					  const tempAvatar = response.data.url + path
 					  uni.hideLoading()
 				    updateAvatarRequest({
-						avatar: response.data,
+						avatar: path,
 						idCard: that.info.idCard,
 						name: that.info.name
 					}).then(avatarRes => {
 						if (avatarRes.code === 200) {
-							that.info.avatar = response.data;
+							that.info.avatar = tempAvatar;
 							that.$store.commit('SET_USERINFO', that.info)
 						}
 					})

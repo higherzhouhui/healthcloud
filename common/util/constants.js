@@ -2,6 +2,7 @@ export const ACCESS_TOKEN = 'Access-Token'
 export const USER_NAME = 'login_username'
 export const USER_INFO = 'login_user_info'
 export const HOME_NOTICE = 'home_notice'
+export const NOTICE_SHOW = 'notice_show'
 
 
 const STORAGE_OPTIONS = {

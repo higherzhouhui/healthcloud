@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { ACCESS_TOKEN, USER_NAME, USER_INFO } from "@/common/util/constants"
+import { ACCESS_TOKEN, USER_NAME, USER_INFO, NOTICE_SHOW } from "@/common/util/constants"
 import { loginRequest } from '@/api/user'
 
 Vue.use(Vuex)
@@ -11,7 +11,8 @@ export default new Vuex.Store({
     download: {
       isShowProgress: false,
       percent: 0
-    }
+    }, 
+	noticeShow: true,
   },
   mutations: {
     SET_USERINFO: (state, userInfo) => {
@@ -22,7 +23,11 @@ export default new Vuex.Store({
       state.download = Object.assign({}, state.download, data)
       if (state.download.isShowProgress) uni.hideTabBar()
       else uni.showTabBar()
-    }
+    },
+	SET_NOTICESHOW: (state, userInfo) => {
+	  state.noticeShow = userInfo
+	  uni.setStorageSync(NOTICE_SHOW,userInfo);
+	},
   },
   actions: {
     //手机号登录

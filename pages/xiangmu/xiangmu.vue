@@ -19,7 +19,7 @@
 						</view>
 					</view>
 					<view class="button" :class="item.state != 1 && 'sq'" @tap="toBuy(item, 1)">
-						{{ item.state == 1 ? '立即购买' : '已售罄' }}
+						{{ item.state == 1 ? '去购买' : '已售罄' }}
 					</view>
 				</view>
 				<view class="botton-info">
@@ -29,11 +29,11 @@
 					</view>
 					<view class="in-item">
 						<view class="value">{{ item.dayEarnings }}</view>
-						<view class="txt">每日社保补贴</view>
+						<view class="txt">每日补贴</view>
 					</view>
 					<view class="in-item">
 						<view class="value value2">{{ item.price }}</view>
-						<view class="txt">购买价格</view>
+						<view class="txt">价格</view>
 					</view>
 				</view>
 			</view>
@@ -118,9 +118,9 @@ export default {
 			avatar: 'https://alipic.lanhuapp.com/web475b3b1e-96fa-4a25-be45-7c2868ddce63',
 			list: [],
 			tabs: [
-				{ label: '理财计划', type: 1 },
-				{ label: '养老保险', type: 3},
-				{ label: '股权', type: 2 }
+				{ label: '爱心福利', type: 1 },
+				// { label: '数贸基金', type: 3},
+				// { label: '数贸股权', type: 2 }
 			],
 			type: 1,
 			css: window ? 'h5css' : 'appcss',
@@ -356,7 +356,7 @@ export default {
 		box-sizing: border-box;
 		border-radius: 8px;
 		background-color: #fff;
-
+		box-shadow: 1px 3px 4px #d0d0d0;
 		.top-info {
 			display: flex;
 			justify-content: space-between;

@@ -35,17 +35,19 @@
 					</view> -->
 					<view class='input-form'>
 						<view class="input-title">
-							
-							{{type == 'cash' ? '兑换数量' : '兑换金额'}}
+							<span>{{type == 'cash' ? '兑换数量' : '兑换金额'}}</span>
+							<span>当前价格：<span class="price">{{currentPrice}}</span>&nbsp;元/枚</span>
 						</view>
 						<view class="input-wrapper">
-							<input type="number" v-model="exchangeAmount" class="input-box" />
+							<input type="number" maxlength="13" v-model="exchangeAmount" class="input-box" />
 							<view class="all" @tap="exchangeAmount = amount">
 								全部兑换
 							</view>
 						</view>
-						<view class="amountPrice" v-if="type == 'cash' && amountPrice">预估金额：{{ amountPrice }}元</view>
-						<view class="amountPrice" v-if="type == 'healthy_currency' && amountPrice">预估健享币：{{ amountPrice }}枚</view>
+						<view class="amountPrice">
+							<span v-if="type === 'cash'">预估金额：{{ amountPrice }}元</span>
+							<span v-else>预估健享币：{{ amountPrice }}枚</span>
+						</view>
 					</view>
 					<view class="sure-btn" @tap="exchange">立即兑换</view>
 				</view>
@@ -207,7 +209,7 @@
 		}
 		.amountPrice {
 			margin-top: 8px;
-			color: #999;
+			color: #ff0000;
 		}
 		.top-info {
 			padding-bottom: 30.07%;
@@ -267,6 +269,13 @@
 						margin-bottom: 20px;
 						font-size: 15px;
 						color: #17191A;
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						.price {
+							color: #ff0000;
+							font-weight: bold;
+						}
 					}
 					.input-wrapper {
 						position: relative;

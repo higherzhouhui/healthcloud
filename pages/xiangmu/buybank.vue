@@ -45,7 +45,9 @@ export default {
                 bankName: '',
                 voucher: '',
                 id: null,
-                num: 0
+                num: 0,
+				imagePath: '',
+				imageUrl: '',
             },
             id: null,
             projectType: null
@@ -85,11 +87,13 @@ export default {
                         filePath: tempFilePaths,
                         name: 'file',
                         formData: {
-                            'user': 'test'
+                            type: 'images',
+							path: 'appbank'
                         },
                         success: function (res) {
                             const response = JSON.parse((res.data))
-                            that.data.voucher = response.data
+                            that.data.voucher = response.data.url + response.data.path
+							that.data.imagePath = response.data.path
 							uni.hideLoading()
                         },
                         fail: function (res) {
@@ -102,13 +106,13 @@ export default {
             });
         },
         onPay() {
-            let { voucher} = this.data
-            if(!voucher) {
+            let { imagePath} = this.data
+            if(!imagePath) {
                 return uni.showToast({ title: '请上传打款截图', icon: 'none' })
             }
             this.loading = true
 
-            buyProject({payType:3, id: this.id, num: (this.num * 100 || 1), voucher, projectType: this.projectType}).then(rt=>{
+            buyProject({payType:3, id: this.id, num: (this.num * 100 || 1), voucher: imagePath, projectType: this.projectType}).then(rt=>{
                 this.loading = false
                 if(rt.code == 200){
                     uni.showToast({ title: '上传打款凭证成功,请联系在线客服审核！', icon: 'none', duration: 3000 })

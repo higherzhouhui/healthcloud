@@ -7,7 +7,7 @@
         </swiper-item>
     </swiper>
     <view class="content">
-        <view class="gongnengList">
+   <!--     <view class="gongnengList">
             <view class="list" @tap="handleTap('caozuo')">
                 <image class="lImg" src="../../static/home/jiaocheng.png"></image>
                 <view class="text">操作教程</view>
@@ -24,26 +24,56 @@
                 <image class="lImg" src="../../static/home/yaoqing.png"></image>
                 <view class="text">邀请好友</view>
             </view>
-        </view>
+        </view> -->
+		<view class="gongnengList">
+		    <view class="list" @tap="handleTap('auto', '微脉圈下载', gfql.microphygmiaDown)">
+		        <image class="lImg" src="../../static/home/weimaiquan.png"></image>
+		        <view id="href" class="text">微脉圈下载</view>
+		    </view>
+		    <view class="list" @tap="handleTap('auto', '微脉圈群', gfql.microphygmia)">
+		        <image class="lImg" src="../../static/home/zaixainkefu.png"></image>
+		        <view class="text">微脉圈群</view>
+		    </view>
+		    <view class="list" @tap="handleTap('auto', '博客众群聊', gfql.blogs)">
+		        <image class="lImg" src="../../static/home/qunliao.png"></image>
+		        <view class="text">博客众群聊</view>
+		    </view>
+		    <view class="list" @tap="handleTap('yqhy')">
+		        <image class="lImg" src="../../static/home/yaoqing.png"></image>
+		        <view class="text">分享好友</view>
+		    </view>
+		</view>
+		<view class="gongnengList">
+		    <view class="list" @tap="handleTap('wdtd')">
+		        <image class="lImg" src="../../static/home/jiaocheng.png"></image>
+		        <view class="text">我的团队</view>
+		    </view>
+		    <view class="list" @tap="handleTap('auto', '股权证书', gfql.equityCert)">
+		        <image class="lImg" src="../../static/home/guquan.png"></image>
+		        <view class="text">股权证书</view>
+		    </view>
+		    <view class="list" @tap="handleTap('zxkf')">
+		        <image class="lImg" src="../../static/home/kefu.png"></image>
+		        <view class="text">在线客服</view>
+		    </view>
+		    <view class="list" @tap="handleTap('down')">
+		        <image class="lImg" src="../../static/home/appxiazai.png"></image>
+		        <view class="text">APP下载</view>
+		    </view>
+		</view>
         <view class="gonggao" @tap="toggle(true)">
             <image class="ggImg" src="../../static/home/gonggao.png"></image>
 			<TextRoll :text="removeHtmlTag(notice.content)"></TextRoll>
-			<!--   <view id="scroll_div" class="fl" ref="scrollDiv">
-                <view id="scroll_begin" ref="scrollBegin" @tap="toggle(true)">
-                    {{notice.content}}
-                </view>
-                <view id="scroll_end" ref="scrollEnd"></view>
-            </view> -->
         </view>
-       <!-- <view class="bg-video">
-            <image @tap="vplay" src="../../static/home/cover.png" v-show="!played || ruleVisible || isShowProgress" class="video"></image>
-            <video id="myVideo" v-show="played && !ruleVisible && !isShowProgress"  class="video" ref="video" :src="videoUrl" loop controls :show-mute-bt="true" play-btn-position="middle" mobilenet-hint-type="1" :enable-play-gesture="true" poster="../../static/home/cover.png"></video>
-        </view> -->
+    
 		<view class="newsContainer">
 		    <text class="title">趋势图</text>
-		    <Canvas v-if="chartTabs.length" :options="chartOptions" :tabs="chartTabs" />
+		    <Canvas />
 		</view>
-		
+		<view class="bg-video">
+		     <image @tap="vplay" src="../../static/home/cover.png" v-show="!played || ruleVisible || isShowProgress" class="video"></image>
+		     <video id="myVideo" v-show="played && !ruleVisible && !isShowProgress"  class="video" ref="video" :src="videoUrl" loop controls :show-mute-bt="true" play-btn-position="middle" mobilenet-hint-type="1" :enable-play-gesture="true" poster="../../static/home/cover.png"></video>
+		 </view>
         <view class="newsContainer">
             <text class="title">新闻动态</text>
             <newProduct v-for="(item, index) in newsList" :product="item" :key="index"></newProduct>
@@ -68,7 +98,7 @@ import newProduct from '@/components/newProduct.vue'
 import TextRoll from '@/components/beyondGod-roll/text-roll.vue'
 import Canvas from '@/components/canvas'
 import {
-    HOME_NOTICE
+    NOTICE_SHOW
 } from '@/common/util/constants.js'
 import {
     stitchUrl,
@@ -81,11 +111,7 @@ import {
     getNewsListRequest,
     getHomeBaseRequest
 } from '@/api/home.js'
-import {
-    getHealthyCurrencyPrice,
-    getHealthyCurrencyCount,
-    getNewHealthyCurrencyPrice
-} from '@/api/common.js'
+
 
 export default {
     data() {
@@ -93,12 +119,12 @@ export default {
             played: false,
             newsList: [],
             timer: '',
-            ruleVisible: true,
             notice: {
                 content: '',
                 createTime: ''
             },
 			removeHtmlTag: removeHtmlTag,
+			ruleVisible: this.$store.state.noticeShow,
             pageNum: 1,
             pageSize: 10,
             videoUrl: '',
@@ -113,8 +139,6 @@ export default {
             course: '',
             // 视频封面图
             poster: '',
-			chartOptions: Local('chartOptions') || {},
-			chartTabs: Local('chartTabs') || [],
         }
     },
     components: {
@@ -146,11 +170,14 @@ export default {
         this.videoUrl = Local('videoUrl') || ''
         this.gfql = Local('gfql') || {}
         this.notice = Local('notice') || {}
+		
+		this.$store.commit(NOTICE_SHOW, false)
     },
     onPullDownRefresh() {
         // 执行刷新操作
         this.getHomeData()
     },
+
     methods: {
         vplay() {
             this.played = true
@@ -161,33 +188,47 @@ export default {
             if (bol) uni.hideTabBar()
             else uni.showTabBar()
         },
-        handleTap(type) {
-            switch (type) {
-                case 'caozuo':
-                    uni.navigateTo({
-                        url: `/pages/index/course/course`
-                    })
-                    break;
-                case 'yqhy':
-                    uni.navigateTo({
-                        url: '/pages/index/invite/invite'
-                    })
-                    break;
-                case 'zxkf':
-                    this.$Router.replaceAll({
-                        name: 'kefu'
-                    })
-                    break;
-                case 'gfql':
-                    const url = stitchUrl('/pages/index/chat/chat', this.gfql)
-                    uni.navigateTo({
-                        url: url,
-                    })
-                    break;
-                default:
-                    break;
-            }
-        },
+      handleTap(type, title, html) {
+          switch (type) {
+              case 'auto':
+                  {
+                      if (title == '微脉圈下载') {
+                          uni.navigateTo({
+                              url: `/pages/index/vmai/vmai?title=${title}&html=${html}`
+                          })
+                      } else {
+                          uni.navigateTo({
+                              url: `/pages/index/auto?title=${title}&html=${html}`
+                          })
+                      }
+                  }
+      
+                  break;
+              case 'down': {
+                  uni.navigateTo({
+                      url: '/pages/download/download?useH5=1'
+                  })
+              }
+                  break
+              case 'yqhy':
+                  uni.navigateTo({
+                      url: '/pages/index/invite/invite'
+                  })
+                  break;
+              case 'zxkf':
+                  this.$Router.replaceAll({
+                      name: 'kefu'
+                  })
+                  break;
+              case 'wdtd':
+                  uni.navigateTo({
+                      url: '/pages/wode/child/myteam'
+                  })
+                  break;
+              default:
+                  break;
+          }
+      },
         onPageScroll(e) {
             let scrollHeight = e.scrollHeight
             let scrollTop = e.scrollTop
@@ -207,10 +248,10 @@ export default {
             Promise.all([getBannerListRequest(), getNewsListRequest({
                 pageSize: this.pageSize,
                 pageNum: this.pageNum
-            }), getHomeBaseRequest(), getNewNoticeRequest(), getHealthyCurrencyPrice({day: 7}), getHealthyCurrencyCount()]).then(res => {
+            }), getHomeBaseRequest(), getNewNoticeRequest()]).then(res => {
                 // 停止刷新转动
                 uni.stopPullDownRefresh()
-                const [banner, newsList, baseInfo, noticeInfo, rchartOption, rchartTabs] = res
+                const [banner, newsList, baseInfo, noticeInfo] = res
                 if (banner.code === 200) {
                     const data = banner.data
                     this.bannersList = data
@@ -242,53 +283,8 @@ export default {
                     // 公告内容不同再看
                     this.notice = noticeInfo.data || '暂无公告'
                     Local('notice', this.notice)
-                    const storageNotice = uni.getStorageSync(HOME_NOTICE)
-                    // if (storageNotice !== this.notice.content) {
-                    // 	uni.setStorageSync(HOME_NOTICE, noticeInfo.data.content)
-                    // }
+                    // const storageNotice = uni.getStorageSync(HOME_NOTICE)
                 }
-				if (rchartOption.code === 200) {
-					const listData = rchartOption.data
-					const xdata = [], yseries = [];
-					listData.map(item => {
-						xdata.push(item.date.replace('2023-', ''))
-						yseries.push(item.price * 1)
-					})
-					const options = {
-						grid: {
-							left: '5px',
-							right: '0%',
-							top: '20%',
-							bottom: '10%',
-						    containLabel: true
-						},
-						xAxis: {
-							type: 'category',
-							data: xdata
-						},
-						yAxis: {
-							type: 'value',
-							name: '健享币/元'
-						},
-						series: [{
-							data: yseries,
-							type: 'line'
-						}]
-					}
-					Local('chartOptions', options)
-					this.chartOptions = options
-				}
-				if (rchartTabs.code === 200) {
-					const {price, rose, todayRose, sumRose } = rchartTabs.data
-					const tabs = [
-						{'label': '今日价格', 'value': price},
-						{'label': '当前涨幅', 'value': rose + '%'},
-						{'label': '今日涨幅', 'value': todayRose + '%'},
-						{'label': '累计涨幅', 'value': sumRose + '%'},
-					]
-					Local('chartTabs', tabs)
-					this.chartTabs = tabs
-				}
             }).catch((error) => {
 				console.log(error)
                 uni.stopPullDownRefresh()
@@ -350,7 +346,7 @@ export default {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         column-gap: 10px;
-
+		margin-bottom: 10px;
         .list {
             background: #fff;
             border-radius: 8px;

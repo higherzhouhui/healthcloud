@@ -227,7 +227,20 @@ const routes = [
 				title: '银行卡绑定',
 			}
 	},
-	
+	{
+	  path: '/pages/index/vmai/vmai',
+	  name: 'vmai',
+	    meta: {
+	        title: '微脉圈下载',
+	    },
+	},
+	{
+	  path: '/pages/index/auto',
+	  name: 'auto',
+	    meta: {
+	        title: '',
+	    },
+	},
 	
 ]
 export default routes

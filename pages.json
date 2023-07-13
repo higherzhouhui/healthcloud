@@ -258,6 +258,19 @@
 					}
 				}
 			}
+		}, {
+			"path": "pages/index/vmai/vmai",
+			"style": {
+				"navigationBarTitleText": "微脉圈下载",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/index/auto",
+			"style": {
+				"navigationBarTitleText": "auto",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#fff"
+			}
 		}
 	],
 	"globalStyle": {
