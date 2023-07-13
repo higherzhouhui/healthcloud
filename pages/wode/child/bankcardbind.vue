@@ -26,7 +26,7 @@
 				<view class="uni-form-item uni-column">
 					<view class="title">银行卡号</view>
 					<view class="input-box">
-						<input class="uni-input" v-model="form.bankCode" placeholder="请输入银行卡号" />
+						<input class="uni-input" type="number" v-model="form.bankCode" placeholder="请输入银行卡号" />
 						<image v-if="form.bankCode" src="../../../static/login/close.png" class="clear"
 							@tap="() => form.bankCode = ''"></image>
 					</view>

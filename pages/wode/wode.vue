@@ -104,7 +104,7 @@ export default {
 				{ title: '银行卡', logo: 'yhk', link: 'bankcardbind' },
 				{ title: '实名认证', logo: 'smrz', link: 'authentication' },
 				{ title: '检查更新', logo: 'update', link: 'update', hidden: document ? true : false },
-				{ title: '下载APP', logo: 'download', link: 'download', hidden: document ? false : true },
+				{ title: '下载APP', logo: 'download', link: 'download' },
 			],
 			wallet: {
 				cash: 0, // 现金钱包

@@ -6,6 +6,7 @@ import {
 	request
 } from "@/utils/request.js"
 import {URL} from '@/config/index.js'
+import {CURRENT_API} from '@/common/util/constants.js'
 export default async function chooseLine() {
 	// 检查网络状态
 	uni.getNetworkType({
