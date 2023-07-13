@@ -7,6 +7,7 @@ import {
 } from "@/utils/request.js"
 import {URL} from '@/config/index.js'
 import {CURRENT_API} from '@/common/util/constants.js'
+import { getVersionRequest } from "@/api/project"
 export default async function chooseLine() {
 	// 检查网络状态
 	uni.getNetworkType({
@@ -20,10 +21,7 @@ export default async function chooseLine() {
 					duration: 5000
 				});
 			} else {
-				const result = await request(
-					`${URL}/project-service/insurance/banner/getDomainList?url=${URL}`,
-					'GET'
-				)
+				const result = await request(`${URL}/project-service/insurance/banner/getDomainList?url=${URL}`)
 				const lineList = result.data
 				const requestList = []
 				lineList.map((item, index) => {
@@ -48,11 +46,16 @@ export default async function chooseLine() {
 					const fastestResponse = await Promise.race(racePromises);
 					return fastestResponse;
 				}
-				const fetchResult = await fetchFastestData()
-				console.log('Fastest response:', fetchResult.extra);
-				if (fetchResult.extra) {
-					Local(CURRENT_API, {API: fetchResult.extra})
+				try {
+					const fetchResult = await fetchFastestData()
+					console.log('Fastest response:', fetchResult.extra);
+					if (fetchResult.extra) {
+						Local(CURRENT_API, {API: fetchResult.extra})
+					}
+				} catch(error) {
+					console.error((error))
 				}
+				
 			}
 		},
 	});

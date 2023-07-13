@@ -206,20 +206,21 @@ uni.addInterceptor('request', {
 	},
 	async fail(error) { //失败回调拦截
 	    if (!modelShow) {
-				await chooseLine()
-				modelShow = true
+			await chooseLine()
+			modelShow = true
+			console.log(error.errMsg)
 		}
 	},
 })
 
-function request(url, method, params = {}) {
+function request(url, method = 'GET', params = {}) {
 	const promise = new Promise((resolve, reject) => {
 		uni.request({
 			url: url,
 			method: method,
 			data: params,
-			timeout: 50000,
 			header: {}, //必须的，用于拦截请求
+			timeout: 50000,
 			success: (res) => {
 				//上面已经对错误进行了处理，直接返回的就是data
 				resolve(res);
