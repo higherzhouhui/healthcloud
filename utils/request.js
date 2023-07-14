@@ -2,7 +2,6 @@ import { ACCESS_TOKEN, USER_INFO, CURRENT_API } from "@/common/util/constants"
 import { Local } from './common'
 import { URL } from '@/config/index.js'
 import chooseLine from "./chooseLine"
-import store from '@/store/index.js'
 let modelShow = false
 uni.addInterceptor('request', {
 	invoke(args) { //拦截前触发
