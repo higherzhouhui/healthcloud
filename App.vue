@@ -1,7 +1,9 @@
 <script>
 	import appUpdate from '@/common/util/appUpdate.js'
+	import chooseLine from '@/utils/chooseLine.js'
 	export default {
 		onLaunch: function() {
+			chooseLine()
 			// #ifdef APP-PLUS
 			// 检测升级
 			appUpdate()
