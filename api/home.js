@@ -13,8 +13,8 @@ export function getNewsListRequest(params) {
 }
 
 // 新闻详情
-export function getNewsDetailRequest() {
-	return request('/project-service/insurance/banner/getNewsDetail', 'GET')	
+export function getNewsDetailRequest(params) {
+	return request('/project-service/insurance/banner/getNewsDetail', 'GET', params)	
 }
 
 // 基础信息

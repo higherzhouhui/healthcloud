@@ -13,7 +13,7 @@
 
 <script>
 	import {
-		getNewsListRequest
+		getNewsDetailRequest
 	} from '@/api/home.js'
 	export default {
 		data() {
@@ -105,14 +105,12 @@
 		},
 		methods: {
 			initData() {
-				getNewsListRequest({pageNum: 1, pageSize: 100}).then(res => {
-					const { list } = res.data
-					uni.stopPullDownRefresh()
-					list.forEach(item => {
-						if (item.id == this.id) {
-							this.newsDetail = item
-						}
-					})
+				uni.showLoading({
+					title: ''
+				})
+				getNewsDetailRequest({id: this.id}).then(res => {
+					uni.hideLoading()
+					this.newsDetail = res.data
 				})
 			}
 		},

@@ -1,37 +1,32 @@
 <template>
-<view class="container">
-    <view class="top">
-        <image src="../../../static/yaoqing/bg.png" class="inviteImg"></image>
-    </view>
-    <view class="content">
-        <view class="inviteWrapper">
-            <view class="rulesWrapper">
-                <view class="ruleTitle">
-                    <view class="txts">我的邀请码</view>
+    <view class="container">
+        <view class="describe">
+            <view class="expandRule">
+                <view class="inviteTitle">邀请注册</view>
+                <view v-html="expandRule"></view>
+            </view>
+            <view class="content">
+                <view class="inviteWrapper">
+                    <view class="rulesWrapper">
+                        <view class="ruleTitle">
+                            <view class="txts">我的邀请码</view>
+                        </view>
+                    </view>
+                    <view class="nums">{{ inviteCode }}</view>
+                    <!-- <view class="title">每天签到送<view class="num">1w</view>数字人民币</view> -->
+                    <view class="ecode-box">
+                        <canvas ref="ecode" fileType="png" id="qrcode" class="ecode" style="width: 175px; height: 175px;"
+                            canvas-id="qrcode"></canvas>
+                    </view>
+                    <!-- <view class="inviteCode">您的邀请码: {{inviteCode}}</view> -->
+                    <view class="btnGroup">
+                        <view class="btn baseBg" @tap="downloadQrd">下载二维码</view>
+                        <view class="btn baseBg" @tap="copyInviteLink()">复制推广链接</view>
+                    </view>
                 </view>
-                <!-- <view class="ruleList" v-for="item in rules" :key="item.id">
-							
-				<text class="normal">推荐</text><text class="res">{{item.inviteNum}}</text>
-
-				<text class="normal">人，</text><text class="normal">赠送推广金</text><text class="red">{{item.amount}}</text>
-
-				<text class="normal">元</text>
-
-				</view> -->
-            </view>
-            <view class="nums">{{ inviteCode }}</view>
-            <!-- <view class="title">每天签到送<view class="num">1w</view>数字人民币</view> -->
-            <view class="ecode-box">
-                <canvas ref="ecode" id="qrcode" class="ecode" style="width: 175px; height: 175px;" canvas-id="qrcode"></canvas>
-            </view>
-            <!-- <view class="inviteCode">您的邀请码: {{inviteCode}}</view> -->
-            <view class="btnGroup">
-                <view class="btn" @tap="saveBaseImgFile">下载二维码</view>
-                <view class="btn" @tap="copyInviteLink()">复制推广链接</view>
             </view>
         </view>
     </view>
-</view>
 </template>
 
 <script>
@@ -40,10 +35,14 @@ import {
     USER_INFO
 } from '@/common/util/constants.js'
 import {
-    LINK
+    LINK,
+    URL as urls
 } from '@/config/index.js'
+import { uploadImgPath } from '@/api/common'
+
 import {
-    getExpandList
+    getExpandList,
+    getExpandRule
 } from '@/api/promotion'
 
 export default {
@@ -53,11 +52,12 @@ export default {
             linkUrl: '',
             inviteCode: '',
             rules: [],
+            expandRule: '',
         }
     },
     onLoad() {
         const {
-            inviteCode
+            inviteCode = 123456
         } = uni.getStorageSync(USER_INFO)
         this.inviteCode = inviteCode
         const url = this.$store.state.userInfo.link || `${LINK}?inviteCode=${inviteCode}/#/pages/register/register`
@@ -77,6 +77,11 @@ export default {
                     })
                 }
             })
+            getExpandRule().then(res => {
+                if (res.code === 200) {
+                    this.expandRule = res.data
+                }
+            })
         },
         qrFun(text) {
             let that = this
@@ -88,7 +93,7 @@ export default {
                 margin: 0,
                 backgroundColor: '#ffffff',
                 foregroundColor: '#000000',
-                fileType: 'jpg',
+                fileType: 'png',
                 errorCorrectLevel: UQrcode.errorCorrectLevel.H,
                 success: res => {
                     that.qrdImg = res
@@ -150,20 +155,28 @@ export default {
             this.downloadQrd(src_blob1)
 
         },
-        downloadQrd(url) {
-            uni.saveImageToPhotosAlbum({
-                filePath: url,
-                success: function () {
-                    uni.showToast({
-                        title: '保存成功',
-                    });
+        downloadQrd(filePath) {
+            if(!window) {
+                return this.saveBaseImgFile()
+            }
+            uni.uploadFile({
+                url: `${urls}${uploadImgPath}`,
+                filePath: this.qrdImg,
+                name: 'file',
+                success: function (res) {
+                    const response = JSON.parse((res.data))
+                    let imgUrl = response.data
+                    let a = document.createElement("a");
+                    a.href = imgUrl;
+                    a.setAttribute("download", 'share.png');
+                    a.setAttribute("target", "_blank");
+                    a.click();
                 },
-                fail: function () {
-                    uni.showToast({
-                        title: '保存失败',
-                    });
+                fail: function (res) {
+                    console.log('下载失败：', res);
                 }
             });
+
         },
         copyInviteLink() {
             uni.setClipboardData({
@@ -187,21 +200,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/static/customicons.scss"; 
-
+	@import "@/static/customicons.scss";
 .container {
     min-height: 100vh;
-    background: #F85B4CFF;
-
-    .top {
-        position: relative;
-        width: 100%;
-        height: 0;
-        padding-bottom: 116%;
-    }
+    position: relative;
+    background: url('../../../static/yaoqing/bg.png');
+    background-size: 100% 100%;
+    padding-bottom: 12px;
 
     .ecode-box {
-        margin-bottom: 32px;
+        margin-top: 10px;
+        margin-bottom: 22px;
+    }
+
+    .detitle {
+        font-size: 32px;
+        font-weight: bold;
+        text-align: center;
+        letter-spacing: 6px;
+        line-height: 88px;
+        color: #d1ff8b;
+
+        @media screen and (max-height: 700px) {
+            line-height: 68px;
+        }
     }
 
     .inviteImg {
@@ -212,19 +234,38 @@ export default {
         top: 0;
     }
 
+    .describe {
+        padding: 90px 12px 0 12px;
+		@media screen and (min-height: 700px) {
+			padding-top: 150px;
+		}
+        .inviteTitle {
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 24px;
+            color: #FF4B4B;
+        }
+
+        .expandRule {
+            background: #fff;
+            border-radius: 12px;
+            padding: 12px;
+            color: #FF4B4B;
+            min-height: 200px;
+        }
+    }
+
     .content {
-        position: absolute;
-        bottom: 12px;
-        width: calc(100% - 24px);
-        left: 12px;
+        margin-top: 12px;
 
         .inviteWrapper {
-            background: #FFFFFF;
-            border-radius: 12px 12px 12px 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 32px 0;
+            padding: 12px 0;
+            background: #fff;
+            border-radius: 12px;
 
             .title {
                 font-size: 15px;
@@ -241,11 +282,17 @@ export default {
             }
 
             .nums {
-                margin: 16px 0;
+                margin: 12px 0;
+
+                @media screen and (max-height: 700px) {
+                    margin: 0;
+                }
+
                 font-size: 16px;
-                font-family: PingFang SC-Semibold, PingFang SC;
+                font-family: PingFang SC-Semibold,
+                PingFang SC;
                 font-weight: 600;
-                color: $primaryColor;
+                color: #FE1E27;
             }
 
             .qrdImg {

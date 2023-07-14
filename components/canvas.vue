@@ -5,9 +5,8 @@
 				v-for="item in chartTabs" :key="item.value">
 				<view class="itemprice">{{ item.value }}</view>
 				<view class="itemlabel">{{ item.label }}</view>
-				</view>
+			</view>
 		</view>
-
 		<canvas ref="canvas" id="demoCanvas" canvas-id="output_mini"></canvas>
 	</view>
 </template>

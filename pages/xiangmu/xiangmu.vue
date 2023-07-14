@@ -6,6 +6,8 @@
 				<view class="txt">{{ item.label }}</view>
 			</view>
 		</view>
+		<view v-if="list.length == 0" class="noData">暂无项目</view>
+		
 		<view class="container" v-if="type == 1">
 			<view class="item" v-for="item in list" :key="item.id">
 				<view class="top-info">
@@ -66,7 +68,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="gq" v-else>
+		<view class="gq" v-if="list.length && type == 2">
 			<img :src="gqData.image" class="img" v-if="gqData.image" alt="">
 			<image v-else class="img" src='../../static/xiangmu/guquan.png'></image>
 			<view class="gq-box">
@@ -115,12 +117,12 @@ import { getProjectList } from '@/api/project'
 export default {
 	data() {
 		return {
-			avatar: 'https://alipic.lanhuapp.com/web475b3b1e-96fa-4a25-be45-7c2868ddce63',
+			avatar: '@/static/tuiguang/icon.png',
 			list: [],
 			tabs: [
 				{ label: '爱心福利', type: 1 },
-				// { label: '数贸基金', type: 3},
-				// { label: '数贸股权', type: 2 }
+				{ label: '数贸基金', type: 3 },
+				{ label: '数贸股权', type: 2 }
 			],
 			type: 1,
 			css: window ? 'h5css' : 'appcss',
@@ -129,7 +131,8 @@ export default {
 				count: 1,
 				base: 100,
 				details: ''
-			}
+			},
+			loading: true,
 		}
 	},
 	computed: {
@@ -157,12 +160,20 @@ export default {
 	},
 	methods: {
 		getList() {
+			this.loading = true
+			uni.showLoading({
+				title: ''
+			})
 			getProjectList({ projectType: this.type }).then(rt => {
 				uni.stopPullDownRefresh()
+				uni.hideLoading()
+				this.loading = false
 				this.list = rt.data
 				if (this.type == 2 && this.list[0]) {
 					this.gqData = Object.assign({}, this.gqData, this.list[0])
 				}
+			}).catch(error =>{
+				this.loading = false
 			})
 		},
 		choice(num) {
@@ -186,7 +197,15 @@ export default {
 
 <style scoped lang="scss">
 @import "@/static/customicons.scss"; 
-
+.noData {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	padding-top: 80px;
+	color: #3e3e3e;
+	text-align: center;
+	font-size: 15px;
+}
 .tabs {
 	position: fixed;
 	top: 0;
