@@ -117,7 +117,7 @@ import { getProjectList } from '@/api/project'
 export default {
 	data() {
 		return {
-			avatar: '@/static/tuiguang/icon.png',
+			avatar: '/static/tuiguang/icon.png',
 			list: [],
 			tabs: [
 				{ label: '爱心福利', type: 1 },
