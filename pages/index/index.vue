@@ -171,7 +171,7 @@ export default {
         this.gfql = Local('gfql') || {}
         this.notice = Local('notice') || {}
 		
-		this.$store.commit(NOTICE_SHOW, false)
+		this.$store.commit('SET_NOTICESHOW', false)
     },
     onPullDownRefresh() {
         // 执行刷新操作
