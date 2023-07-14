@@ -26,36 +26,59 @@ export default async function chooseLine() {
 				const requestList = []
 				lineList.map((item, index) => {
 					requestList.push(request(
-						`${item}/project-service/insurance/banner/getDomainList?url=${item}`
+						`${item}/project-service/insurance/banner/getDomainList?url=${item}`, 'GET', {}, 3000
 					))
 				})
-				const racePromises = requestList.map(promise => {
+				let timer = ''
+				let countTime = 0
+				timer = setInterval(() => {
+					countTime += 10
+				}, 10)
+				const racePromises = requestList.map((promise, index) => {
 					return promise.then(result => {
 						return {
 							...result,
-							isSuccess: true
+							isSuccess: true,
+							delay: countTime,
 						};
 					}).catch(error => {
+						if (Local('userInfo') && Local('userInfo').mobilePhone == '18516010812') {
+							uni.showToast({
+								title: `${lineList[index]}: 线路异常`,
+								icon: 'none'
+							})
+						}
 						return {
 							error,
-							isSuccess: false
+							extra: lineList[index],
+							delay: countTime,
+							isSuccess: false,
 						};
 					});
 				});
 				async function fetchFastestData() {
-					const fastestResponse = await Promise.race(racePromises);
-					return fastestResponse;
+					const allResponse = await Promise.all(racePromises);
+					return allResponse;
 				}
 				try {
-					const fetchResult = await fetchFastestData()
-					console.log('Fastest response:', fetchResult.extra);
-					if (fetchResult.extra) {
-						Local(CURRENT_API, {API: fetchResult.extra})
+					let fetchResult = await fetchFastestData()
+					clearInterval(timer)
+					fetchResult = fetchResult.filter(item => {return item.isSuccess})
+					fetchResult.sort((a,b) => {return a.delay - b.delay})
+					console.log('all response:', fetchResult);
+					if (fetchResult.length && fetchResult[0].extra) {
+						Local(CURRENT_API, {API: fetchResult[0].extra})
+					} else {
+						if (Local('userInfo') && Local('userInfo').mobilePhone == '18516010812') {
+							uni.showToast({
+								title: '所有线路异常',
+								icon: 'none'
+							})
+						}
 					}
 				} catch(error) {
 					console.error((error))
 				}
-				
 			}
 		},
 	});

@@ -6,6 +6,9 @@ import store from '@/store/index.js'
 let modelShow = false
 uni.addInterceptor('request', {
 	invoke(args) { //拦截前触发
+		if (args.url.includes('http')) {
+			return
+		}
 		let baseURL = ''
 		if (args.url.includes('banner/getDomainList')) {
 			baseURL = ''
@@ -22,6 +25,7 @@ uni.addInterceptor('request', {
 		}
 	},
 	success(args) { //成功回调拦截
+		console.log('args:', args)
 		if (!args || !args.statusCode) {
 			return Promise.reject("错误的消息内容。");
 		}
@@ -213,14 +217,14 @@ uni.addInterceptor('request', {
 	},
 })
 
-function request(url, method = 'GET', params = {}) {
+function request(url, method = 'GET', params = {}, timeout = 50000) {
 	const promise = new Promise((resolve, reject) => {
 		uni.request({
 			url: url,
 			method: method,
 			data: params,
 			header: {}, //必须的，用于拦截请求
-			timeout: 50000,
+			timeout: timeout,
 			success: (res) => {
 				//上面已经对错误进行了处理，直接返回的就是data
 				resolve(res);
