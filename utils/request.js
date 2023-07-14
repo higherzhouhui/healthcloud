@@ -1,19 +1,30 @@
-import {
-	baseURL
-} from '@/config/index.js'
-import { ACCESS_TOKEN, USER_INFO } from "@/common/util/constants"
+import { ACCESS_TOKEN, USER_INFO, CURRENT_API } from "@/common/util/constants"
+import { Local } from './common'
+import { URL } from '@/config/index.js'
+import chooseLine from "./chooseLine"
 let modelShow = false
 uni.addInterceptor('request', {
 	invoke(args) { //拦截前触发
-		args.url = `${baseURL}${args.url}`
+		if (args.url.includes('http')) {
+			return
+		}
+		let baseURL = ''
+		if (args.url.includes('banner/getDomainList')) {
+			baseURL = ''
+		} else {
+			baseURL = Local(CURRENT_API).API || URL
+		}
+		args.url = baseURL + args.url
+		console.log('currentDomain:', baseURL)
 		args.header["Content-Type"] = "application/json;charset=UTF-8"
 		//获取token
-		let token = uni.getStorageSync(ACCESS_TOKEN)
+		let token = uni.getStorageSync('Access-Token')
 		if (token) {
-			args.header[ACCESS_TOKEN] = token
+			args.header["Access-Token"] = token
 		}
 	},
 	success(args) { //成功回调拦截
+		console.log('args:', args)
 		if (!args || !args.statusCode) {
 			return Promise.reject("错误的消息内容。");
 		}
@@ -196,22 +207,23 @@ uni.addInterceptor('request', {
 		//返回消息 
 		return Promise.resolve(args.data)
 	},
-	fail(error) { //失败回调拦截
-			console.log(error)
+	async fail(error) { //失败回调拦截
 	    if (!modelShow) {
+			await chooseLine()
 			modelShow = true
+			console.log(error.errMsg)
 		}
 	},
 })
 
-function request(url, method, params = {}) {
+function request(url, method = 'GET', params = {}, timeout = 50000) {
 	const promise = new Promise((resolve, reject) => {
 		uni.request({
 			url: url,
 			method: method,
 			data: params,
 			header: {}, //必须的，用于拦截请求
-			timeout: 50000,
+			timeout: timeout,
 			success: (res) => {
 				//上面已经对错误进行了处理，直接返回的就是data
 				resolve(res);
